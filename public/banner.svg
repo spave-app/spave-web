@@ -1,0 +1,79 @@
+<svg width="1440" height="480" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1440" height="480" fill="#0d0d0d"/>
+
+  <!-- Field surface -->
+  <rect x="120" y="60" width="1200" height="360" rx="4" fill="#0f1f0f"/>
+
+  <!-- Alternating grass bands -->
+  <rect x="120" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+  <rect x="360" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+  <rect x="600" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+  <rect x="840" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+  <rect x="1080" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+  <rect x="1200" y="60" width="120" height="360" fill="#111f11" opacity="0.6"/>
+
+  <!-- Outer boundary -->
+  <rect x="144" y="84" width="1152" height="312" rx="2" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+
+  <!-- Halfway line -->
+  <line x1="720" y1="84" x2="720" y2="396" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+
+  <!-- Center circle -->
+  <circle cx="720" cy="240" r="60" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <circle cx="720" cy="240" r="4" fill="rgba(255,255,255,0.4)"/>
+
+  <!-- Left penalty box -->
+  <rect x="144" y="156" width="110" height="168" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Left goal box -->
+  <rect x="144" y="192" width="44" height="96" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <!-- Left penalty spot -->
+  <circle cx="208" cy="240" r="3" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Right penalty box -->
+  <rect x="1186" y="156" width="110" height="168" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Right goal box -->
+  <rect x="1252" y="192" width="44" height="96" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <!-- Right penalty spot -->
+  <circle cx="1232" cy="240" r="3" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Left penalty arc -->
+  <path d="M 254 192 A 60 60 0 0 1 254 288" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <!-- Right penalty arc -->
+  <path d="M 1186 192 A 60 60 0 0 0 1186 288" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+
+  <!-- Corner arcs -->
+  <path d="M 144 100 A 16 16 0 0 1 160 84" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <path d="M 1280 84 A 16 16 0 0 1 1296 100" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <path d="M 144 380 A 16 16 0 0 0 160 396" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+  <path d="M 1280 396 A 16 16 0 0 0 1296 380" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+
+  <!-- Crimson accent — center spot glow -->
+  <circle cx="720" cy="240" r="80" fill="rgba(118,4,61,0.06)"/>
+  <circle cx="720" cy="240" r="40" fill="rgba(118,4,61,0.08)"/>
+
+  <!-- Top/bottom fade for depth -->
+  <rect width="1440" height="100" fill="url(#fadeTop)"/>
+  <rect y="380" width="1440" height="100" fill="url(#fadeBottom)"/>
+  <rect width="80" height="480" fill="url(#fadeLeft)"/>
+  <rect x="1360" width="80" height="480" fill="url(#fadeRight)"/>
+
+  <defs>
+    <linearGradient id="fadeTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#0d0d0d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeBottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d0d0d" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+    <linearGradient id="fadeLeft" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#0d0d0d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fadeRight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d0d0d" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </linearGradient>
+  </defs>
+</svg>
