@@ -100,9 +100,22 @@
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
 
+.btnSecondary svg {
+  opacity: 0;
+  width: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, width 0.2s ease;
+}
+
 .btnSecondary:hover {
   border-color: #ccc;
   box-shadow: var(--shadow-elevated);
+}
+
+.btnSecondary:hover svg {
+  opacity: 1;
+  width: 16px;
+  transform: translateX(0);
 }
 
 .btnSecondary:active {

@@ -139,7 +139,7 @@ Build in this exact order. Each page must be mobile-first responsive from the st
 | **Search Bar** | Search by court name or neighborhood. |
 | **Results Count** | "X courts found" |
 | **Court Cards** | Grid (2 columns mobile, 3-4 desktop). Each card: image, court name, neighborhood, price range, rating, availability hint. Click card → court detail. |
-| **Infinite Scroll** | Load more courts as user scrolls. |
+| **No pagination** | Just load all courts for now, database is small. |
 
 **Data:** Fetches from backend API (see `api.md` for endpoint structure).
 

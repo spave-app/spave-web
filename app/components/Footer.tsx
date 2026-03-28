@@ -13,13 +13,9 @@ export default function Footer() {
 
           <div className={styles.links}>
             <div className={styles.linkGroup}>
-              <span className={styles.linkGroupLabel}>Product</span>
-              <a href="#browse" className={styles.link}>Try prototype</a>
-            </div>
-            <div className={styles.linkGroup}>
-              <span className={styles.linkGroupLabel}>Company</span>
-              <a href="#contact" className={styles.link}>Contact</a>
-              <a href="#faq" className={styles.link}>FAQ</a>
+              <span className={styles.linkGroupLabel}>Quick links</span>
+              <a href="/browse" className={styles.link}>Try prototype</a>
+              <a href="/contact" className={styles.link}>Contact</a>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ChevronsRight } from "lucide-react";
 import styles from "./styles/Hero.module.css";
 
 export default function Hero() {
@@ -25,8 +25,8 @@ export default function Hero() {
           <a href="#waitlist" className={styles.btnPrimary}>
             Join the Waitlist
           </a>
-          <a href="#browse" className={styles.btnSecondary}>
-            Try Prototype <ArrowRight size={16} />
+          <a href="/browse" className={styles.btnSecondary}>
+            Try Prototype <ChevronsRight size={16} />
           </a>
         </div>
 
