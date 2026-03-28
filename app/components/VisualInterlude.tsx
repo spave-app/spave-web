@@ -15,7 +15,7 @@ export default function VisualInterlude() {
       <div className={styles.overlay} />
       <div className={styles.content}>
         <h2 className={styles.heading}>Your game is waiting.</h2>
-        <a href="#browse" className={styles.cta}>
+        <a href="/browse" className={styles.cta}>
           Find your court <ChevronsRight size={18} />
         </a>
       </div>

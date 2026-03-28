@@ -1,0 +1,86 @@
+create table public.soccer_courts (
+  id uuid not null default gen_random_uuid (),
+  venue_id uuid not null,
+  name character varying(255) not null,
+  description character varying(255) null,
+  size character varying(255) not null,
+  type character varying(255) not null,
+  surface character varying(255) not null,
+  booking_link character varying(255) not null,
+  availability_hint text[] not null default '{}'::text[],
+  notes character varying(255) null,
+  is_active boolean not null default true,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  number_available smallint not null,
+  price_min numeric(10, 2) null,
+  price_max numeric(10, 2) null,
+  constraint soccer_courts_pkey primary key (id),
+  constraint soccer_courts_venue_id_fkey foreign KEY (venue_id) references venues (id) on delete CASCADE,
+  constraint soccer_courts_size_check check (
+    (
+      (size)::text = any (
+        array[
+          'THREE_V_THREE'::text,
+          'FIVE_V_FIVE'::text,
+          'SEVEN_V_SEVEN'::text,
+          'NINE_V_NINE'::text,
+          'FULL'::text
+        ]
+      )
+    )
+  ),
+  constraint soccer_courts_surface_check check (
+    (
+      (surface)::text = any (
+        array[
+          'SYNTHETIC'::text,
+          'GRASS'::text,
+          'HARDWOOD'::text
+        ]
+      )
+    )
+  ),
+  constraint soccer_courts_type_check check (
+    (
+      (type)::text = any (array['INDOOR'::text, 'OUTDOOR'::text])
+    )
+  )
+) TABLESPACE pg_default;
+
+create table public.addresses (
+  id uuid not null default gen_random_uuid (),
+  venue_id uuid not null,
+  address_line1 character varying(255) not null,
+  address_line2 character varying(255) null,
+  city character varying(255) not null,
+  postal_code character varying(255) not null,
+  neighborhood character varying(255) null,
+  lat double precision not null,
+  lng double precision not null,
+  is_primary boolean not null default true,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  province character varying(255) not null,
+  country character varying(255) not null,
+  constraint addresses_pkey primary key (id),
+  constraint addresses_venue_id_key unique (venue_id),
+  constraint addresses_venue_id_fkey foreign KEY (venue_id) references venues (id) on delete CASCADE
+) TABLESPACE pg_default;
+
+create table public.venues (
+  id uuid not null default gen_random_uuid (),
+  name character varying(255) not null,
+  phone character varying(255) not null,
+  website character varying(255) not null,
+  description character varying(255) null,
+  source character varying(255) null,
+  is_active boolean not null default true,
+  created_at timestamp with time zone not null default now(),
+  updated_at timestamp with time zone not null default now(),
+  email character varying(255) null,
+  phone_extension character varying(255) null,
+  constraint venues_pkey primary key (id),
+  constraint phone_extension_digits check (((phone_extension)::text ~ '^\d+$'::text)),
+  constraint phone_format check (((phone)::text ~ '^\+[1-9][0-9]{7,14}$'::text))
+) TABLESPACE pg_default;

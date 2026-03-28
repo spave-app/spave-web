@@ -19,11 +19,15 @@
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
+  --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
+  --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
   --space-24: 96px;
+
+  --topbar-h: 65px;
 
   --shadow-card: 0 2px 8px rgba(118, 4, 61, 0.06), 0 8px 32px rgba(0, 0, 0, 0.08);
   --shadow-elevated: 0 4px 16px rgba(118, 4, 61, 0.10), 0 16px 48px rgba(0, 0, 0, 0.12);
