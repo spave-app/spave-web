@@ -1,5 +1,16 @@
+import Image from "next/image";
 import type { Court, CourtSize, CourtType, CourtSurface } from "../../types";
 import styles from "./CourtCard.module.css";
+
+function isValidImageUrl(url: string | null): url is string {
+  if (!url) return false;
+  try {
+    const { protocol } = new URL(url);
+    return protocol === "https:" || protocol === "http:";
+  } catch {
+    return false;
+  }
+}
 
 function formatSize(size: CourtSize): string {
   const map: Record<CourtSize, string> = {
@@ -37,10 +48,20 @@ function formatPrice(priceMin: number | null, priceMax: number | null): string {
 
 export default function CourtCard({ court }: { court: Court }) {
   const isIndoor = court.type === "INDOOR";
+  const validImage = isValidImageUrl(court.imageUrl);
 
   return (
     <div className={styles.card}>
-      <div className={`${styles.imageWrap} ${isIndoor ? styles.indoor : styles.outdoor}`}>
+      <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
+        {validImage && (
+          <Image
+            src={court.imageUrl}
+            alt={court.name}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+          />
+        )}
         <div className={styles.overlay} />
 
         <div className={styles.imageMeta}>

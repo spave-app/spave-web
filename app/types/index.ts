@@ -17,6 +17,7 @@ export interface Court {
   notes: string | null;
   active: boolean;
   numberAvailable: number;
+  imageUrl: string | null;
   priceMin: number | null;
   priceMax: number | null;
   createdAt: string;
