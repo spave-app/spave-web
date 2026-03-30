@@ -10,7 +10,7 @@ const font = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Spave — Book Soccer Courts in Montreal",
+  title: "Spave - Book Soccer Courts in Montreal",
   description: "Find and book soccer courts by the hour across Montreal's metropolitan area. No calls, no guesswork.",
 };
 
