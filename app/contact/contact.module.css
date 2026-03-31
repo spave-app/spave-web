@@ -1,0 +1,266 @@
+.page {
+  padding-top: var(--header-h);
+  min-height: 100dvh;
+  background: var(--color-white);
+}
+
+/* ── Hero strip ── */
+.hero {
+  padding: var(--space-24) var(--space-6) var(--space-16);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+/* ── Left: identity ── */
+.identity {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  width: fit-content;
+}
+
+.taglineDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--color-text-primary);
+}
+
+.hook {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  max-width: 420px;
+}
+
+.contactBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.contactLabel {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.emailLink {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  transition: opacity 0.15s ease;
+}
+
+.emailLink:hover {
+  opacity: 0.75;
+}
+
+.responseTime {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.faqLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-top: var(--space-2);
+  transition: color 0.15s ease;
+}
+
+.faqLink:hover {
+  color: var(--color-primary);
+}
+
+.faqLinkArrow {
+  transition: transform 0.15s ease;
+}
+
+.faqLink:hover .faqLinkArrow {
+  transform: translateX(3px);
+}
+
+/* ── Right: form ── */
+.formWrap {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.05);
+}
+
+.formTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  font-family: var(--font-system);
+  color: var(--color-text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(118, 4, 61, 0.08);
+}
+
+.textarea {
+  resize: none;
+  height: 130px;
+  line-height: 1.6;
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  height: 48px;
+  padding: 0 var(--space-6);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-system);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-btn);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  align-self: center;
+  letter-spacing: 0.01em;
+}
+
+.submit:hover {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-elevated);
+}
+
+.submit:active {
+  transform: scale(0.97);
+}
+
+.submit svg {
+  opacity: 0;
+  width: 0;
+  margin-left: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease, width 0.2s ease, margin-left 0.2s ease;
+}
+
+.submit:hover svg {
+  opacity: 1;
+  width: 16px;
+  margin-left: var(--space-2);
+  transform: translateX(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .hook {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: var(--space-12) var(--space-4) var(--space-12);
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .formWrap {
+    padding: var(--space-6);
+  }
+
+  .emailLink {
+    font-size: 17px;
+  }
+}

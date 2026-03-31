@@ -82,8 +82,8 @@ export default function CourtCard({ court }: { court: Court }) {
       <div className={styles.info}>
         <div className={styles.nameRow}>
           <div className={styles.nameBlock}>
-            <span className={styles.venueName}>{court.venue.name}</span>
             <h3 className={styles.name}>{court.name}</h3>
+            <span className={styles.venueName}>{court.venue.name}</span>
           </div>
           <span className={styles.available}>
             {court.numberAvailable} available

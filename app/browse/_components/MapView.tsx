@@ -2,9 +2,9 @@ import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
 import styles from "./MapView.module.css";
 
-export default function MapView({ onClose }: { onClose: () => void }) {
+export default function MapView({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
-    <div className={styles.panel}>
+    <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`}>
       <Image
         src="/map_placeholder.png"
         alt="Map"

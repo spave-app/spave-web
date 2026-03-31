@@ -161,7 +161,7 @@ export default function Browse() {
         </div>
       </div>
 
-      {mapOpen && <MapView onClose={() => setMapOpen(false)} />}
+      <MapView open={mapOpen} onClose={() => setMapOpen(false)} />
       <Footer />
     </>
   );
