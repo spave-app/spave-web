@@ -169,6 +169,14 @@ export const translations = {
     map: {
       close: "Close Map",
     },
+    modal: {
+      details: "Details",
+      availability: "Availability",
+      venue: "Venue",
+      website: "Website",
+      notes: "Notes",
+      bookAt: (name: string) => `Book at ${name}`,
+    },
     contact: {
       tagline: "Built by athletes, for athletes",
       title: "Let's talk.",
@@ -356,6 +364,14 @@ export const translations = {
     },
     map: {
       close: "Fermer la carte",
+    },
+    modal: {
+      details: "Détails",
+      availability: "Disponibilité",
+      venue: "Salle",
+      website: "Site web",
+      notes: "Notes",
+      bookAt: (name: string) => `Réserver chez ${name}`,
     },
     contact: {
       tagline: "Conçu par des athlètes, pour des athlètes",
