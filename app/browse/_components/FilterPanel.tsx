@@ -1,31 +1,8 @@
 "use client";
 
 import type { Filters, CourtSize, CourtType, CourtSurface, SortBy } from "../../types";
+import { useT } from "../../i18n/LanguageContext";
 import styles from "./FilterPanel.module.css";
-
-const SIZES: { value: CourtSize; label: string }[] = [
-  { value: "THREE_V_THREE", label: "3v3" },
-  { value: "FIVE_V_FIVE", label: "5v5" },
-  { value: "SEVEN_V_SEVEN", label: "7v7" },
-  { value: "NINE_V_NINE", label: "9v9" },
-  { value: "FULL", label: "Full" },
-];
-
-const TYPES: { value: CourtType; label: string }[] = [
-  { value: "INDOOR", label: "Indoor" },
-  { value: "OUTDOOR", label: "Outdoor" },
-];
-
-const SURFACES: { value: CourtSurface; label: string }[] = [
-  { value: "SYNTHETIC", label: "Synthetic" },
-  { value: "GRASS", label: "Grass" },
-  { value: "HARDWOOD", label: "Hardwood" },
-];
-
-const SORT_OPTIONS: { value: SortBy; label: string }[] = [
-  { value: "price_asc", label: "Price: low to high" },
-  { value: "price_desc", label: "Price: high to low" },
-];
 
 function toggle<T>(arr: T[], val: T): T[] {
   return arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
@@ -48,20 +25,46 @@ export default function FilterPanel({
   onReset,
   resultCount,
 }: FilterPanelProps) {
+  const { t } = useT();
+  const f = t.filter;
+
+  const SIZES: { value: CourtSize; label: string }[] = [
+    { value: "THREE_V_THREE", label: "3v3" },
+    { value: "FIVE_V_FIVE", label: "5v5" },
+    { value: "SEVEN_V_SEVEN", label: "7v7" },
+    { value: "NINE_V_NINE", label: "9v9" },
+    { value: "FULL", label: f.full },
+  ];
+
+  const TYPES: { value: CourtType; label: string }[] = [
+    { value: "INDOOR", label: f.indoor },
+    { value: "OUTDOOR", label: f.outdoor },
+  ];
+
+  const SURFACES: { value: CourtSurface; label: string }[] = [
+    { value: "SYNTHETIC", label: f.synthetic },
+    { value: "GRASS", label: f.grass },
+    { value: "HARDWOOD", label: f.hardwood },
+  ];
+
+  const SORT_OPTIONS: { value: SortBy; label: string }[] = [
+    { value: "price_asc", label: f.priceLowHigh },
+    { value: "price_desc", label: f.priceHighLow },
+  ];
+
   const update = (partial: Partial<Filters>) =>
     onFiltersChange({ ...filters, ...partial });
 
   return (
     <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`}>
-      {/* Mobile only header */}
       <div className={styles.mobileHeader}>
-        <span className={styles.mobileTitle}>Filter</span>
-        <button className={styles.resetBtn} onClick={onReset}>Reset filters</button>
+        <span className={styles.mobileTitle}>{f.title}</span>
+        <button className={styles.resetBtn} onClick={onReset}>{f.reset}</button>
       </div>
 
       <div className={styles.body}>
         <div className={styles.group}>
-          <span className={styles.label}>Size</span>
+          <span className={styles.label}>{f.size}</span>
           <div className={styles.pills}>
             {SIZES.map((s) => (
               <button
@@ -78,15 +81,15 @@ export default function FilterPanel({
         <div className={styles.divider} />
 
         <div className={styles.group}>
-          <span className={styles.label}>Type</span>
+          <span className={styles.label}>{f.type}</span>
           <div className={styles.pills}>
-            {TYPES.map((t) => (
+            {TYPES.map((type) => (
               <button
-                key={t.value}
-                className={`${styles.pill} ${filters.types.includes(t.value) ? styles.pillActive : ""}`}
-                onClick={() => update({ types: toggle(filters.types, t.value) })}
+                key={type.value}
+                className={`${styles.pill} ${filters.types.includes(type.value) ? styles.pillActive : ""}`}
+                onClick={() => update({ types: toggle(filters.types, type.value) })}
               >
-                {t.label}
+                {type.label}
               </button>
             ))}
           </div>
@@ -95,7 +98,7 @@ export default function FilterPanel({
         <div className={styles.divider} />
 
         <div className={styles.group}>
-          <span className={styles.label}>Surface</span>
+          <span className={styles.label}>{f.surface}</span>
           <div className={styles.pills}>
             {SURFACES.map((s) => (
               <button
@@ -112,13 +115,13 @@ export default function FilterPanel({
         <div className={styles.divider} />
 
         <div className={styles.group}>
-          <span className={styles.label}>Price range</span>
+          <span className={styles.label}>{f.priceRange}</span>
           <div className={styles.priceRow}>
             <div className={styles.priceField}>
               <span className={styles.currency}>$</span>
               <input
                 type="number"
-                placeholder="Min"
+                placeholder={f.min}
                 className={styles.priceInput}
                 value={filters.priceMin}
                 onChange={(e) => update({ priceMin: e.target.value })}
@@ -130,7 +133,7 @@ export default function FilterPanel({
               <span className={styles.currency}>$</span>
               <input
                 type="number"
-                placeholder="Max"
+                placeholder={f.max}
                 className={styles.priceInput}
                 value={filters.priceMax}
                 onChange={(e) => update({ priceMax: e.target.value })}
@@ -143,7 +146,7 @@ export default function FilterPanel({
         <div className={styles.divider} />
 
         <div className={styles.group}>
-          <span className={styles.label}>Sort</span>
+          <span className={styles.label}>{f.sort}</span>
           <div className={styles.pills}>
             {SORT_OPTIONS.map((s) => (
               <button
@@ -157,14 +160,12 @@ export default function FilterPanel({
           </div>
         </div>
 
-        {/* Desktop only — hidden on mobile */}
-        <button className={`${styles.resetBtn} ${styles.desktopReset}`} onClick={onReset}>Reset</button>
+        <button className={`${styles.resetBtn} ${styles.desktopReset}`} onClick={onReset}>{f.resetShort}</button>
       </div>
 
-      {/* Mobile only footer */}
       <div className={styles.mobileFooter}>
         <button className={styles.showBtn} onClick={onClose}>
-          Show {resultCount} result{resultCount !== 1 ? "s" : ""}
+          {f.showResults(resultCount)}
         </button>
       </div>
     </div>

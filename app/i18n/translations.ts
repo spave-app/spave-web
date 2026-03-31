@@ -1,0 +1,381 @@
+export type Language = "en" | "fr";
+
+export const translations = {
+  en: {
+    header: {
+      contact: "Contact Us",
+      tryPrototype: "Try Prototype",
+    },
+    hero: {
+      description: "Introducing Spave — discover and book soccer courts across Montreal, by the hour.",
+      incentive: "Coming soon, be the first to book.",
+      joinWaitlist: "Join the Waitlist",
+      tryPrototype: "Try Prototype",
+      socialProof: "95 players are waiting",
+    },
+    timeline: {
+      heading: "What we're building",
+      live: "Live",
+      inProgress: "In progress",
+      comingSoon: "Coming soon",
+      milestones: [
+        {
+          label: "Prototype",
+          description: "Browse real courts across Montreal. Filter by size, surface, and neighborhood — no account needed.",
+        },
+        {
+          label: "Instant Booking",
+          description: "Reserve your slot and pay directly on Spave. Instant confirmation, no back-and-forth with venues.",
+        },
+        {
+          label: "Every Sport",
+          description: "Basketball courts, tennis courts, turf fields. One platform, any game.",
+        },
+        {
+          label: "Spave Mobile App",
+          description: "Full native experience on iOS and Android. Book your court from anywhere, in seconds.",
+        },
+      ],
+    },
+    howItWorks: {
+      heading: "How it works",
+      steps: [
+        {
+          title: "Browse",
+          description: "Search by neighborhood, size, and surface. See real availability at a glance.",
+        },
+        {
+          title: "Book",
+          description: "Pick your slot, confirm with the venue, and get everything you need in one place.",
+        },
+        {
+          title: "Show Up",
+          description: "Get directions, show up, and play. That's the whole thing.",
+        },
+      ],
+    },
+    socialProof: {
+      heading: "What players are saying",
+      testimonials: [
+        {
+          quote: "Finally found a 5v5 court in NDG with actual grass. Booked in under two minutes. Would've taken me three phone calls before.",
+          author: "Karim T.",
+          location: "Notre-Dame-de-Grâce",
+        },
+        {
+          quote: "Tried calling three venues on a Friday afternoon. With Spave I just found an open court, got the address, and went.",
+          author: "Sophie L.",
+          location: "Laval",
+        },
+      ],
+    },
+    visualInterlude: {
+      heading: "Your game is waiting.",
+      cta: "Find your court",
+    },
+    faq: {
+      eyebrow: "Questions?",
+      heading: "We've got answers.",
+      items: [
+        {
+          q: "Is Spave free to use?",
+          a: "Browsing and discovering courts is completely free. We take a small platform fee when a booking is completed through Spave — that's it.",
+        },
+        {
+          q: "How do I know a court is actually available?",
+          a: "Courts show real availability pulled from the venue. If it shows open, it's open. No more calling to confirm what's on the website.",
+        },
+        {
+          q: "Can I list my court on Spave?",
+          a: "Not yet via self-serve, but we're actively onboarding venues. If you manage a space in Montreal, get in touch and we'll set you up.",
+        },
+        {
+          q: "Do I pay on Spave or at the venue?",
+          a: "Right now, Spave connects you directly with the venue's booking system. Full integrated payment is coming in Phase 2.",
+        },
+        {
+          q: "Why only soccer courts in Montreal?",
+          a: "We're starting focused. Montreal has one of the most active recreational soccer scenes in Canada and we want to get this right before expanding.",
+        },
+        {
+          q: "When will more sports be available?",
+          a: "Basketball and tennis are next. Sign up for the waitlist and we'll reach out before anyone else when they go live.",
+        },
+      ],
+    },
+    finalCta: {
+      eyebrow: "Ready?",
+      heading: "We'll let you know first",
+      sub: "We'll reach out the moment Spave goes live. No spam.",
+      placeholder: "your@email.com",
+      notify: "Notify me",
+      note: "95 players are waiting.",
+    },
+    footer: {
+      tagline: "Book soccer courts by the hour in Montreal.",
+      quickLinks: "Quick links",
+      tryPrototype: "Try Prototype",
+      contact: "Contact",
+      stayInLoop: "Stay in the loop",
+      placeholder: "your@email.com",
+      notify: "Notify me",
+      copyright: "© 2026 Spave. All rights reserved.",
+      city: "Made in Montreal.",
+    },
+    loading: {
+      hint: "Searching nearby courts...",
+    },
+    browse: {
+      searchPlaceholder: "Search by court or venue...",
+      filter: "Filter",
+      map: "Map",
+      courtsFound: (n: number) => `${n} court${n !== 1 ? "s" : ""} found`,
+      noResults: "No courts match your filters.",
+    },
+    filter: {
+      title: "Filter",
+      reset: "Reset filters",
+      resetShort: "Reset",
+      size: "Size",
+      type: "Type",
+      surface: "Surface",
+      priceRange: "Price range",
+      min: "Min",
+      max: "Max",
+      sort: "Sort",
+      priceLowHigh: "Price: low to high",
+      priceHighLow: "Price: high to low",
+      showResults: (n: number) => `Show ${n} result${n !== 1 ? "s" : ""}`,
+      indoor: "Indoor",
+      outdoor: "Outdoor",
+      synthetic: "Synthetic",
+      grass: "Grass",
+      hardwood: "Hardwood",
+      full: "Full",
+    },
+    courtCard: {
+      indoor: "Indoor",
+      outdoor: "Outdoor",
+      synthetic: "Synthetic",
+      grass: "Grass",
+      hardwood: "Hardwood",
+      full: "Full",
+      available: (n: number) => `${n} available`,
+      fromPrice: (n: number) => `From $${n}`,
+      upToPrice: (n: number) => `Up to $${n}`,
+      contactVenue: "Contact venue for pricing",
+      perHour: "/hr",
+    },
+    map: {
+      close: "Close Map",
+    },
+    contact: {
+      tagline: "Built by athletes, for athletes",
+      title: "Let's talk.",
+      hook: "For venue listings, partnership inquiries, or general questions about Spave. We're here and we respond promptly.",
+      emailLabel: "Email us",
+      responseTime: "Typically responds within 24 hours",
+      faqLink: "Browse our FAQ",
+      formTitle: "Send a message",
+      name: "Name",
+      namePlaceholder: "Your name",
+      email: "Email",
+      emailPlaceholder: "you@example.com",
+      subject: "Subject",
+      subjectPlaceholder: "What's this about?",
+      message: "Message",
+      messagePlaceholder: "Tell us what's on your mind...",
+      submit: "Send message",
+    },
+  },
+
+  fr: {
+    header: {
+      contact: "Nous contacter",
+      tryPrototype: "Essayer le prototype",
+    },
+    hero: {
+      description: "Découvrez Spave — trouvez et réservez des terrains de soccer à Montréal, à l'heure.",
+      incentive: "Bientôt disponible, soyez les premiers à réserver.",
+      joinWaitlist: "Rejoindre la liste d'attente",
+      tryPrototype: "Essayer le prototype",
+      socialProof: "95 joueurs attendent",
+    },
+    timeline: {
+      heading: "Ce que nous construisons",
+      live: "En ligne",
+      inProgress: "En cours",
+      comingSoon: "Bientôt disponible",
+      milestones: [
+        {
+          label: "Prototype",
+          description: "Parcourez de vrais terrains à Montréal. Filtrez par taille, surface et quartier — sans compte requis.",
+        },
+        {
+          label: "Réservation instantanée",
+          description: "Réservez votre créneau et payez directement sur Spave. Confirmation instantanée, sans échanges avec les salles.",
+        },
+        {
+          label: "Tous les sports",
+          description: "Terrains de basketball, tennis, gazon synthétique. Une plateforme, tous les sports.",
+        },
+        {
+          label: "Application mobile Spave",
+          description: "Expérience native complète sur iOS et Android. Réservez votre terrain de partout, en quelques secondes.",
+        },
+      ],
+    },
+    howItWorks: {
+      heading: "Comment ça marche",
+      steps: [
+        {
+          title: "Parcourir",
+          description: "Cherchez par quartier, taille et surface. Visualisez les disponibilités en un coup d'œil.",
+        },
+        {
+          title: "Réserver",
+          description: "Choisissez votre créneau, confirmez avec la salle et obtenez tout en un seul endroit.",
+        },
+        {
+          title: "Jouer",
+          description: "Obtenez l'itinéraire, arrivez et jouez. C'est aussi simple que ça.",
+        },
+      ],
+    },
+    socialProof: {
+      heading: "Ce que disent les joueurs",
+      testimonials: [
+        {
+          quote: "J'ai enfin trouvé un terrain 5v5 à NDG avec de la vraie pelouse. Réservé en moins de deux minutes. Avant, ça m'aurait pris trois appels.",
+          author: "Karim T.",
+          location: "Notre-Dame-de-Grâce",
+        },
+        {
+          quote: "J'ai essayé d'appeler trois salles un vendredi après-midi. Avec Spave, j'ai trouvé un terrain disponible, pris l'adresse et je suis parti.",
+          author: "Sophie L.",
+          location: "Laval",
+        },
+      ],
+    },
+    visualInterlude: {
+      heading: "Votre match vous attend.",
+      cta: "Trouvez votre terrain",
+    },
+    faq: {
+      eyebrow: "Questions ?",
+      heading: "Nous avons les réponses.",
+      items: [
+        {
+          q: "Est-ce que Spave est gratuit ?",
+          a: "Parcourir et découvrir des terrains est entièrement gratuit. Nous prenons une petite commission lorsqu'une réservation est effectuée via Spave — c'est tout.",
+        },
+        {
+          q: "Comment savoir si un terrain est vraiment disponible ?",
+          a: "Les terrains affichent la disponibilité en temps réel depuis la salle. Si c'est indiqué libre, c'est libre. Fini les appels pour confirmer.",
+        },
+        {
+          q: "Puis-je inscrire mon terrain sur Spave ?",
+          a: "Pas encore en libre-service, mais nous intégrons activement de nouvelles salles. Si vous gérez un espace à Montréal, contactez-nous.",
+        },
+        {
+          q: "Est-ce que je paie sur Spave ou à la salle ?",
+          a: "Pour l'instant, Spave vous connecte directement au système de réservation de la salle. Le paiement intégré arrive en phase 2.",
+        },
+        {
+          q: "Pourquoi seulement les terrains de soccer à Montréal ?",
+          a: "Nous commençons de façon ciblée. Montréal a l'une des scènes de soccer récréatif les plus actives au Canada et nous voulons bien faire les choses avant d'élargir.",
+        },
+        {
+          q: "Quand d'autres sports seront-ils disponibles ?",
+          a: "Le basketball et le tennis sont les prochains. Inscrivez-vous à la liste d'attente et nous vous contacterons en premier.",
+        },
+      ],
+    },
+    finalCta: {
+      eyebrow: "Prêt ?",
+      heading: "Nous vous préviendrons en premier",
+      sub: "Nous vous contacterons dès que Spave sera disponible. Pas de spam.",
+      placeholder: "votre@email.com",
+      notify: "Me notifier",
+      note: "95 joueurs attendent.",
+    },
+    footer: {
+      tagline: "Réservez des terrains de soccer à l'heure à Montréal.",
+      quickLinks: "Liens rapides",
+      tryPrototype: "Essayer le prototype",
+      contact: "Contact",
+      stayInLoop: "Restez informé",
+      placeholder: "votre@email.com",
+      notify: "Me notifier",
+      copyright: "© 2026 Spave. Tous droits réservés.",
+      city: "Fait à Montréal.",
+    },
+    loading: {
+      hint: "Recherche de terrains à proximité...",
+    },
+    browse: {
+      searchPlaceholder: "Rechercher par terrain ou salle...",
+      filter: "Filtrer",
+      map: "Carte",
+      courtsFound: (n: number) => `${n} terrain${n !== 1 ? "s" : ""} trouvé${n !== 1 ? "s" : ""}`,
+      noResults: "Aucun terrain ne correspond à vos filtres.",
+    },
+    filter: {
+      title: "Filtrer",
+      reset: "Réinitialiser les filtres",
+      resetShort: "Réinitialiser",
+      size: "Taille",
+      type: "Type",
+      surface: "Surface",
+      priceRange: "Fourchette de prix",
+      min: "Min",
+      max: "Max",
+      sort: "Trier",
+      priceLowHigh: "Prix : croissant",
+      priceHighLow: "Prix : décroissant",
+      showResults: (n: number) => `Afficher ${n} résultat${n !== 1 ? "s" : ""}`,
+      indoor: "Intérieur",
+      outdoor: "Extérieur",
+      synthetic: "Synthétique",
+      grass: "Gazon",
+      hardwood: "Parquet",
+      full: "Complet",
+    },
+    courtCard: {
+      indoor: "Intérieur",
+      outdoor: "Extérieur",
+      synthetic: "Synthétique",
+      grass: "Gazon",
+      hardwood: "Parquet",
+      full: "Complet",
+      available: (n: number) => `${n} disponible${n !== 1 ? "s" : ""}`,
+      fromPrice: (n: number) => `À partir de ${n}$`,
+      upToPrice: (n: number) => `Jusqu'à ${n}$`,
+      contactVenue: "Contactez la salle pour les tarifs",
+      perHour: "/h",
+    },
+    map: {
+      close: "Fermer la carte",
+    },
+    contact: {
+      tagline: "Conçu par des athlètes, pour des athlètes",
+      title: "Parlons.",
+      hook: "Pour les inscriptions de salles, les demandes de partenariat ou les questions générales sur Spave. Nous sommes disponibles et répondons rapidement.",
+      emailLabel: "Envoyez-nous un courriel",
+      responseTime: "Réponse habituelle sous 24 heures",
+      faqLink: "Consulter notre FAQ",
+      formTitle: "Envoyer un message",
+      name: "Nom",
+      namePlaceholder: "Votre nom",
+      email: "Courriel",
+      emailPlaceholder: "vous@exemple.com",
+      subject: "Sujet",
+      subjectPlaceholder: "De quoi s'agit-il ?",
+      message: "Message",
+      messagePlaceholder: "Dites-nous ce que vous pensez...",
+      submit: "Envoyer le message",
+    },
+  },
+} as const;
+
+export type Translations = typeof translations.en;

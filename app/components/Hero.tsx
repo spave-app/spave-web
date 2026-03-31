@@ -1,14 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
+import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/Hero.module.css";
 
 export default function Hero() {
+  const { t, l, lang } = useT();
   return (
     <section className={styles.hero}>
       <div className={styles.inner}>
         <div className={styles.bannerWrap}>
           <Image
-            src="/banner-image.svg"
+            src={lang === "fr" ? "/banner-image-fr.svg" : "/banner-image.svg"}
             alt="Find Your Court - Spave"
             fill
             className={styles.banner}
@@ -17,20 +21,24 @@ export default function Hero() {
         </div>
 
         <p className={styles.description}>
-          Introducing <span className={styles.brand}>Spave</span> - discover and book soccer courts across Montreal, by the hour.
+          {t.hero.description.split("Spave").map((part, i, arr) =>
+            i < arr.length - 1 ? (
+              <span key={i}>{part}<span className={styles.brand}>Spave</span></span>
+            ) : part
+          )}
         </p>
-        <p className={styles.incentive}>Coming soon, be the first to book.</p>
+        <p className={styles.incentive}>{t.hero.incentive}</p>
 
         <div className={styles.actions}>
-          <a href="#waitlist" className={styles.btnPrimary}>
-            Join the Waitlist
+          <a href={l("/#waitlist")} className={styles.btnPrimary}>
+            {t.hero.joinWaitlist}
           </a>
-          <a href="/browse" className={styles.btnSecondary}>
-            Try Prototype <ChevronsRight size={16} />
+          <a href={l("/browse")} className={styles.btnSecondary}>
+            {t.hero.tryPrototype} <ChevronsRight size={16} />
           </a>
         </div>
 
-        <p className={styles.socialProof}>95 players are waiting</p>
+        <p className={styles.socialProof}>{t.hero.socialProof}</p>
       </div>
     </section>
   );

@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/Header.module.css";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, setLang, t, l } = useT();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -29,15 +31,23 @@ export default function Header() {
       />
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
-          <a href="/" className={styles.logo}>
-            <Image src="/spave-logo.svg" alt="Spave" width={60} height={36} />
+          <a href={l("/")} className={styles.brand}>
+            <Image src="/spave-logo.svg" alt="Spave" width={60} height={36} className={styles.logo} />
+            <span className={styles.wordmark}>SPAVE</span>
           </a>
 
-          <span className={styles.wordmark}>SPAVE</span>
-
           <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-            <a href="/contact" className={styles.navLink}>Contact Us</a>
-            <a href="/browse" className={styles.navCta}>Try Prototype</a>
+            <a href={l("/contact")} className={styles.navLink}>{t.header.contact}</a>
+            <div className={styles.ctaGroup}>
+              <a href={l("/browse")} className={styles.navCta}>{t.header.tryPrototype}</a>
+              <button
+                className={styles.langToggle}
+                onClick={() => setLang(lang === "en" ? "fr" : "en")}
+                aria-label="Toggle language"
+              >
+                {lang === "en" ? "FR" : "EN"}
+              </button>
+            </div>
           </nav>
 
           <button
