@@ -1,31 +1,22 @@
+"use client";
+
+import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/SocialProof.module.css";
 
-const testimonials = [
-  {
-    quote: "Finally found a 5v5 court in NDG with actual grass. Booked in under two minutes. Would've taken me three phone calls before.",
-    author: "Karim T.",
-    location: "Notre-Dame-de-Grâce",
-  },
-  {
-    quote: "Tried calling three venues on a Friday afternoon. With Spave I just found an open court, got the address, and went.",
-    author: "Sophie L.",
-    location: "Laval",
-  },
-];
-
 export default function SocialProof() {
+  const { t } = useT();
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.heading}>What players are saying</h2>
+        <h2 className={styles.heading}>{t.socialProof.heading}</h2>
 
         <div className={styles.grid}>
-          {testimonials.map((t) => (
-            <div key={t.author} className={styles.card}>
-              <p className={styles.quote}>&ldquo;{t.quote}&rdquo;</p>
+          {t.socialProof.testimonials.map((testimonial) => (
+            <div key={testimonial.author} className={styles.card}>
+              <p className={styles.quote}>&ldquo;{testimonial.quote}&rdquo;</p>
               <div className={styles.attribution}>
-                <span className={styles.author}>{t.author}</span>
-                <span className={styles.location}>{t.location}</span>
+                <span className={styles.author}>{testimonial.author}</span>
+                <span className={styles.location}>{testimonial.location}</span>
               </div>
             </div>
           ))}

@@ -1,3 +1,4 @@
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Timeline from "./components/Timeline";
@@ -11,7 +12,7 @@ import ScrollToTop from "./components/ScrollToTop";
 
 export default function Home() {
   return (
-    <>
+    <LanguageProvider lang="en">
       <Header />
       <main>
         <Hero />
@@ -24,6 +25,6 @@ export default function Home() {
       </main>
       <Footer />
       <ScrollToTop />
-    </>
+    </LanguageProvider>
   );
 }

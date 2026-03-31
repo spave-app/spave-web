@@ -29,15 +29,17 @@
 }
 
 .logo {
-  display: flex;
-  align-items: center;
+  display: block;
   flex-shrink: 0;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .wordmark {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 19px;
   font-weight: 800;
   letter-spacing: 0.15em;
@@ -46,6 +48,13 @@
 
 .nav {
   display: none;
+  align-items: center;
+  gap: var(--space-8);
+  transform: translateX(-20px);
+}
+
+.ctaGroup {
+  display: flex;
   align-items: center;
   gap: var(--space-8);
 }
@@ -79,6 +88,22 @@
 
 .navCta:active {
   transform: scale(0.97);
+}
+
+.langToggle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-family: var(--font-system);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.langToggle:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface);
 }
 
 .menuToggle {
@@ -156,10 +181,12 @@
     opacity: 0;
     pointer-events: none;
     transition: max-height 0.3s ease, opacity 0.12s ease;
+    transform: none;
+    text-align: center;
   }
 
   .navOpen {
-    max-height: 200px;
+    max-height: 240px;
     opacity: 1;
     pointer-events: auto;
   }
@@ -169,8 +196,10 @@
     border-bottom: 1px solid var(--color-border);
   }
 
-  .nav a:last-child {
-    border-bottom: none;
+  .ctaGroup {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
   }
 
   .navCta {
@@ -180,11 +209,27 @@
     border-radius: 0;
     box-shadow: none;
     font-weight: 500;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .navCta:hover {
     background: none;
     color: var(--color-text-primary);
     box-shadow: none;
+  }
+
+  .langToggle {
+    padding: var(--space-4) 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .langToggle:hover {
+    background: none;
+    color: var(--color-text-primary);
   }
 }

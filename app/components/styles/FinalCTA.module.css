@@ -5,7 +5,7 @@
 }
 
 .inner {
-  max-width: 520px;
+  max-width: 640px;
   margin: 0 auto;
 }
 
@@ -25,7 +25,6 @@
   color: var(--color-text-primary);
   margin-bottom: var(--space-3);
   line-height: 1.05;
-  white-space: nowrap;
 }
 
 .sub {
@@ -33,7 +32,6 @@
   line-height: 1.55;
   color: var(--color-text-secondary);
   margin-bottom: var(--space-8);
-  white-space: nowrap;
 }
 
 .form {

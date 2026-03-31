@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
+import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/VisualInterlude.module.css";
 
 export default function VisualInterlude() {
+  const { t, l } = useT();
   return (
     <section className={styles.section}>
       <Image
@@ -14,9 +18,9 @@ export default function VisualInterlude() {
       />
       <div className={styles.overlay} />
       <div className={styles.content}>
-        <h2 className={styles.heading}>Your game is waiting.</h2>
-        <a href="/browse" className={styles.cta}>
-          Find your court <ChevronsRight size={18} />
+        <h2 className={styles.heading}>{t.visualInterlude.heading}</h2>
+        <a href={l("/browse")} className={styles.cta}>
+          {t.visualInterlude.cta} <ChevronsRight size={18} />
         </a>
       </div>
     </section>
