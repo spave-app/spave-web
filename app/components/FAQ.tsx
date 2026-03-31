@@ -61,7 +61,7 @@ export default function FAQ() {
   const toggle = (i: number) => setOpenIndex((prev) => (prev === i ? null : i));
 
   return (
-    <section className={styles.section}>
+    <section id="faq" className={styles.section}>
       <div className={styles.inner}>
         <p className={styles.eyebrow}>Questions?</p>
         <h2 className={styles.heading}>We&apos;ve got answers.</h2>
