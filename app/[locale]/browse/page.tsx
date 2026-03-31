@@ -31,7 +31,13 @@ export default function Browse() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const { t } = useT();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(filters.search), 200);
+    return () => clearTimeout(timer);
+  }, [filters.search]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -57,9 +63,18 @@ export default function Browse() {
   const filtered = useMemo(() => {
     let result = [...courts];
 
-    if (filters.search) {
-      const q = filters.search.toLowerCase();
-      result = result.filter((c) => c.name.toLowerCase().includes(q));
+    if (debouncedSearch) {
+      const tokens = debouncedSearch.toLowerCase().split(/\s+/).filter(Boolean);
+      result = result.filter((c) => {
+        const fields = [
+          c.name,
+          c.venue.name,
+          c.description ?? "",
+          c.type.toLowerCase(),
+          c.surface.toLowerCase(),
+        ].map((f) => f.toLowerCase());
+        return tokens.every((token) => fields.some((field) => field.includes(token)));
+      });
     }
     if (filters.sizes.length > 0) {
       result = result.filter((c) => filters.sizes.includes(c.size));
@@ -84,7 +99,7 @@ export default function Browse() {
     }
 
     return result;
-  }, [courts, filters]);
+  }, [courts, filters, debouncedSearch]);
 
   const activeFilterCount = [
     filters.sizes.length > 0,
