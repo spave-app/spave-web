@@ -9,6 +9,7 @@ import ScrollToTop from "@/app/components/ScrollToTop";
 import CourtCard from "@/app/browse/_components/CourtCard";
 import FilterPanel from "@/app/browse/_components/FilterPanel";
 import MapView from "@/app/browse/_components/MapView";
+import CourtModal from "@/app/browse/_components/CourtModal";
 import { useT } from "@/app/i18n/LanguageContext";
 import type { Court, Filters } from "@/app/types";
 import styles from "@/app/browse/browse.module.css";
@@ -32,6 +33,7 @@ export default function Browse() {
   const [mapOpen, setMapOpen] = useState(false);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
   const { t } = useT();
 
   useEffect(() => {
@@ -166,7 +168,7 @@ export default function Browse() {
                 </p>
                 <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
                   {filtered.map((court) => (
-                    <CourtCard key={court.id} court={court} />
+                    <CourtCard key={court.id} court={court} onClick={() => setSelectedCourt(court)} />
                   ))}
                 </div>
                 {filtered.length === 0 && (
@@ -179,6 +181,9 @@ export default function Browse() {
       </div>
 
       <MapView open={mapOpen} onClose={() => setMapOpen(false)} />
+      {selectedCourt && (
+        <CourtModal court={selectedCourt} onClose={() => setSelectedCourt(null)} />
+      )}
       <Footer />
     </>
   );

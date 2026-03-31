@@ -35,7 +35,7 @@ function formatSurface(surface: CourtSurface, labels: { synthetic: string; grass
   return map[surface] ?? surface;
 }
 
-export default function CourtCard({ court }: { court: Court }) {
+export default function CourtCard({ court, onClick }: { court: Court; onClick: () => void }) {
   const { t } = useT();
   const c = t.courtCard;
   const isIndoor = court.type === "INDOOR";
@@ -52,7 +52,7 @@ export default function CourtCard({ court }: { court: Court }) {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
         {validImage && (
           <Image
