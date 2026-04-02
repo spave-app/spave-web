@@ -7,6 +7,7 @@ import Footer from "@/app/components/Footer";
 import Loading from "@/app/components/Loading";
 import ScrollToTop from "@/app/components/ScrollToTop";
 import CourtCard from "@/app/browse/_components/CourtCard";
+import CtaBanner from "@/app/browse/_components/CtaBanner";
 import FilterPanel from "@/app/browse/_components/FilterPanel";
 import MapView from "@/app/browse/_components/MapView";
 import CourtModal from "@/app/browse/_components/CourtModal";
@@ -163,6 +164,7 @@ export default function Browse() {
               <Loading />
             ) : (
               <>
+                <CtaBanner />
                 <p className={styles.resultCount}>
                   {t.browse.courtsFound(filtered.length)}
                 </p>
