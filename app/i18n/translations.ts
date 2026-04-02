@@ -4,13 +4,13 @@ export const translations = {
   en: {
     header: {
       contact: "Contact Us",
-      tryPrototype: "Try Prototype",
+      tryPrototype: "Catalog",
     },
     hero: {
-      description: "Introducing Spave — discover and book soccer courts across Montreal, by the hour.",
+      description: "Introducing Spave. Discover and book soccer courts across Montreal, by the hour.",
       incentive: "Coming soon, be the first to book.",
       joinWaitlist: "Join the Waitlist",
-      tryPrototype: "Try Prototype",
+      tryPrototype: "Browse Catalog",
       socialProof: "95 players are waiting",
     },
     timeline: {
@@ -114,7 +114,7 @@ export const translations = {
     footer: {
       tagline: "Book soccer courts by the hour in Montreal.",
       quickLinks: "Quick links",
-      tryPrototype: "Try Prototype",
+      tryPrototype: "Catalog",
       contact: "Contact",
       stayInLoop: "Stay in the loop",
       placeholder: "your@email.com",
@@ -131,6 +131,10 @@ export const translations = {
       map: "Map",
       courtsFound: (n: number) => `${n} court${n !== 1 ? "s" : ""} found`,
       noResults: "No courts match your filters.",
+      ctaHeadline: "Like what you see?",
+      ctaSub: "One-tap booking is almost here. Be first in line.",
+      ctaBtn: "Get notified",
+      ctaConfirmed: "You're on the list!",
     },
     filter: {
       title: "Filter",
@@ -200,13 +204,13 @@ export const translations = {
   fr: {
     header: {
       contact: "Nous contacter",
-      tryPrototype: "Essayer le prototype",
+      tryPrototype: "Catalogue",
     },
     hero: {
-      description: "Découvrez Spave — trouvez et réservez des terrains de soccer à Montréal, à l'heure.",
+      description: "Découvrez Spave. Trouvez et réservez des terrains de soccer à Montréal, à l'heure.",
       incentive: "Bientôt disponible, soyez les premiers à réserver.",
       joinWaitlist: "Rejoindre la liste d'attente",
-      tryPrototype: "Essayer le prototype",
+      tryPrototype: "Voir le catalogue",
       socialProof: "95 joueurs attendent",
     },
     timeline: {
@@ -310,7 +314,7 @@ export const translations = {
     footer: {
       tagline: "Réservez des terrains de soccer à l'heure à Montréal.",
       quickLinks: "Liens rapides",
-      tryPrototype: "Essayer le prototype",
+      tryPrototype: "Catalogue",
       contact: "Contact",
       stayInLoop: "Restez informé",
       placeholder: "votre@email.com",
@@ -327,6 +331,10 @@ export const translations = {
       map: "Carte",
       courtsFound: (n: number) => `${n} terrain${n !== 1 ? "s" : ""} trouvé${n !== 1 ? "s" : ""}`,
       noResults: "Aucun terrain ne correspond à vos filtres.",
+      ctaHeadline: "Quelque chose vous plaît?",
+      ctaSub: "La réservation en un clic arrive bientôt. Soyez parmi les premiers.",
+      ctaBtn: "Me notifier",
+      ctaConfirmed: "Vous êtes sur la liste!",
     },
     filter: {
       title: "Filtrer",
