@@ -21,6 +21,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(580px, 92vw);
+  max-height: 90dvh;
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -113,6 +114,10 @@
   padding: 28px 28px 8px;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 /* ── Header block ── */
