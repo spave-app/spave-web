@@ -36,7 +36,13 @@ export default function CtaBanner() {
         <>
           <div className={styles.left}>
             <span className={styles.headline}>{t.browse.ctaHeadline}</span>
-            <span className={styles.sub}>{t.browse.ctaSub}</span>
+            <span className={styles.sub}>
+              {t.browse.ctaSub.split(". ").map((s, i, arr) =>
+                i === arr.length - 1
+                  ? <strong key={i}>{s}</strong>
+                  : <span key={i}>{s}. </span>
+              )}
+            </span>
           </div>
           <div className={styles.right}>
             {expanded ? (
