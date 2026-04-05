@@ -1,0 +1,280 @@
+/* ── Desktop: compact horizontal strip ── */
+.panel {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.panelOpen {
+  max-height: 160px;
+}
+
+/* Mobile header/footer hidden on desktop */
+.mobileHeader,
+.mobileFooter {
+  display: none;
+}
+
+.body {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-system);
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.pill:focus {
+  outline: none;
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.pill:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.pillActive,
+.pillActive:hover {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-white);
+}
+
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.priceField {
+  position: relative;
+  width: 84px;
+}
+
+.currency {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.priceInput {
+  width: 100%;
+  height: 34px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 10px 0 22px;
+  font-size: 13px;
+  font-family: var(--font-system);
+  color: var(--color-text-primary);
+  background: var(--color-white);
+  transition: border-color 0.15s ease;
+}
+
+.priceInput:focus {
+  outline: none;
+  border-color: var(--color-text-primary);
+}
+
+.priceInput::-webkit-inner-spin-button,
+.priceInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.priceSep {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.resetBtn {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-family: var(--font-system);
+  transition: color 0.15s ease;
+}
+
+.resetBtn:hover {
+  color: var(--color-text-primary);
+}
+
+/* Desktop-only reset button (inside body) */
+.desktopReset {
+  margin-left: auto;
+}
+
+/* ── Mobile: full-screen slide-up overlay ── */
+@media (max-width: 767px) {
+  .panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    overflow: hidden;
+    background: var(--color-white);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panelOpen {
+    max-height: none;
+    transform: translateY(0);
+  }
+
+  .mobileHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .mobileTitle {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+  }
+
+  .resetBtn {
+    margin-left: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  .body {
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    gap: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    overflow-y: auto;
+  }
+
+  .desktopReset {
+    display: none;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .group {
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-3);
+  }
+
+  .pills {
+    gap: var(--space-2);
+  }
+
+  .pill {
+    height: 42px;
+    padding: 0 20px;
+    font-size: 14px;
+  }
+
+  .priceField {
+    width: 120px;
+  }
+
+  .priceInput {
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .mobileFooter {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-white);
+    flex-shrink: 0;
+  }
+
+  .showBtn {
+    flex: 1;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-white);
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-btn);
+    font-family: var(--font-system);
+    transition: background 0.15s ease;
+  }
+
+  .showBtn:hover {
+    background: var(--color-primary-dark);
+  }
+}

@@ -1,0 +1,337 @@
+/* ── Overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal shell ── */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(580px, 92vw);
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  z-index: 201;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 12px 40px rgba(0, 0, 0, 0.16),
+    0 32px 72px rgba(0, 0, 0, 0.1);
+  animation: scaleIn 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.97); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ── Image ── */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  flex-shrink: 0;
+  background: #111;
+}
+
+.indoor {
+  background: linear-gradient(155deg, #180810 0%, #2b1020 100%);
+}
+
+.outdoor {
+  background: linear-gradient(155deg, #091508 0%, #0e2212 100%);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 0%, transparent 55%);
+}
+
+/* ── Close button ── */
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+  z-index: 2;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.closeBtn:hover {
+  background: #fff;
+}
+
+/* ── Type badge ── */
+.typeBadge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.typeBadgeIndoor {
+  background: rgba(118, 4, 61, 0.88);
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.typeBadgeOutdoor {
+  background: rgba(255, 255, 255, 0.88);
+  color: #111;
+}
+
+/* ── Body ── */
+.body {
+  padding: 28px 28px 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* ── Header block ── */
+.header {
+  margin-bottom: 0;
+}
+
+.courtName {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #111;
+  line-height: 1.15;
+  margin-bottom: 5px;
+}
+
+.venueName {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary, #76043D);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ── Price row ── */
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 20px;
+  padding-bottom: 24px;
+}
+
+.priceValue {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.priceUnit {
+  font-size: 14px;
+  font-weight: 400;
+  color: #aaa;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: #F0F0F0;
+  flex-shrink: 0;
+}
+
+/* ── Sections ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 0;
+}
+
+.sectionLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bbb;
+}
+
+/* ── Pills ── */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Neutral attribute pills */
+.pill {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  background: #F5F5F5;
+  padding: 6px 14px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+/* Availability status — intentionally distinct */
+.pillAvailable {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary, #76043D);
+  background: rgba(118, 4, 61, 0.07);
+  padding: 6px 14px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+/* ── Notes ── */
+.notes {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #555;
+}
+
+/* ── Venue links ── */
+.venueLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.venueLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  transition: color 0.15s ease;
+  width: fit-content;
+}
+
+.venueLink:hover {
+  color: #111;
+}
+
+.externalIcon {
+  opacity: 0.4;
+}
+
+/* ── Footer CTA ── */
+.footer {
+  padding: 16px 28px 22px;
+  border-top: 1px solid #F0F0F0;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.bookBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  background: var(--color-primary, #76043D);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-system);
+  border-radius: 8px;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 2px 6px rgba(118, 4, 61, 0.3),
+    0 6px 20px rgba(118, 4, 61, 0.18);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.bookBtn:hover {
+  background: #5e0330;
+  box-shadow:
+    0 4px 10px rgba(118, 4, 61, 0.38),
+    0 10px 28px rgba(118, 4, 61, 0.22);
+}
+
+.bookBtn:active {
+  transform: scale(0.99);
+}
+
+
+/* ── Mobile: bottom sheet ── */
+@media (max-width: 767px) {
+  .modal {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 92dvh;
+    transform: none;
+    border-radius: 20px 20px 0 0;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .body {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  .imageWrap {
+    height: 200px;
+  }
+
+  .body {
+    padding: 24px 20px 8px;
+  }
+
+  .footer {
+    padding: 14px 20px 28px;
+  }
+
+  .courtName {
+    font-size: 21px;
+  }
+
+  .priceValue {
+    font-size: 26px;
+  }
+}
