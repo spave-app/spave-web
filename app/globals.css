@@ -1,26 +1,75 @@
-@import "tailwindcss";
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #76043D;
+  --color-primary-dark: #5a0330;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-border: #EEEEEE;
+  --color-surface: #F8F8F8;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  --topbar-h: 65px;
+
+  --shadow-card: 0 2px 8px rgba(118, 4, 61, 0.06), 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 4px 16px rgba(118, 4, 61, 0.10), 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-float: 0 8px 32px rgba(118, 4, 61, 0.14), 0 32px 96px rgba(0, 0, 0, 0.16);
+  --shadow-btn: 0 2px 8px rgba(118, 4, 61, 0.30), 0 4px 16px rgba(118, 4, 61, 0.20);
+
+  --font-system: var(--font-main, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --header-h: 72px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-system);
+  background: var(--color-white);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
 }
