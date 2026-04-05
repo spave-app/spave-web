@@ -1,7 +1,7 @@
 export type CourtSize = "THREE_V_THREE" | "FIVE_V_FIVE" | "SEVEN_V_SEVEN" | "NINE_V_NINE" | "FULL";
 export type CourtType = "INDOOR" | "OUTDOOR";
 export type CourtSurface = "SYNTHETIC" | "GRASS" | "HARDWOOD";
-export type SortBy = "price_asc" | "price_desc" | "";
+export type SortBy = "price_asc" | "price_desc" | "distance_asc" | "distance_desc" | "";
 
 export interface Court {
   id: string;

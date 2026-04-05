@@ -15,6 +15,7 @@ interface FilterPanelProps {
   onClose: () => void;
   onReset: () => void;
   resultCount: number;
+  hasLocation: boolean;
 }
 
 export default function FilterPanel({
@@ -24,6 +25,7 @@ export default function FilterPanel({
   onClose,
   onReset,
   resultCount,
+  hasLocation,
 }: FilterPanelProps) {
   const { t } = useT();
   const f = t.filter;
@@ -50,6 +52,10 @@ export default function FilterPanel({
   const SORT_OPTIONS: { value: SortBy; label: string }[] = [
     { value: "price_asc", label: f.priceLowHigh },
     { value: "price_desc", label: f.priceHighLow },
+    ...(hasLocation ? [
+      { value: "distance_asc" as SortBy, label: f.distanceNearFar },
+      { value: "distance_desc" as SortBy, label: f.distanceFarNear },
+    ] : []),
   ];
 
   const update = (partial: Partial<Filters>) =>

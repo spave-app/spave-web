@@ -13,6 +13,7 @@ import MapView from "@/app/browse/_components/MapView";
 import CourtModal from "@/app/browse/_components/CourtModal";
 import { useT } from "@/app/i18n/LanguageContext";
 import type { Court, Filters } from "@/app/types";
+import { haversineKm, formatDistance } from "@/app/utils/haversine";
 import styles from "@/app/browse/browse.module.css";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -35,7 +36,17 @@ export default function Browse() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
+  const [courtLocations, setCourtLocations] = useState<{ courtId: string; venueId: string; venueName: string; lat: number; lng: number }[]>([]);
+  const [userPosition, setUserPosition] = useState<{ lat: number; lng: number } | null>(null);
   const { t } = useT();
+
+  useEffect(() => {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setUserPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => setUserPosition(null)
+    );
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(filters.search), 200);
@@ -50,7 +61,7 @@ export default function Browse() {
         const res = await fetch(`${API_URL}/courts`, { signal: controller.signal });
         if (!res.ok) throw new Error(`Failed to fetch courts: ${res.status}`);
         const data: Court[] = await res.json();
-setCourts(data);
+        setCourts(data);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return;
         console.error("Error fetching courts:", err);
@@ -59,9 +70,33 @@ setCourts(data);
       }
     }
 
+    async function fetchCourtLocations() {
+      try {
+        const res = await fetch(`${API_URL}/courts/locations`);
+        if (!res.ok) throw new Error(`Failed to fetch locations: ${res.status}`);
+        setCourtLocations(await res.json());
+      } catch (err) {
+        console.error("Error fetching court locations:", err);
+      }
+    }
+
     fetchCourts();
+    fetchCourtLocations();
     return () => controller.abort();
   }, []);
+
+  const venueCoords = useMemo(() => {
+    const map: Record<string, { lat: number; lng: number }> = {};
+    courtLocations.forEach((l) => { map[l.venueId] = { lat: l.lat, lng: l.lng }; });
+    return map;
+  }, [courtLocations]);
+
+  function getDistance(court: Court): string | null {
+    if (!userPosition) return null;
+    const coords = venueCoords[court.venue.id];
+    if (!coords) return null;
+    return formatDistance(haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng));
+  }
 
   const filtered = useMemo(() => {
     let result = [...courts];
@@ -99,10 +134,18 @@ setCourts(data);
       result.sort((a, b) => (a.priceMin ?? 0) - (b.priceMin ?? 0));
     } else if (filters.sortBy === "price_desc") {
       result.sort((a, b) => (b.priceMin ?? 0) - (a.priceMin ?? 0));
+    } else if (userPosition && (filters.sortBy === "distance_asc" || filters.sortBy === "distance_desc")) {
+      const getDist = (c: Court) => {
+        const coords = venueCoords[c.venue.id];
+        return coords ? haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng) : Infinity;
+      };
+      result.sort((a, b) => filters.sortBy === "distance_asc"
+        ? getDist(a) - getDist(b)
+        : getDist(b) - getDist(a));
     }
 
     return result;
-  }, [courts, filters, debouncedSearch]);
+  }, [courts, filters, debouncedSearch, userPosition, venueCoords]);
 
   const activeFilterCount = [
     filters.sizes.length > 0,
@@ -156,6 +199,7 @@ setCourts(data);
           onClose={() => setFilterOpen(false)}
           onReset={() => setFilters(DEFAULT_FILTERS)}
           resultCount={filtered.length}
+          hasLocation={!!userPosition}
         />
 
         <div className={styles.content}>
@@ -170,7 +214,7 @@ setCourts(data);
                 </p>
                 <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
                   {filtered.map((court) => (
-                    <CourtCard key={court.id} court={court} onClick={() => setSelectedCourt(court)} />
+                    <CourtCard key={court.id} court={court} onClick={() => setSelectedCourt(court)} distance={getDistance(court)} />
                   ))}
                 </div>
                 {filtered.length === 0 && (

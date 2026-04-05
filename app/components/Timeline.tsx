@@ -1,6 +1,7 @@
 "use client";
 
 import { useT } from "../i18n/LanguageContext";
+import { useInView } from "../hooks/useInView";
 import styles from "./styles/Timeline.module.css";
 
 const STATUSES = ["done", "active", "upcoming", "upcoming"] as const;
@@ -8,21 +9,26 @@ const STATUSES = ["done", "active", "upcoming", "upcoming"] as const;
 export default function Timeline() {
   const { t } = useT();
   const { milestones, heading, live, inProgress, comingSoon } = t.timeline;
+  const { ref: sectionRef, inView } = useInView<HTMLDivElement>(0.2);
 
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <h2 className={styles.heading}>{heading}</h2>
+        <h2 className={`${styles.heading} ${inView ? styles.visible : ""}`}>{heading}</h2>
 
-        <div className={styles.timeline}>
+        <div ref={sectionRef} className={styles.timeline}>
           <div className={styles.track}>
-            <div className={styles.trackFill} />
+            <div className={`${styles.trackFill} ${inView ? styles.trackFillActive : ""}`} />
           </div>
 
           {milestones.map((m, i) => {
             const status = STATUSES[i];
             return (
-              <div key={m.label} className={`${styles.item} ${i % 2 === 0 ? styles.left : styles.right}`}>
+              <div
+                key={m.label}
+                className={`${styles.item} ${i % 2 === 0 ? styles.left : styles.right} ${inView ? styles.visible : ""}`}
+                style={{ transitionDelay: `${i * 120}ms` }}
+              >
                 <div className={`${styles.dot} ${styles[status]}`} />
                 <div className={`${styles.card} ${styles[`card_${status}`]}`}>
                   {status === "done" && <span className={styles.badge}>{live}</span>}
