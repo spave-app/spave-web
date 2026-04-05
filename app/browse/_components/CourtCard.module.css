@@ -150,6 +150,10 @@
   font-weight: 400;
 }
 
+.distance {
+  color: var(--color-text-muted);
+}
+
 .price {
   font-size: 14px;
   font-weight: 700;

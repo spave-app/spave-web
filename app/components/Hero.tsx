@@ -3,10 +3,20 @@
 import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
 import { useT } from "../i18n/LanguageContext";
+import { useCountUp } from "../hooks/useCountUp";
 import styles from "./styles/Hero.module.css";
 
-export default function Hero() {
+// TODO: replace with DB value when live count endpoint is ready
+// Usage: <Hero playerCount={dbCount} />
+export default function Hero({ playerCount }: { playerCount?: number } = {}) {
   const { t, l, lang } = useT();
+
+  const socialProofText = t.hero.socialProof;
+  const match = socialProofText.match(/^(\d+)(.*)/);
+  const targetCount = playerCount ?? (match ? parseInt(match[1]) : null);
+  const socialProofSuffix = match ? match[2] : socialProofText;
+  const count = useCountUp(targetCount ?? 0);
+
   return (
     <section className={styles.hero}>
       <div className={styles.inner}>
@@ -38,7 +48,9 @@ export default function Hero() {
           </a>
         </div>
 
-        <p className={styles.socialProof}>{t.hero.socialProof}</p>
+        <p className={styles.socialProof}>
+          {targetCount !== null ? <><span className={styles.count}>{count}</span>{socialProofSuffix}</> : socialProofText}
+        </p>
       </div>
     </section>
   );

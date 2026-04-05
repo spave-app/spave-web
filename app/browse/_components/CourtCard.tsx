@@ -35,7 +35,7 @@ function formatSurface(surface: CourtSurface, labels: { synthetic: string; grass
   return map[surface] ?? surface;
 }
 
-export default function CourtCard({ court, onClick }: { court: Court; onClick: () => void }) {
+export default function CourtCard({ court, onClick, distance }: { court: Court; onClick: () => void; distance?: string | null }) {
   const { t } = useT();
   const c = t.courtCard;
   const isIndoor = court.type === "INDOOR";
@@ -93,6 +93,7 @@ export default function CourtCard({ court, onClick }: { court: Court; onClick: (
 
         <p className={styles.meta}>
           {formatSize(court.size, c.full)} · {formatSurface(court.surface, { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood })}
+          {distance && <span className={styles.distance}> · {distance}</span>}
         </p>
 
         <p className={styles.price}>

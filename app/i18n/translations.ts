@@ -42,7 +42,7 @@ export const translations = {
       steps: [
         {
           title: "Browse",
-          description: "Search by neighborhood, size, and surface. See real availability at a glance.",
+          description: "Find courts near you. Search by size, surface, and price. See real availability at a glance.",
         },
         {
           title: "Book",
@@ -149,6 +149,8 @@ export const translations = {
       sort: "Sort",
       priceLowHigh: "Price: low to high",
       priceHighLow: "Price: high to low",
+      distanceNearFar: "Distance: near to far",
+      distanceFarNear: "Distance: far to near",
       showResults: (n: number) => `Show ${n} result${n !== 1 ? "s" : ""}`,
       indoor: "Indoor",
       outdoor: "Outdoor",
@@ -242,7 +244,7 @@ export const translations = {
       steps: [
         {
           title: "Parcourir",
-          description: "Cherche par quartier, taille et surface. Consulte les disponibilités en un coup d'œil.",
+          description: "Trouve des terrains près de toi. Cherche par taille, surface et prix. Consulte les disponibilités en un coup d'œil.",
         },
         {
           title: "Réserver",
@@ -349,6 +351,8 @@ export const translations = {
       sort: "Trier",
       priceLowHigh: "Prix : croissant",
       priceHighLow: "Prix : décroissant",
+      distanceNearFar: "Distance : proche à loin",
+      distanceFarNear: "Distance : loin à proche",
       showResults: (n: number) => `Afficher ${n} résultat${n !== 1 ? "s" : ""}`,
       indoor: "Intérieur",
       outdoor: "Extérieur",
