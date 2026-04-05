@@ -37,7 +37,7 @@ export function LanguageProvider({ lang: initialLang, children }: { lang: Langua
   }
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang], l }}>
+    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] as Translations, l }}>
       {children}
     </LanguageContext.Provider>
   );

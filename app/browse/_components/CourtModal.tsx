@@ -72,7 +72,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
         <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
           {validImage && (
             <Image
-              src={court.imageUrl}
+              src={court.imageUrl!}
               alt={court.name}
               fill
               style={{ objectFit: "cover" }}
