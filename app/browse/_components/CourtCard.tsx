@@ -39,6 +39,7 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
   const { t } = useT();
   const c = t.courtCard;
   const isIndoor = court.type === "INDOOR";
+  const imageUrl = court.imageUrl ?? "/placeholder.jpg";
   const validImage = isValidImageUrl(court.imageUrl);
 
   function formatPrice(priceMin: number | null, priceMax: number | null): string {
@@ -54,15 +55,13 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
   return (
     <div className={styles.card} onClick={onClick}>
       <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
-        {validImage && (
-          <Image
-            src={court.imageUrl}
-            alt={court.name}
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
-          />
-        )}
+        <Image
+          src={imageUrl}
+          alt={court.name}
+          fill
+          style={{ objectFit: "cover" }}
+          sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+        />
         <div className={styles.overlay} />
 
         <div className={styles.imageMeta}>

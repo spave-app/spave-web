@@ -214,7 +214,13 @@ export default function Browse() {
                 </p>
                 <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
                   {filtered.map((court) => (
-                    <CourtCard key={court.id} court={court} onClick={() => setSelectedCourt(court)} distance={getDistance(court)} />
+                    <div key={court.id} id={`court-card-${court.id}`}>
+                      <CourtCard
+                        court={court}
+                        onClick={() => setSelectedCourt(court)}
+                        distance={getDistance(court)}
+                      />
+                    </div>
                   ))}
                 </div>
                 {filtered.length === 0 && (
@@ -226,7 +232,19 @@ export default function Browse() {
         </div>
       </div>
 
-      <MapView open={mapOpen} onClose={() => setMapOpen(false)} />
+      <MapView
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        courtLocations={courtLocations}
+        filteredCourts={filtered}
+        onCourtSelect={(court) => { setSelectedCourt(court); }}
+        onPinClick={(venueId) => {
+          const venueLocs = courtLocations.filter((l) => l.venueId === venueId);
+          const court = filtered.find((c) => venueLocs.some((l) => l.courtId === c.id));
+          if (!court) return;
+          document.getElementById(`court-card-${court.id}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }}
+      />
       {selectedCourt && (
         <CourtModal court={selectedCourt} onClose={() => setSelectedCourt(null)} />
       )}
