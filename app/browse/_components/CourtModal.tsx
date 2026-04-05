@@ -33,6 +33,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  const imageUrl = court.imageUrl ?? "/placeholder.jpg";
   const validImage = isValidImageUrl(court.imageUrl);
   const isIndoor = court.type === "INDOOR";
   const hasPrice = court.priceMin !== null || court.priceMax !== null;
@@ -70,15 +71,13 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
 
         {/* Image */}
         <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
-          {validImage && (
-            <Image
-              src={court.imageUrl!}
-              alt={court.name}
-              fill
-              style={{ objectFit: "cover" }}
-              sizes="(max-width: 768px) 100vw, 560px"
-            />
-          )}
+          <Image
+            src={imageUrl}
+            alt={court.name}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, 560px"
+          />
           <div className={styles.imageOverlay} />
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <X size={18} />
