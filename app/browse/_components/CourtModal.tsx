@@ -136,7 +136,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
           <div className={styles.divider} />
 
           <div className={styles.section}>
-            <p className={styles.sectionLabel}>{m.venue}</p>
+            <p className={styles.sectionLabel}>{court.venue.name}</p>
             <div className={styles.venueLinks}>
               {court.venue.phone && (
                 <a href={`tel:${court.venue.phone}`} className={styles.venueLink}>

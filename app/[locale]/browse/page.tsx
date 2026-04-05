@@ -50,7 +50,7 @@ export default function Browse() {
         const res = await fetch(`${API_URL}/courts`, { signal: controller.signal });
         if (!res.ok) throw new Error(`Failed to fetch courts: ${res.status}`);
         const data: Court[] = await res.json();
-        setCourts(data);
+setCourts(data);
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return;
         console.error("Error fetching courts:", err);

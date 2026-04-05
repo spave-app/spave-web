@@ -20,10 +20,16 @@ const LanguageContext = createContext<LanguageContextValue>({
 export function LanguageProvider({ lang: initialLang, children }: { lang: Language; children: ReactNode }) {
   const [lang, setLangState] = useState<Language>(initialLang);
 
+  const titles: Record<Language, string> = {
+    en: "Spave - Book Soccer Courts in the Greater Montreal Area",
+    fr: "Spave - Réservez des terrains de soccer dans le Grand Montréal",
+  };
+
   function setLang(newLang: Language) {
     setLangState(newLang);
     const newPath = window.location.pathname.replace(/^\/(en|fr)/, `/${newLang}`);
     window.history.replaceState(null, "", newPath);
+    document.title = titles[newLang];
   }
 
   function l(path: string) {
