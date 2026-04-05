@@ -56,7 +56,7 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
       <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
         {validImage && (
           <Image
-            src={court.imageUrl}
+            src={court.imageUrl!}
             alt={court.name}
             fill
             style={{ objectFit: "cover" }}
