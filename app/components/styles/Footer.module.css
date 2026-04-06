@@ -161,3 +161,9 @@
     grid-template-columns: 1fr auto auto;
   }
 }
+
+@media (max-width: 640px) {
+  .input {
+    font-size: 16px;
+  }
+}
