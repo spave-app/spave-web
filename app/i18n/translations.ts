@@ -106,7 +106,7 @@ export const translations = {
     finalCta: {
       eyebrow: "Ready?",
       heading: "We'll let you know first",
-      sub: "We'll reach out the moment Spave goes live.",
+      sub: "Get notified the moment we launch.",
       placeholder: "your@email.com",
       notify: "Notify me",
       note: "95 players are waiting.",
@@ -322,7 +322,7 @@ export const translations = {
     finalCta: {
       eyebrow: "Prêt ?",
       heading: "On te préviendra en premier",
-      sub: "On te contactera dès que Spave est disponible.",
+      sub: "Sois notifié dès qu'on lance.",
       placeholder: "votre@email.com",
       notify: "Me notifier",
       note: "95 joueurs attendent.",
