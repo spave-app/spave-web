@@ -9,6 +9,7 @@ import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import CookieBanner from "./components/CookieBanner";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
       </main>
       <Footer />
       <ScrollToTop />
+      <CookieBanner />
     </LanguageProvider>
   );
 }
