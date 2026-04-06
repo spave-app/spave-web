@@ -31,6 +31,7 @@ const DEFAULT_FILTERS: Filters = {
 export default function Browse() {
   const [courts, setCourts] = useState<Court[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
@@ -65,6 +66,7 @@ export default function Browse() {
       } catch (err) {
         if (err instanceof DOMException && err.name === "AbortError") return;
         console.error("Error fetching courts:", err);
+        setFetchError(true);
       } finally {
         setLoading(false);
       }
@@ -208,23 +210,29 @@ export default function Browse() {
               <Loading />
             ) : (
               <>
-                <CtaBanner />
-                <p className={styles.resultCount}>
-                  {t.browse.courtsFound(filtered.length)}
-                </p>
-                <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
-                  {filtered.map((court) => (
-                    <div key={court.id} id={`court-card-${court.id}`}>
-                      <CourtCard
-                        court={court}
-                        onClick={() => setSelectedCourt(court)}
-                        distance={getDistance(court)}
-                      />
+                {fetchError ? (
+                  <p className={styles.empty}>{t.browse.fetchError}</p>
+                ) : (
+                  <>
+                    <CtaBanner />
+                    <p className={styles.resultCount}>
+                      {t.browse.courtsFound(filtered.length)}
+                    </p>
+                    <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
+                      {filtered.map((court) => (
+                        <div key={court.id} id={`court-card-${court.id}`}>
+                          <CourtCard
+                            court={court}
+                            onClick={() => setSelectedCourt(court)}
+                            distance={getDistance(court)}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                {filtered.length === 0 && (
-                  <p className={styles.empty}>{t.browse.noResults}</p>
+                    {filtered.length === 0 && (
+                      <p className={styles.empty}>{t.browse.noResults}</p>
+                    )}
+                  </>
                 )}
               </>
             )}

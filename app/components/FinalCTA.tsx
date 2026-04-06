@@ -19,7 +19,11 @@ export default function FinalCTA() {
           />
           <button className={styles.btn}>{t.finalCta.notify}</button>
         </div>
-        <p className={styles.note}>{t.finalCta.note}</p>
+        <p className={styles.consent}>{t.finalCta.consent}</p>
+        <p className={styles.note}>
+          <span className={styles.noteCount}>{t.finalCta.note.match(/^\d+/)?.[0]}</span>
+          {t.finalCta.note.replace(/^\d+/, "")}
+        </p>
       </div>
     </section>
   );

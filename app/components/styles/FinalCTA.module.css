@@ -82,9 +82,22 @@
   transform: scale(0.97);
 }
 
+.consent {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
 .note {
   font-size: 13px;
   color: var(--color-text-muted);
+}
+
+.noteCount {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 
 @media (max-width: 560px) {
