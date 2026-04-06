@@ -21,6 +21,16 @@ export default function Footer() {
               <a href={l("/browse")} className={styles.link}>{t.footer.tryPrototype}</a>
               <a href={l("/contact")} className={styles.link}>{t.footer.contact}</a>
             </div>
+            <div className={styles.linkGroup}>
+              <span className={styles.linkGroupLabel}>{t.footer.legal}</span>
+              <a href={l("/privacy")} className={styles.link}>{t.footer.privacyPolicy}</a>
+              <button
+                className={styles.linkBtn}
+                onClick={() => window.dispatchEvent(new CustomEvent("spave:reset-cookie-consent"))}
+              >
+                {t.footer.cookiePreferences}
+              </button>
+            </div>
           </div>
 
           <div className={styles.waitlistBlock}>
@@ -33,6 +43,7 @@ export default function Footer() {
               />
               <button className={styles.waitlistBtn}>{t.footer.notify}</button>
             </div>
+            <p className={styles.consent}>{t.footer.consent}</p>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { Language } from "../i18n/translations";
 import { LanguageProvider } from "../i18n/LanguageContext";
+import CookieBanner from "../components/CookieBanner";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fr" }];
@@ -37,5 +38,10 @@ export default async function LocaleLayout({
   const { locale } = await params;
   const lang: Language = locale === "fr" ? "fr" : "en";
 
-  return <LanguageProvider lang={lang}>{children}</LanguageProvider>;
+  return (
+    <LanguageProvider lang={lang}>
+      {children}
+      <CookieBanner />
+    </LanguageProvider>
+  );
 }

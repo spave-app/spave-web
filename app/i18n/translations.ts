@@ -106,10 +106,11 @@ export const translations = {
     finalCta: {
       eyebrow: "Ready?",
       heading: "We'll let you know first",
-      sub: "We'll reach out the moment Spave goes live. No spam.",
+      sub: "We'll reach out the moment Spave goes live.",
       placeholder: "your@email.com",
       notify: "Notify me",
       note: "95 players are waiting.",
+      consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
     },
     footer: {
       tagline: "Book soccer courts by the hour in Montreal.",
@@ -121,6 +122,10 @@ export const translations = {
       notify: "Notify me",
       copyright: "© 2026 Spave. All rights reserved.",
       city: "Made in Montreal.",
+      consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
+      privacyPolicy: "Privacy Policy",
+      legal: "Legal",
+      cookiePreferences: "Cookie Preferences",
     },
     loading: {
       hint: "Searching nearby courts...",
@@ -136,6 +141,7 @@ export const translations = {
       ctaSub: "Direct booking for these courts on Spave is coming soon. Be first in line.",
       ctaBtn: "Get notified",
       ctaConfirmed: "You're on the list!",
+      ctaConsent: ["By joining, you agree to receive occasional updates.", "Unsubscribe anytime."],
     },
     filter: {
       title: "Filter",
@@ -183,6 +189,13 @@ export const translations = {
       website: "Website",
       notes: "Notes",
       bookAt: (name: string) => `Book at ${name}`,
+    },
+    cookieBanner: {
+      text: "We use analytics cookies to understand how visitors use Spave and improve the experience. Read our",
+      privacyLink: "Privacy Policy",
+      accept: "Accept all",
+      essential: "Essential only",
+      refuse: "Refuse all",
     },
     contact: {
       tagline: "Built by athletes, for athletes",
@@ -309,10 +322,11 @@ export const translations = {
     finalCta: {
       eyebrow: "Prêt ?",
       heading: "On te préviendra en premier",
-      sub: "On te contactera dès que Spave est disponible. Pas de spam.",
+      sub: "On te contactera dès que Spave est disponible.",
       placeholder: "votre@email.com",
       notify: "Me notifier",
       note: "95 joueurs attendent.",
+      consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
     },
     footer: {
       tagline: "Réservez des terrains de soccer à l'heure à Montréal.",
@@ -324,6 +338,10 @@ export const translations = {
       notify: "Me notifier",
       copyright: "© 2026 Spave. Tous droits réservés.",
       city: "Fait à Montréal.",
+      consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
+      privacyPolicy: "Politique de confidentialité",
+      legal: "Légal",
+      cookiePreferences: "Préférences de cookies",
     },
     loading: {
       hint: "Recherche de terrains à proximité...",
@@ -339,6 +357,7 @@ export const translations = {
       ctaSub: "La réservation directe de ces terrains sur Spave arrive bientôt. Sois parmi les premiers.",
       ctaBtn: "Me notifier",
       ctaConfirmed: "Vous êtes sur la liste!",
+      ctaConsent: ["En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles.", "Désabonnement possible à tout moment."],
     },
     filter: {
       title: "Filtrer",
@@ -386,6 +405,13 @@ export const translations = {
       website: "Site web",
       notes: "Notes",
       bookAt: (name: string) => `Réserver chez ${name}`,
+    },
+    cookieBanner: {
+      text: "Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent Spave et améliorer l'expérience. Consultez notre",
+      privacyLink: "Politique de confidentialité",
+      accept: "Tout accepter",
+      essential: "Essentiels uniquement",
+      refuse: "Tout refuser",
     },
     contact: {
       tagline: "Conçu par des athlètes, pour les athlètes",

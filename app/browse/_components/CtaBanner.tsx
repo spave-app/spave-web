@@ -46,20 +46,25 @@ export default function CtaBanner() {
           </div>
           <div className={styles.right}>
             {expanded ? (
-              <form className={styles.form} onSubmit={handleSubmit}>
-                <input
-                  type="email"
-                  required
-                  autoFocus
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={styles.input}
-                />
-                <button type="submit" className={styles.submitBtn}>
-                  <ArrowRight size={14} />
-                </button>
-              </form>
+              <div className={styles.expandedBlock}>
+                <form className={styles.form} onSubmit={handleSubmit}>
+                  <input
+                    type="email"
+                    required
+                    autoFocus
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={styles.input}
+                  />
+                  <button type="submit" className={styles.submitBtn}>
+                    <ArrowRight size={14} />
+                  </button>
+                </form>
+                <p className={styles.consent}>
+                  {t.browse.ctaConsent[0]}<br />{t.browse.ctaConsent[1]}
+                </p>
+              </div>
             ) : (
               <button className={styles.notifyBtn} onClick={() => setExpanded(true)}>
                 {t.browse.ctaBtn}
