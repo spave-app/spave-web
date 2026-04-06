@@ -14,6 +14,14 @@
   letter-spacing: -0.03em;
   color: var(--color-text-primary);
   margin-bottom: var(--space-12);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.heading.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .grid {
@@ -31,10 +39,17 @@
   flex-direction: column;
   gap: var(--space-6);
   border: 1px solid var(--color-border);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.2s ease;
 }
 
-.card:hover {
+.card.cardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card.cardVisible:hover {
   box-shadow: var(--shadow-elevated);
   transform: translateY(-2px);
 }

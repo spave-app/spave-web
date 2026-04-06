@@ -58,6 +58,21 @@
   transform: scale(0.97);
 }
 
+.expandedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.consent {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  text-align: right;
+  max-width: 320px;
+}
+
 .form {
   display: flex;
   align-items: center;
@@ -155,6 +170,15 @@
     width: 100%;
     height: 38px;
     justify-content: center;
+  }
+
+  .expandedBlock {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .consent {
+    text-align: left;
   }
 
   .form {
