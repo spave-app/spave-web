@@ -156,12 +156,6 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.loadingWrap {
-  display: flex;
-  justify-content: center;
-  padding: var(--space-24) 0;
-}
-
 .empty {
   font-size: 15px;
   color: var(--color-text-muted);
@@ -197,6 +191,10 @@
 @media (max-width: 767px) {
   .page {
     overflow-x: hidden;
+  }
+
+  .searchInput {
+    font-size: 16px;
   }
 
   .topBar {

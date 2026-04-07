@@ -111,15 +111,26 @@
   .refuse {
     flex: 1;
     text-align: center;
+    white-space: nowrap;
   }
 
   .essential {
     flex: 1;
     text-align: center;
+    white-space: nowrap;
   }
 
   .accept {
     flex: 1;
     text-align: center;
+  }
+}
+
+@media (max-width: 390px) {
+  .refuse,
+  .essential,
+  .accept {
+    font-size: 11px;
+    padding: 7px var(--space-2);
   }
 }

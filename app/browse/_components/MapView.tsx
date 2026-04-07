@@ -5,19 +5,16 @@ import Image from "next/image";
 import Map, { Marker, Popup, NavigationControl, useMap } from "react-map-gl/maplibre";
 import { ChevronsRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useT } from "../../i18n/LanguageContext";
-import type { Court } from "../../types";
+import type { Court, CourtLocation } from "../../types";
+import { isValidImageUrl } from "@/app/utils/courtUtils";
 import styles from "./MapView.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY;
-
-interface CourtLocation {
-  courtId: string;
-  venueId: string;
-  venueName: string;
-  lat: number;
-  lng: number;
-}
+const MOBILE_BREAKPOINT = 1024;
+const SWIPE_THRESHOLD_PX = 40;
+const MONTREAL_CENTER = { lng: -73.5673, lat: 45.5017 };
+const DEFAULT_ZOOM = 11;
 
 interface VenuePin {
   venueId: string;
@@ -36,15 +33,6 @@ interface MapViewProps {
   onPinClick?: (venueId: string) => void;
 }
 
-function isValidImageUrl(url: string | null): url is string {
-  if (!url) return false;
-  try {
-    const { protocol } = new URL(url);
-    return protocol === "https:" || protocol === "http:";
-  } catch {
-    return false;
-  }
-}
 
 function formatSize(size: string): string {
   const map: Record<string, string> = {
@@ -190,7 +178,7 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
   const touchStartX = useRef<number>(0);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 1024);
+    const check = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -234,7 +222,7 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
     <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`}>
       {open && (
         <Map
-          initialViewState={{ longitude: -73.5673, latitude: 45.5017, zoom: 11 }}
+          initialViewState={{ longitude: MONTREAL_CENTER.lng, latitude: MONTREAL_CENTER.lat, zoom: DEFAULT_ZOOM }}
           style={{ width: "100%", height: "100%" }}
           mapStyle={`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`}
           attributionControl={false}
@@ -283,7 +271,7 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
           onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
           onTouchEnd={(e) => {
             const delta = e.changedTouches[0].clientX - touchStartX.current;
-            if (Math.abs(delta) > 40 && total > 1) {
+            if (Math.abs(delta) > SWIPE_THRESHOLD_PX && total > 1) {
               if (delta < 0) {
                 setSwipeDir("left");
                 setCarouselIndex((i) => Math.min(total - 1, i + 1));

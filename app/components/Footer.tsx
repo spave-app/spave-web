@@ -1,11 +1,29 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/Footer.module.css";
 
+function isValidEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+}
+
 export default function Footer() {
   const { t, l } = useT();
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [confirmed, setConfirmed] = useState(false);
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed) { setError(t.validation.emailRequired); return; }
+    if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
+    setError("");
+    setConfirmed(true);
+  }
+
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -35,14 +53,21 @@ export default function Footer() {
 
           <div className={styles.waitlistBlock}>
             <p className={styles.waitlistLabel}>{t.footer.stayInLoop}</p>
-            <div className={styles.waitlistForm}>
-              <input
-                type="email"
-                placeholder={t.footer.placeholder}
-                className={styles.input}
-              />
-              <button className={styles.waitlistBtn}>{t.footer.notify}</button>
-            </div>
+            {confirmed ? (
+              <p className={styles.confirmed}>{t.footer.confirmed}</p>
+            ) : (
+              <form className={styles.waitlistForm} onSubmit={handleSubmit} noValidate>
+                <input
+                  type="email"
+                  placeholder={t.footer.placeholder}
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+                  className={`${styles.input} ${error ? styles.inputError : ""}`}
+                />
+                <button type="submit" className={styles.waitlistBtn}>{t.footer.notify}</button>
+              </form>
+            )}
+            {error && <p className={styles.error}>{error}</p>}
             <p className={styles.consent}>{t.footer.consent}</p>
           </div>
         </div>

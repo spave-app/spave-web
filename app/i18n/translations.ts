@@ -111,6 +111,7 @@ export const translations = {
       notify: "Notify me",
       note: "95 players are waiting.",
       consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
+      confirmed: "You're on the list!",
     },
     footer: {
       tagline: "Book soccer courts by the hour in Montreal.",
@@ -126,6 +127,15 @@ export const translations = {
       privacyPolicy: "Privacy Policy",
       legal: "Legal",
       cookiePreferences: "Cookie Preferences",
+      confirmed: "You're on the list!",
+    },
+    validation: {
+      emailRequired: "Please enter your email.",
+      emailInvalid: "Please enter a valid email address.",
+      nameRequired: "Please enter your name.",
+      subjectRequired: "Please enter a subject.",
+      messageRequired: "Please write a message.",
+      contactConfirmed: "Message sent! We'll get back to you soon.",
     },
     loading: {
       hint: "Searching nearby courts...",
@@ -327,6 +337,7 @@ export const translations = {
       notify: "Me notifier",
       note: "95 joueurs attendent.",
       consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
+      confirmed: "Tu es sur la liste !",
     },
     footer: {
       tagline: "Réservez des terrains de soccer à l'heure à Montréal.",
@@ -342,6 +353,15 @@ export const translations = {
       privacyPolicy: "Politique de confidentialité",
       legal: "Légal",
       cookiePreferences: "Préférences de cookies",
+      confirmed: "Tu es sur la liste !",
+    },
+    validation: {
+      emailRequired: "Veuillez entrer votre adresse courriel.",
+      emailInvalid: "Veuillez entrer une adresse courriel valide.",
+      nameRequired: "Veuillez entrer votre nom.",
+      subjectRequired: "Veuillez entrer un sujet.",
+      messageRequired: "Veuillez écrire un message.",
+      contactConfirmed: "Message envoyé ! Nous reviendrons vers vous bientôt.",
     },
     loading: {
       hint: "Recherche de terrains à proximité...",

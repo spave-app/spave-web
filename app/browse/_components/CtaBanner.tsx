@@ -5,25 +5,32 @@ import { X, ArrowRight } from "lucide-react";
 import { useT } from "../../i18n/LanguageContext";
 import styles from "./CtaBanner.module.css";
 
+const CONFIRM_DISPLAY_MS = 2500;
+
+function isValidEmail(v: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+}
+
 export default function CtaBanner() {
   const { t } = useT();
   const [dismissed, setDismissed] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const [confirmed, setConfirmed] = useState(false);
-
-  function dismiss() {
-    setDismissed(true);
-  }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const trimmed = email.trim();
+    if (!trimmed) { setError(t.validation.emailRequired); return; }
+    if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
+    setError("");
     setConfirmed(true);
     setTimeout(() => {
       setConfirmed(false);
       setExpanded(false);
       setEmail("");
-    }, 2500);
+    }, CONFIRM_DISPLAY_MS);
   }
 
   if (dismissed) return null;
@@ -47,20 +54,20 @@ export default function CtaBanner() {
           <div className={styles.right}>
             {expanded ? (
               <div className={styles.expandedBlock}>
-                <form className={styles.form} onSubmit={handleSubmit}>
+                <form className={styles.form} onSubmit={handleSubmit} noValidate>
                   <input
                     type="email"
-                    required
                     autoFocus
                     placeholder="your@email.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className={styles.input}
+                    onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+                    className={`${styles.input} ${error ? styles.inputError : ""}`}
                   />
                   <button type="submit" className={styles.submitBtn}>
                     <ArrowRight size={14} />
                   </button>
                 </form>
+                {error && <p className={styles.error}>{error}</p>}
                 <p className={styles.consent}>
                   {t.browse.ctaConsent[0]}<br />{t.browse.ctaConsent[1]}
                 </p>
@@ -73,7 +80,7 @@ export default function CtaBanner() {
           </div>
         </>
       )}
-      <button className={styles.dismiss} onClick={dismiss} aria-label="Dismiss banner">
+      <button className={styles.dismiss} onClick={() => setDismissed(true)} aria-label="Dismiss banner">
         <X size={13} />
       </button>
     </div>
