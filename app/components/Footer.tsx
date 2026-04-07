@@ -54,7 +54,7 @@ export default function Footer() {
           <div className={styles.waitlistBlock}>
             <p className={styles.waitlistLabel}>{t.footer.stayInLoop}</p>
             {confirmed ? (
-              <p className={styles.confirmed}>{t.footer.confirmed}</p>
+              <p role="status" className={styles.confirmed}>{t.footer.confirmed}</p>
             ) : (
               <form className={styles.waitlistForm} onSubmit={handleSubmit} noValidate>
                 <input
@@ -63,11 +63,13 @@ export default function Footer() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
                   className={`${styles.input} ${error ? styles.inputError : ""}`}
+                  aria-describedby="footer-error"
+                  aria-invalid={!!error}
                 />
                 <button type="submit" className={styles.waitlistBtn}>{t.footer.notify}</button>
               </form>
             )}
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p id="footer-error" className={styles.error}>{error}</p>}
             <p className={styles.consent}>{t.footer.consent}</p>
           </div>
         </div>

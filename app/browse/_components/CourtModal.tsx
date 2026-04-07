@@ -36,7 +36,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
-      <div className={styles.modal} role="dialog" aria-modal="true">
+      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="modal-court-name">
 
         {/* Image */}
         <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
@@ -60,7 +60,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
         <div className={styles.body}>
 
           <div className={styles.header}>
-            <h2 className={styles.courtName}>{court.name}</h2>
+            <h2 id="modal-court-name" className={styles.courtName}>{court.name}</h2>
             <p className={styles.venueName}>{court.venue.name}</p>
           </div>
 

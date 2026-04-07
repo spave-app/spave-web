@@ -36,14 +36,14 @@ export default function Header() {
             <span className={styles.wordmark}>SPAVE</span>
           </a>
 
-          <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
+          <nav id="main-nav" className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
             <a href={l("/contact")} className={styles.navLink}>{t.header.contact}</a>
             <div className={styles.ctaGroup}>
               <a href={l("/browse")} className={styles.navCta}>{t.header.tryPrototype}</a>
               <button
                 className={styles.langToggle}
                 onClick={() => setLang(lang === "en" ? "fr" : "en")}
-                aria-label="Toggle language"
+                aria-label={lang === "en" ? "Switch to French" : "Switch to English"}
               >
                 {lang === "en" ? "FR" : "EN"}
               </button>
@@ -54,6 +54,8 @@ export default function Header() {
             className={`${styles.menuToggle} ${menuOpen ? styles.menuToggleOpen : ""}`}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            aria-controls="main-nav"
           >
             <span className={styles.menuIcon}>
               {menuOpen ? <X size={22} /> : <Menu size={22} />}

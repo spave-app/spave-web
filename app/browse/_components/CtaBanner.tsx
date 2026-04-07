@@ -38,7 +38,7 @@ export default function CtaBanner() {
   return (
     <div className={styles.banner}>
       {confirmed ? (
-        <span className={styles.confirmed}>{t.browse.ctaConfirmed}</span>
+        <span role="status" className={styles.confirmed}>{t.browse.ctaConfirmed}</span>
       ) : (
         <>
           <div className={styles.left}>
@@ -62,12 +62,14 @@ export default function CtaBanner() {
                     value={email}
                     onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
                     className={`${styles.input} ${error ? styles.inputError : ""}`}
+                    aria-describedby="ctabanner-error"
+                    aria-invalid={!!error}
                   />
-                  <button type="submit" className={styles.submitBtn}>
-                    <ArrowRight size={14} />
+                  <button type="submit" className={styles.submitBtn} aria-label="Submit email">
+                    <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </form>
-                {error && <p className={styles.error}>{error}</p>}
+                {error && <p id="ctabanner-error" className={styles.error}>{error}</p>}
                 <p className={styles.consent}>
                   {t.browse.ctaConsent[0]}<br />{t.browse.ctaConsent[1]}
                 </p>

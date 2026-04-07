@@ -46,7 +46,7 @@ export default function FinalCTA() {
         <h2 className={styles.heading}>{t.finalCta.heading}</h2>
         <p className={styles.sub}>{t.finalCta.sub}</p>
         {confirmed ? (
-          <p className={styles.confirmed}>{t.finalCta.confirmed}</p>
+          <p role="status" className={styles.confirmed}>{t.finalCta.confirmed}</p>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <input
@@ -55,11 +55,13 @@ export default function FinalCTA() {
               value={email}
               onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
               className={`${styles.input} ${error ? styles.inputError : ""}`}
+              aria-describedby="finalcta-error"
+              aria-invalid={!!error}
             />
             <button type="submit" className={styles.btn}>{t.finalCta.notify}</button>
           </form>
         )}
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <p id="finalcta-error" className={styles.error}>{error}</p>}
         {!confirmed && <p className={styles.consent}>{t.finalCta.consent}</p>}
         <p className={styles.note}>
           <span className={`${styles.noteCount} ${counting ? styles.noteCountTick : ""}`}>

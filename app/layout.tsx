@@ -28,6 +28,10 @@ export const metadata: Metadata = {
     description: "Find and book soccer courts by the hour across Montreal's metropolitan area. Instant booking coming soon!",
     images: ["https://spaveapp.com/og-image.png"],
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/spave-logo.png",
+  },
 };
 
 export default function RootLayout({
