@@ -6,14 +6,12 @@ import styles from "./not-found.module.css";
 
 const content = {
   en: {
-    eyebrow: "404",
     heading: "Out of bounds.",
     sub: ["This page doesn't exist.", "Let's get you back on the field."],
     cta: "Back to Home",
     href: "/en",
   },
   fr: {
-    eyebrow: "404",
     heading: "Hors du terrain.",
     sub: ["Cette page n'existe pas.", "Retournons sur le bon terrain."],
     cta: "Retour à l'accueil",

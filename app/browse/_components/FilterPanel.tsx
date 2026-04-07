@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import type { Filters, CourtSize, CourtType, CourtSurface, SortBy } from "../../types";
 import { useT } from "../../i18n/LanguageContext";
 import styles from "./FilterPanel.module.css";
@@ -30,33 +31,33 @@ export default function FilterPanel({
   const { t } = useT();
   const f = t.filter;
 
-  const SIZES: { value: CourtSize; label: string }[] = [
+  const sizes = useMemo<{ value: CourtSize; label: string }[]>(() => [
     { value: "THREE_V_THREE", label: "3v3" },
     { value: "FIVE_V_FIVE", label: "5v5" },
     { value: "SEVEN_V_SEVEN", label: "7v7" },
     { value: "NINE_V_NINE", label: "9v9" },
     { value: "FULL", label: f.full },
-  ];
+  ], [f.full]);
 
-  const TYPES: { value: CourtType; label: string }[] = [
+  const types = useMemo<{ value: CourtType; label: string }[]>(() => [
     { value: "INDOOR", label: f.indoor },
     { value: "OUTDOOR", label: f.outdoor },
-  ];
+  ], [f.indoor, f.outdoor]);
 
-  const SURFACES: { value: CourtSurface; label: string }[] = [
+  const surfaces = useMemo<{ value: CourtSurface; label: string }[]>(() => [
     { value: "SYNTHETIC", label: f.synthetic },
     { value: "GRASS", label: f.grass },
     { value: "HARDWOOD", label: f.hardwood },
-  ];
+  ], [f.synthetic, f.grass, f.hardwood]);
 
-  const SORT_OPTIONS: { value: SortBy; label: string }[] = [
+  const sortOptions = useMemo<{ value: SortBy; label: string }[]>(() => [
     { value: "price_asc", label: f.priceLowHigh },
     { value: "price_desc", label: f.priceHighLow },
     ...(hasLocation ? [
       { value: "distance_asc" as SortBy, label: f.distanceNearFar },
       { value: "distance_desc" as SortBy, label: f.distanceFarNear },
     ] : []),
-  ];
+  ], [f.priceLowHigh, f.priceHighLow, f.distanceNearFar, f.distanceFarNear, hasLocation]);
 
   const update = (partial: Partial<Filters>) =>
     onFiltersChange({ ...filters, ...partial });
@@ -72,7 +73,7 @@ export default function FilterPanel({
         <div className={styles.group}>
           <span className={styles.label}>{f.size}</span>
           <div className={styles.pills}>
-            {SIZES.map((s) => (
+            {sizes.map((s) => (
               <button
                 key={s.value}
                 className={`${styles.pill} ${filters.sizes.includes(s.value) ? styles.pillActive : ""}`}
@@ -89,7 +90,7 @@ export default function FilterPanel({
         <div className={styles.group}>
           <span className={styles.label}>{f.type}</span>
           <div className={styles.pills}>
-            {TYPES.map((type) => (
+            {types.map((type) => (
               <button
                 key={type.value}
                 className={`${styles.pill} ${filters.types.includes(type.value) ? styles.pillActive : ""}`}
@@ -106,7 +107,7 @@ export default function FilterPanel({
         <div className={styles.group}>
           <span className={styles.label}>{f.surface}</span>
           <div className={styles.pills}>
-            {SURFACES.map((s) => (
+            {surfaces.map((s) => (
               <button
                 key={s.value}
                 className={`${styles.pill} ${filters.surfaces.includes(s.value) ? styles.pillActive : ""}`}
@@ -154,7 +155,7 @@ export default function FilterPanel({
         <div className={styles.group}>
           <span className={styles.label}>{f.sort}</span>
           <div className={styles.pills}>
-            {SORT_OPTIONS.map((s) => (
+            {sortOptions.map((s) => (
               <button
                 key={s.value}
                 className={`${styles.pill} ${filters.sortBy === s.value ? styles.pillActive : ""}`}

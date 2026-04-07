@@ -56,6 +56,14 @@ export interface Venue {
   updatedAt: string;
 }
 
+export interface CourtLocation {
+  courtId: string;
+  venueId: string;
+  venueName: string;
+  lat: number;
+  lng: number;
+}
+
 export interface Filters {
   search: string;
   sizes: CourtSize[];

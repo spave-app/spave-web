@@ -7,8 +7,9 @@ export function useCountUp(target: number, duration = 2500, delay = 300) {
   useEffect(() => {
     // Piecewise: first 50% of time covers 80% of numbers (fast),
     // last 50% of time crawls through the final 20% (very noticeable slowdown).
-    const fastEnd = Math.round(target * 0.8);
+    const FAST_PHASE_RATIO = 0.8;
     const timeSplit = 0.5;
+    const fastEnd = Math.round(target * FAST_PHASE_RATIO);
 
     const start = performance.now();
     const timer = setTimeout(() => {

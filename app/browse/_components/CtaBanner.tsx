@@ -5,6 +5,8 @@ import { X, ArrowRight } from "lucide-react";
 import { useT } from "../../i18n/LanguageContext";
 import styles from "./CtaBanner.module.css";
 
+const CONFIRM_DISPLAY_MS = 2500;
+
 export default function CtaBanner() {
   const { t } = useT();
   const [dismissed, setDismissed] = useState(false);
@@ -23,7 +25,7 @@ export default function CtaBanner() {
       setConfirmed(false);
       setExpanded(false);
       setEmail("");
-    }, 2500);
+    }, CONFIRM_DISPLAY_MS);
   }
 
   if (dismissed) return null;

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useMemo, type ReactNode } from "react";
 import { translations, type Language, type Translations } from "./translations";
 
 interface LanguageContextValue {
@@ -17,27 +17,30 @@ const LanguageContext = createContext<LanguageContextValue>({
   l: (path) => `/en${path}`,
 });
 
+const PAGE_TITLES: Record<Language, string> = {
+  en: "Spave - Book Soccer Courts in the Greater Montreal Area",
+  fr: "Spave - Réservez des terrains de soccer dans le Grand Montréal",
+};
+
 export function LanguageProvider({ lang: initialLang, children }: { lang: Language; children: ReactNode }) {
   const [lang, setLangState] = useState<Language>(initialLang);
 
-  const titles: Record<Language, string> = {
-    en: "Spave - Book Soccer Courts in the Greater Montreal Area",
-    fr: "Spave - Réservez des terrains de soccer dans le Grand Montréal",
-  };
-
-  function setLang(newLang: Language) {
+  const setLang = useCallback((newLang: Language) => {
     setLangState(newLang);
     const newPath = window.location.pathname.replace(/^\/(en|fr)/, `/${newLang}`);
     window.history.replaceState(null, "", newPath);
-    document.title = titles[newLang];
-  }
+    document.title = PAGE_TITLES[newLang];
+  }, []);
 
-  function l(path: string) {
-    return `/${lang}${path}`;
-  }
+  const l = useCallback((path: string) => `/${lang}${path}`, [lang]);
+
+  const value = useMemo<LanguageContextValue>(
+    () => ({ lang, setLang, t: translations[lang] as Translations, l }),
+    [lang, setLang, l]
+  );
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] as Translations, l }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );

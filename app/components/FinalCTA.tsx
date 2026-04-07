@@ -1,10 +1,16 @@
 "use client";
 
+import { useMemo } from "react";
 import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/FinalCTA.module.css";
 
 export default function FinalCTA() {
   const { t } = useT();
+  const { noteCount, noteSuffix } = useMemo(() => {
+    const match = t.finalCta.note.match(/^(\d+)([\s\S]*)/);
+    return { noteCount: match?.[1] ?? "", noteSuffix: match?.[2] ?? t.finalCta.note };
+  }, [t.finalCta.note]);
+
   return (
     <section className={styles.section} id="waitlist">
       <div className={styles.inner}>
@@ -21,8 +27,8 @@ export default function FinalCTA() {
         </div>
         <p className={styles.consent}>{t.finalCta.consent}</p>
         <p className={styles.note}>
-          <span className={styles.noteCount}>{t.finalCta.note.match(/^\d+/)?.[0]}</span>
-          {t.finalCta.note.replace(/^\d+/, "")}
+          <span className={styles.noteCount}>{noteCount}</span>
+          {noteSuffix}
         </p>
       </div>
     </section>

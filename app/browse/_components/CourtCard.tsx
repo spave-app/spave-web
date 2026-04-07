@@ -2,38 +2,9 @@
 
 import Image from "next/image";
 import { useT } from "../../i18n/LanguageContext";
-import type { Court, CourtSize, CourtType, CourtSurface } from "../../types";
+import type { Court } from "../../types";
+import { isValidImageUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
 import styles from "./CourtCard.module.css";
-
-function isValidImageUrl(url: string | null): url is string {
-  if (!url) return false;
-  try {
-    const { protocol } = new URL(url);
-    return protocol === "https:" || protocol === "http:";
-  } catch {
-    return false;
-  }
-}
-
-function formatSize(size: CourtSize, full: string): string {
-  const map: Record<CourtSize, string> = {
-    THREE_V_THREE: "3v3",
-    FIVE_V_FIVE: "5v5",
-    SEVEN_V_SEVEN: "7v7",
-    NINE_V_NINE: "9v9",
-    FULL: full,
-  };
-  return map[size] ?? size;
-}
-
-function formatSurface(surface: CourtSurface, labels: { synthetic: string; grass: string; hardwood: string }): string {
-  const map: Record<CourtSurface, string> = {
-    SYNTHETIC: labels.synthetic,
-    GRASS: labels.grass,
-    HARDWOOD: labels.hardwood,
-  };
-  return map[surface] ?? surface;
-}
 
 export default function CourtCard({ court, onClick, distance }: { court: Court; onClick: () => void; distance?: string | null }) {
   const { t } = useT();
@@ -41,16 +12,6 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
   const isIndoor = court.type === "INDOOR";
   const imageUrl = court.imageUrl ?? "/placeholder.jpg";
   const validImage = isValidImageUrl(court.imageUrl);
-
-  function formatPrice(priceMin: number | null, priceMax: number | null): string {
-    if (priceMin !== null && priceMax !== null) {
-      if (priceMin === priceMax) return `$${priceMin}`;
-      return `$${priceMin} - $${priceMax}`;
-    }
-    if (priceMin !== null) return c.fromPrice(priceMin);
-    if (priceMax !== null) return c.upToPrice(priceMax);
-    return c.contactVenue;
-  }
 
   return (
     <div className={styles.card} onClick={onClick}>
@@ -91,12 +52,12 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
         </div>
 
         <p className={styles.meta}>
-          {formatSize(court.size, c.full)} · {formatSurface(court.surface, { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood })}
+          {formatSize(court.size, { full: c.full })} · {formatSurface(court.surface, { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood })}
           {distance && <span className={styles.distance}> · {distance}</span>}
         </p>
 
         <p className={styles.price}>
-          {formatPrice(court.priceMin, court.priceMax)}
+          {formatPrice(court.priceMin, court.priceMax, { fromPrice: c.fromPrice, upToPrice: c.upToPrice, contactVenue: c.contactVenue })}
           {(court.priceMin !== null || court.priceMax !== null) && (
             <span className={styles.priceUnit}> {c.perHour}</span>
           )}
