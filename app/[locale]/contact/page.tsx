@@ -83,7 +83,7 @@ export default function Contact() {
             <div className={styles.formWrap}>
               <p className={styles.formTitle}>{c.formTitle}</p>
               {confirmed ? (
-                <p className={styles.confirmed}>{v.contactConfirmed}</p>
+                <p role="status" className={styles.confirmed}>{v.contactConfirmed}</p>
               ) : (
                 <form className={styles.form} onSubmit={handleSubmit} noValidate>
                   <div className={styles.row}>
@@ -96,8 +96,10 @@ export default function Contact() {
                         value={fields.name}
                         onChange={(e) => set("name", e.target.value)}
                         className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
+                        aria-describedby="contact-name-error"
+                        aria-invalid={!!errors.name}
                       />
-                      {errors.name && <p className={styles.fieldError}>{errors.name}</p>}
+                      {errors.name && <p id="contact-name-error" className={styles.fieldError}>{errors.name}</p>}
                     </div>
                     <div className={styles.fieldGroup}>
                       <label className={styles.label} htmlFor="email">{c.email}</label>
@@ -108,8 +110,10 @@ export default function Contact() {
                         value={fields.email}
                         onChange={(e) => set("email", e.target.value)}
                         className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
+                        aria-describedby="contact-email-error"
+                        aria-invalid={!!errors.email}
                       />
-                      {errors.email && <p className={styles.fieldError}>{errors.email}</p>}
+                      {errors.email && <p id="contact-email-error" className={styles.fieldError}>{errors.email}</p>}
                     </div>
                   </div>
                   <div className={styles.fieldGroup}>
@@ -121,8 +125,10 @@ export default function Contact() {
                       value={fields.subject}
                       onChange={(e) => set("subject", e.target.value)}
                       className={`${styles.input} ${errors.subject ? styles.inputError : ""}`}
+                      aria-describedby="contact-subject-error"
+                      aria-invalid={!!errors.subject}
                     />
-                    {errors.subject && <p className={styles.fieldError}>{errors.subject}</p>}
+                    {errors.subject && <p id="contact-subject-error" className={styles.fieldError}>{errors.subject}</p>}
                   </div>
                   <div className={styles.fieldGroup}>
                     <label className={styles.label} htmlFor="message">{c.message}</label>
@@ -132,8 +138,10 @@ export default function Contact() {
                       value={fields.message}
                       onChange={(e) => set("message", e.target.value)}
                       className={`${styles.textarea} ${errors.message ? styles.inputError : ""}`}
+                      aria-describedby="contact-message-error"
+                      aria-invalid={!!errors.message}
                     />
-                    {errors.message && <p className={styles.fieldError}>{errors.message}</p>}
+                    {errors.message && <p id="contact-message-error" className={styles.fieldError}>{errors.message}</p>}
                   </div>
                   <button type="submit" className={styles.submit}>
                     {c.submit}

@@ -1,17 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { useT } from "@/app/i18n/LanguageContext";
 import styles from "./styles/CookieBanner.module.css";
 
 type Consent = "all" | "essential" | "refused";
 const STORAGE_KEY = "spave_cookie_consent";
+const CSS_VAR = "--cookie-banner-height";
 
 export default function CookieBanner() {
   const { t, l } = useT();
   const [consent, setConsent] = useState<Consent | null>(null);
   const [visible, setVisible] = useState(false);
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  // Keep --cookie-banner-height in sync with the actual rendered banner height
+  useEffect(() => {
+    if (!visible || !bannerRef.current) return;
+    const el = bannerRef.current;
+    const observer = new ResizeObserver(() => {
+      document.documentElement.style.setProperty(CSS_VAR, `${el.offsetHeight}px`);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [visible]);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY) as Consent | null;
@@ -19,20 +32,18 @@ export default function CookieBanner() {
       setConsent(stored);
     } else {
       setVisible(true);
-      document.documentElement.style.setProperty("--cookie-banner-height", "65px");
     }
 
     function handleReset() {
       localStorage.removeItem(STORAGE_KEY);
       setConsent(null);
       setVisible(true);
-      document.documentElement.style.setProperty("--cookie-banner-height", "65px");
     }
 
     window.addEventListener("spave:reset-cookie-consent", handleReset);
     return () => {
       window.removeEventListener("spave:reset-cookie-consent", handleReset);
-      document.documentElement.style.removeProperty("--cookie-banner-height");
+      document.documentElement.style.removeProperty(CSS_VAR);
     };
   }, []);
 
@@ -40,14 +51,14 @@ export default function CookieBanner() {
     localStorage.setItem(STORAGE_KEY, value);
     setConsent(value);
     setVisible(false);
-    document.documentElement.style.removeProperty("--cookie-banner-height");
+    document.documentElement.style.removeProperty(CSS_VAR);
   }
 
   return (
     <>
       {consent === "all" && <Analytics />}
       {visible && (
-        <div className={styles.banner} role="dialog" aria-label="Cookie preferences">
+        <div ref={bannerRef} className={styles.banner} role="dialog" aria-label="Cookie preferences">
           <div className={styles.inner}>
             <p className={styles.text}>
               {t.cookieBanner.text}{" "}

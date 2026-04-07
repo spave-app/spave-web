@@ -14,7 +14,14 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
   const validImage = isValidImageUrl(court.imageUrl);
 
   return (
-    <div className={styles.card} onClick={onClick}>
+    <div
+      className={styles.card}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }}
+      aria-label={court.name}
+    >
       <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
         <Image
           src={imageUrl}
