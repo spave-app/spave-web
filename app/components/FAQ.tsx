@@ -11,18 +11,26 @@ function FAQRow({
   item,
   open,
   onToggle,
+  id,
 }: {
   item: FAQItem;
   open: boolean;
   onToggle: () => void;
+  id: string;
 }) {
+  const answerId = `${id}-answer`;
   return (
     <div className={`${styles.row} ${open ? styles.rowOpen : ""}`}>
-      <button className={styles.question} onClick={onToggle}>
+      <button
+        className={styles.question}
+        onClick={onToggle}
+        aria-expanded={open}
+        aria-controls={answerId}
+      >
         <span>{item.q}</span>
-        {open ? <Minus size={18} /> : <Plus size={18} />}
+        {open ? <Minus size={18} aria-hidden="true" /> : <Plus size={18} aria-hidden="true" />}
       </button>
-      <div className={`${styles.answerWrap} ${open ? styles.answerOpen : ""}`}>
+      <div id={answerId} className={`${styles.answerWrap} ${open ? styles.answerOpen : ""}`}>
         <p className={styles.answer}>{item.a}</p>
       </div>
     </div>
@@ -44,12 +52,12 @@ export default function FAQ() {
         <div className={styles.faqGrid}>
           <div className={styles.col}>
             {items.slice(0, 3).map((f, i) => (
-              <FAQRow key={f.q} item={f} open={openIndex === i} onToggle={() => toggle(i)} />
+              <FAQRow key={f.q} item={f} open={openIndex === i} onToggle={() => toggle(i)} id={`faq-${i}`} />
             ))}
           </div>
           <div className={styles.col}>
             {items.slice(3).map((f, i) => (
-              <FAQRow key={f.q} item={f} open={openIndex === i + 3} onToggle={() => toggle(i + 3)} />
+              <FAQRow key={f.q} item={f} open={openIndex === i + 3} onToggle={() => toggle(i + 3)} id={`faq-${i + 3}`} />
             ))}
           </div>
         </div>
