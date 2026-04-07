@@ -148,6 +148,16 @@
   text-align: center;
 }
 
+.inputError {
+  border-color: #c0392b;
+}
+
+.error {
+  font-size: 11px;
+  color: #c0392b;
+  font-weight: 500;
+}
+
 @media (max-width: 640px) {
   .banner {
     flex-direction: column;
@@ -158,8 +168,10 @@
 
   .dismiss {
     position: absolute;
-    top: var(--space-3);
-    right: var(--space-3);
+    top: var(--space-2);
+    right: var(--space-2);
+    width: 36px;
+    height: 36px;
   }
 
   .right {
@@ -188,5 +200,6 @@
   .input {
     flex: 1;
     width: auto;
+    font-size: 16px;
   }
 }

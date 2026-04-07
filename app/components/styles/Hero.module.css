@@ -1,6 +1,6 @@
 .hero {
   padding-top: var(--header-h);
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--cookie-banner-height, 0px));
   display: flex;
   align-items: center;
 }

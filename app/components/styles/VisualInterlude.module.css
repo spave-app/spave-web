@@ -64,7 +64,8 @@
   box-shadow: var(--shadow-elevated);
 }
 
-.cta:hover svg {
+.cta:hover svg,
+.cta:active svg {
   opacity: 1;
   width: 18px;
   transform: translateX(0);

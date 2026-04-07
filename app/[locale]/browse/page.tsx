@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
+import dynamic from "next/dynamic";
 import { Search, SlidersHorizontal, Map } from "lucide-react";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
@@ -9,14 +10,16 @@ import ScrollToTop from "@/app/components/ScrollToTop";
 import CourtCard from "@/app/browse/_components/CourtCard";
 import CtaBanner from "@/app/browse/_components/CtaBanner";
 import FilterPanel from "@/app/browse/_components/FilterPanel";
-import MapView from "@/app/browse/_components/MapView";
 import CourtModal from "@/app/browse/_components/CourtModal";
+
+const MapView = dynamic(() => import("@/app/browse/_components/MapView"), { ssr: false });
 import { useT } from "@/app/i18n/LanguageContext";
-import type { Court, Filters } from "@/app/types";
+import type { Court, CourtLocation, Filters } from "@/app/types";
 import { haversineKm, formatDistance } from "@/app/utils/haversine";
 import styles from "@/app/browse/browse.module.css";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const SEARCH_DEBOUNCE_MS = 200;
 
 const DEFAULT_FILTERS: Filters = {
   search: "",
@@ -37,7 +40,7 @@ export default function Browse() {
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [selectedCourt, setSelectedCourt] = useState<Court | null>(null);
-  const [courtLocations, setCourtLocations] = useState<{ courtId: string; venueId: string; venueName: string; lat: number; lng: number }[]>([]);
+  const [courtLocations, setCourtLocations] = useState<CourtLocation[]>([]);
   const [userPosition, setUserPosition] = useState<{ lat: number; lng: number } | null>(null);
   const { t } = useT();
 
@@ -50,7 +53,7 @@ export default function Browse() {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(filters.search), 200);
+    const timer = setTimeout(() => setDebouncedSearch(filters.search), SEARCH_DEBOUNCE_MS);
     return () => clearTimeout(timer);
   }, [filters.search]);
 
@@ -93,12 +96,12 @@ export default function Browse() {
     return map;
   }, [courtLocations]);
 
-  function getDistance(court: Court): string | null {
+  const getDistance = useCallback((court: Court): string | null => {
     if (!userPosition) return null;
     const coords = venueCoords[court.venue.id];
     if (!coords) return null;
     return formatDistance(haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng));
-  }
+  }, [userPosition, venueCoords]);
 
   const filtered = useMemo(() => {
     let result = [...courts];

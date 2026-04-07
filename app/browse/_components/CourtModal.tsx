@@ -4,18 +4,9 @@ import Image from "next/image";
 import { X, Phone, Mail, Globe, ExternalLink } from "lucide-react";
 import { useEffect } from "react";
 import { useT } from "../../i18n/LanguageContext";
-import type { Court, CourtSize, CourtSurface } from "../../types";
+import type { Court } from "../../types";
+import { isValidImageUrl, isSafeExternalUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
 import styles from "./CourtModal.module.css";
-
-function isValidImageUrl(url: string | null): url is string {
-  if (!url) return false;
-  try {
-    const { protocol } = new URL(url);
-    return protocol === "https:" || protocol === "http:";
-  } catch {
-    return false;
-  }
-}
 
 export default function CourtModal({ court, onClose }: { court: Court; onClose: () => void }) {
   const { t } = useT();
@@ -38,31 +29,9 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
   const isIndoor = court.type === "INDOOR";
   const hasPrice = court.priceMin !== null || court.priceMax !== null;
 
-  function formatSize(size: CourtSize): string {
-    const map: Record<CourtSize, string> = {
-      THREE_V_THREE: "3v3", FIVE_V_FIVE: "5v5",
-      SEVEN_V_SEVEN: "7v7", NINE_V_NINE: "9v9", FULL: c.full,
-    };
-    return map[size] ?? size;
-  }
-
-  function formatSurface(surface: CourtSurface): string {
-    const map: Record<CourtSurface, string> = {
-      SYNTHETIC: c.synthetic, GRASS: c.grass, HARDWOOD: c.hardwood,
-    };
-    return map[surface] ?? surface;
-  }
-
-  function formatPrice(): string {
-    const { priceMin, priceMax } = court;
-    if (priceMin !== null && priceMax !== null) {
-      if (priceMin === priceMax) return `$${priceMin}`;
-      return `$${priceMin} – $${priceMax}`;
-    }
-    if (priceMin !== null) return c.fromPrice(priceMin);
-    if (priceMax !== null) return c.upToPrice(priceMax);
-    return c.contactVenue;
-  }
+  const surfaceLabels = { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood };
+  const sizeLabels = { full: c.full };
+  const priceLabels = { fromPrice: c.fromPrice, upToPrice: c.upToPrice, contactVenue: c.contactVenue };
 
   return (
     <>
@@ -96,7 +65,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
           </div>
 
           <div className={styles.priceRow}>
-            <span className={styles.priceValue}>{formatPrice()}</span>
+            <span className={styles.priceValue}>{formatPrice(court.priceMin, court.priceMax, priceLabels)}</span>
             {hasPrice && <span className={styles.priceUnit}>{c.perHour}</span>}
           </div>
 
@@ -105,8 +74,8 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
           <div className={styles.section}>
             <p className={styles.sectionLabel}>{m.details}</p>
             <div className={styles.pills}>
-              <span className={styles.pill}>{formatSize(court.size)}</span>
-              <span className={styles.pill}>{formatSurface(court.surface)}</span>
+              <span className={styles.pill}>{formatSize(court.size, sizeLabels)}</span>
+              <span className={styles.pill}>{formatSurface(court.surface, surfaceLabels)}</span>
               <span className={styles.pill}>{isIndoor ? c.indoor : c.outdoor}</span>
               <span className={`${styles.pill} ${styles.pillAvailable}`}>
                 {c.available(court.numberAvailable)}
@@ -149,7 +118,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
                   {court.venue.email}
                 </a>
               )}
-              {court.venue.website && (
+              {isSafeExternalUrl(court.venue.website) && (
                 <a href={court.venue.website} target="_blank" rel="noopener noreferrer" className={styles.venueLink}>
                   <Globe size={14} />
                   {m.website}
@@ -162,16 +131,18 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
         </div>
 
         {/* Sticky CTA */}
-        <div className={styles.footer}>
-          <a
-            href={court.bookingLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.bookBtn}
-          >
-            {m.bookAt(court.venue.name)}
-          </a>
-        </div>
+        {isSafeExternalUrl(court.bookingLink) && (
+          <div className={styles.footer}>
+            <a
+              href={court.bookingLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.bookBtn}
+            >
+              {m.bookAt(court.venue.name)}
+            </a>
+          </div>
+        )}
 
       </div>
     </>
