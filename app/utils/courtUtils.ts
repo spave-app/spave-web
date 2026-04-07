@@ -10,6 +10,20 @@ export function isValidImageUrl(url: string | null): url is string {
   }
 }
 
+/**
+ * Guards API-sourced URLs before rendering in href attributes.
+ * Prevents javascript: protocol injection from database-supplied URLs.
+ */
+export function isSafeExternalUrl(url: string | null | undefined): url is string {
+  if (!url) return false;
+  try {
+    const { protocol } = new URL(url);
+    return protocol === "https:" || protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
 export function formatSize(size: CourtSize, labels: { full: string }): string {
   const map: Record<CourtSize, string> = {
     THREE_V_THREE: "3v3",

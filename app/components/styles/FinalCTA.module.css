@@ -82,6 +82,24 @@
   transform: scale(0.97);
 }
 
+.inputError {
+  border-color: #c0392b;
+}
+
+.error {
+  font-size: 13px;
+  color: #c0392b;
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.confirmed {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
 .consent {
   font-size: 12px;
   line-height: 1.5;
@@ -98,6 +116,18 @@
   font-size: 16px;
   font-weight: 700;
   color: var(--color-text-primary);
+  display: inline-block;
+}
+
+.noteCountTick {
+  animation: countTick 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes countTick {
+  0%   { transform: translateY(0);     opacity: 1; color: var(--color-text-primary); }
+  30%  { transform: translateY(-8px);  opacity: 0; }
+  31%  { transform: translateY(8px);   opacity: 0; }
+  100% { transform: translateY(0);     opacity: 1; color: var(--color-primary); }
 }
 
 @media (max-width: 560px) {

@@ -5,7 +5,7 @@ import { X, Phone, Mail, Globe, ExternalLink } from "lucide-react";
 import { useEffect } from "react";
 import { useT } from "../../i18n/LanguageContext";
 import type { Court } from "../../types";
-import { isValidImageUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
+import { isValidImageUrl, isSafeExternalUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
 import styles from "./CourtModal.module.css";
 
 export default function CourtModal({ court, onClose }: { court: Court; onClose: () => void }) {
@@ -118,7 +118,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
                   {court.venue.email}
                 </a>
               )}
-              {court.venue.website && (
+              {isSafeExternalUrl(court.venue.website) && (
                 <a href={court.venue.website} target="_blank" rel="noopener noreferrer" className={styles.venueLink}>
                   <Globe size={14} />
                   {m.website}
@@ -131,16 +131,18 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
         </div>
 
         {/* Sticky CTA */}
-        <div className={styles.footer}>
-          <a
-            href={court.bookingLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.bookBtn}
-          >
-            {m.bookAt(court.venue.name)}
-          </a>
-        </div>
+        {isSafeExternalUrl(court.bookingLink) && (
+          <div className={styles.footer}>
+            <a
+              href={court.bookingLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.bookBtn}
+            >
+              {m.bookAt(court.venue.name)}
+            </a>
+          </div>
+        )}
 
       </div>
     </>
