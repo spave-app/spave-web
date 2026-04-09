@@ -56,7 +56,7 @@ export default function FinalCTA() {
         setCounting(true);
         setTimeout(() => {
           setDisplayCount((prev) => {
-            const parsed = parseInt(prev, 10);
+            const parsed = parseInt(prev ?? "", 10);
             return isNaN(parsed) ? prev : String(parsed + 1);
           });
         }, 150);
