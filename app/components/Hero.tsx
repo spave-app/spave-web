@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronsRight } from "lucide-react";
 import { useT } from "../i18n/LanguageContext";
@@ -11,15 +11,32 @@ import styles from "./styles/Hero.module.css";
 // Usage: <Hero playerCount={dbCount} />
 export default function Hero({ playerCount }: { playerCount?: number } = {}) {
   const { t, l, lang } = useT();
+  const [fetchedCount, setFetchedCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist/size`);
+        if (!res.ok) return;
+        const text = (await res.text()).trim();
+        const n = parseInt(text, 10);
+        if (!cancelled && !isNaN(n)) setFetchedCount(n);
+      } catch (err) {
+        console.error("[waitlist/size] failed", err);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
 
   const { targetCount, socialProofSuffix } = useMemo(() => {
     const text = t.hero.socialProof;
     const match = text.match(/^(\d+)(.*)/);
     return {
-      targetCount: playerCount ?? (match ? parseInt(match[1]) : null),
+      targetCount: playerCount ?? fetchedCount,
       socialProofSuffix: match ? match[2] : text,
     };
-  }, [t.hero.socialProof, playerCount]);
+  }, [t.hero.socialProof, playerCount, fetchedCount]);
 
   const descriptionParts = useMemo(
     () => t.hero.description.split("Spave"),
@@ -60,7 +77,7 @@ export default function Hero({ playerCount }: { playerCount?: number } = {}) {
         </div>
 
         <p className={styles.socialProof}>
-          {targetCount !== null ? <><span className={styles.count}>{count}</span>{socialProofSuffix}</> : t.hero.socialProof}
+          {targetCount != null ? <><span className={styles.count}>{count}</span>{socialProofSuffix}</> : <>&nbsp;</>}
         </p>
       </div>
     </section>

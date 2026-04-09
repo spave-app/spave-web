@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useT } from "../i18n/LanguageContext";
 import styles from "./styles/FinalCTA.module.css";
 
@@ -14,29 +14,63 @@ export default function FinalCTA() {
   const [error, setError] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [counting, setCounting] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const { noteCount, noteSuffix } = useMemo(() => {
     const match = t.finalCta.note.match(/^(\d+)([\s\S]*)/);
     return { noteCount: match?.[1] ?? "", noteSuffix: match?.[2] ?? t.finalCta.note };
   }, [t.finalCta.note]);
 
-  const [displayCount, setDisplayCount] = useState<string>(noteCount);
+  const [displayCount, setDisplayCount] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist/size`);
+        if (!res.ok) return;
+        const text = (await res.text()).trim();
+        if (!cancelled && /^\d+$/.test(text)) setDisplayCount(text);
+      } catch (err) {
+        console.error("[waitlist/size] failed", err);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
     if (!trimmed) { setError(t.validation.emailRequired); return; }
     if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
     setError("");
-    setConfirmed(true);
-
-    // Animate counter +1
-    setCounting(true);
-    setTimeout(() => {
-      const parsed = parseInt(noteCount, 10);
-      setDisplayCount(isNaN(parsed) ? noteCount : String(parsed + 1));
-    }, 150);
-    setTimeout(() => setCounting(false), 700);
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed }),
+      });
+      if (res.status === 201) {
+        setConfirmed(true);
+        setCounting(true);
+        setTimeout(() => {
+          setDisplayCount((prev) => {
+            const parsed = parseInt(prev ?? "", 10);
+            return isNaN(parsed) ? prev : String(parsed + 1);
+          });
+        }, 150);
+        setTimeout(() => setCounting(false), 700);
+      } else if (res.status === 409) {
+        setError("You're already on the waitlist.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -58,17 +92,19 @@ export default function FinalCTA() {
               aria-describedby="finalcta-error"
               aria-invalid={!!error}
             />
-            <button type="submit" className={styles.btn}>{t.finalCta.notify}</button>
+            <button type="submit" className={styles.btn} disabled={submitting}>{t.finalCta.notify}</button>
           </form>
         )}
         {error && <p id="finalcta-error" className={styles.error}>{error}</p>}
         {!confirmed && <p className={styles.consent}>{t.finalCta.consent}</p>}
-        <p className={styles.note}>
-          <span className={`${styles.noteCount} ${counting ? styles.noteCountTick : ""}`}>
-            {displayCount}
-          </span>
-          {noteSuffix}
-        </p>
+        {displayCount != null && (
+          <p className={styles.note}>
+            <span className={`${styles.noteCount} ${counting ? styles.noteCountTick : ""}`}>
+              {displayCount}
+            </span>
+            {noteSuffix}
+          </p>
+        )}
       </div>
     </section>
   );
