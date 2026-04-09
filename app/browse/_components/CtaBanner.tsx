@@ -18,19 +18,43 @@ export default function CtaBanner() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
     if (!trimmed) { setError(t.validation.emailRequired); return; }
     if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
     setError("");
-    setConfirmed(true);
-    setTimeout(() => {
-      setConfirmed(false);
-      setExpanded(false);
-      setEmail("");
-    }, CONFIRM_DISPLAY_MS);
+    setSubmitting(true);
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/waitlist`;
+    console.log("[waitlist] submitting", { url, email: trimmed, apiUrl: process.env.NEXT_PUBLIC_API_URL });
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed }),
+      });
+      const bodyText = await res.text().catch(() => "");
+      console.log("[waitlist] response", { status: res.status, ok: res.ok, body: bodyText });
+      if (res.status === 201) {
+        setConfirmed(true);
+        setTimeout(() => {
+          setConfirmed(false);
+          setExpanded(false);
+          setEmail("");
+        }, CONFIRM_DISPLAY_MS);
+      } else if (res.status === 409) {
+        setError("You're already on the waitlist.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("[waitlist] network/error", err);
+      setError("Network error. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (dismissed) return null;
@@ -65,7 +89,7 @@ export default function CtaBanner() {
                     aria-describedby="ctabanner-error"
                     aria-invalid={!!error}
                   />
-                  <button type="submit" className={styles.submitBtn} aria-label="Submit email">
+                  <button type="submit" className={styles.submitBtn} aria-label="Submit email" disabled={submitting}>
                     <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </form>
