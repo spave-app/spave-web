@@ -136,6 +136,8 @@ export const translations = {
       subjectRequired: "Please enter a subject.",
       messageRequired: "Please write a message.",
       contactConfirmed: "Message sent! We'll get back to you soon.",
+      contactSending: "Sending...",
+      contactError: "Couldn't send your message. Please try again.",
     },
     loading: {
       hint: "Searching nearby courts...",
@@ -362,6 +364,8 @@ export const translations = {
       subjectRequired: "Veuillez entrer un sujet.",
       messageRequired: "Veuillez écrire un message.",
       contactConfirmed: "Message envoyé ! Nous reviendrons vers vous bientôt.",
+      contactSending: "Envoi en cours...",
+      contactError: "Impossible d'envoyer votre message. Veuillez réessayer.",
     },
     loading: {
       hint: "Recherche de terrains à proximité...",
