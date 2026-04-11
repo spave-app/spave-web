@@ -22,10 +22,13 @@ export default function Contact() {
   const [fields, setFields] = useState<Fields>({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   function set(key: keyof Fields, value: string) {
     setFields((f) => ({ ...f, [key]: value }));
     if (errors[key]) setErrors((e) => ({ ...e, [key]: undefined }));
+    if (submitError) setSubmitError("");
   }
 
   function validate(): Errors {
@@ -38,11 +41,34 @@ export default function Contact() {
     return e;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setConfirmed(true);
+    setSubmitError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.name.trim(),
+          email: fields.email.trim(),
+          subject: fields.subject.trim(),
+          message: fields.message.trim(),
+        }),
+      });
+      if (res.status === 201) {
+        setConfirmed(true);
+      } else {
+        setSubmitError(v.contactError);
+      }
+    } catch (err) {
+      console.error("[contact] submit failed", err);
+      setSubmitError(v.contactError);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -143,8 +169,11 @@ export default function Contact() {
                     />
                     {errors.message && <p id="contact-message-error" className={styles.fieldError}>{errors.message}</p>}
                   </div>
-                  <button type="submit" className={styles.submit}>
-                    {c.submit}
+                  {submitError && (
+                    <p role="alert" className={styles.submitError}>{submitError}</p>
+                  )}
+                  <button type="submit" className={styles.submit} disabled={submitting}>
+                    {submitting ? v.contactSending : c.submit}
                     <ChevronsRight size={16} />
                   </button>
                 </form>
