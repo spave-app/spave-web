@@ -74,6 +74,8 @@ export default function Footer() {
           </div>
         </div>
 
+        <p className={styles.priceDisclaimer}>{t.footer.priceDisclaimerFooter}</p>
+
         <div className={styles.bottom}>
           <span className={styles.copy}>{t.footer.copyright}</span>
           <span className={styles.city}>{t.footer.city}</span>

@@ -9,10 +9,10 @@ const STATUSES = ["done", "active", "upcoming", "upcoming"] as const;
 export default function Timeline() {
   const { t } = useT();
   const { milestones, heading, live, inProgress, comingSoon } = t.timeline;
-  const { ref: sectionRef, inView } = useInView<HTMLDivElement>(0.15, "0px 0px -120px 0px");
+  const { ref: sectionRef, inView } = useInView<HTMLDivElement>(0.1, "0px 0px -40px 0px");
 
   return (
-    <section className={styles.section}>
+    <section id="timeline" className={styles.section}>
       <div className={styles.inner}>
         <h2 className={`${styles.heading} ${inView ? styles.visible : ""}`}>{heading}</h2>
 

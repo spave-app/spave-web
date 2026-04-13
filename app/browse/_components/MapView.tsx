@@ -266,32 +266,16 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
 
       {/* Mobile bottom card — lives outside <Map> */}
       {isMobile && (
-        <div
-          className={`${styles.mobileCard} ${selectedVenue && activeCourt ? styles.mobileCardVisible : ""}`}
-          onTouchStart={(e) => { touchStartX.current = e.touches[0].clientX; }}
-          onTouchEnd={(e) => {
-            const delta = e.changedTouches[0].clientX - touchStartX.current;
-            if (Math.abs(delta) > SWIPE_THRESHOLD_PX && total > 1) {
-              if (delta < 0) {
-                setSwipeDir("left");
-                setCarouselIndex((i) => Math.min(total - 1, i + 1));
-              } else {
-                setSwipeDir("right");
-                setCarouselIndex((i) => Math.max(0, i - 1));
-              }
-            }
-          }}
-        >
+        <div className={`${styles.mobileCard} ${selectedVenue && activeCourt ? styles.mobileCardVisible : ""}`}>
           {selectedVenue && activeCourt && (
             <>
-              {/* Keyed row — image + info, animates on swipe */}
               <div
                 key={carouselIndex}
                 className={`${styles.mobileCardSlide} ${swipeDir === "left" ? styles.slideFromRight : styles.slideFromLeft}`}
               >
                 <div className={`${styles.mobileCardImage} ${!hasImage ? (activeCourt.type === "INDOOR" ? styles.mobileImageIndoor : styles.mobileImageOutdoor) : ""}`}>
                   {hasImage && (
-                    <Image src={activeCourt.imageUrl!} alt={activeCourt.name} fill style={{ objectFit: "cover" }} sizes="96px" />
+                    <Image src={activeCourt.imageUrl!} alt={activeCourt.name} fill style={{ objectFit: "cover" }} sizes="140px" />
                   )}
                   <span className={`${styles.popupTypeBadge} ${activeCourt.type === "INDOOR" ? styles.popupTypeBadgeIndoor : styles.popupTypeBadgeOutdoor}`}>
                     {activeCourt.type === "INDOOR" ? "Indoor" : "Outdoor"}
@@ -314,24 +298,28 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
                       })()}
                     </span>
                   </button>
+
+                  {total > 1 && (
+                    <div className={styles.mobileArrows}>
+                      <button
+                        className={styles.mobileArrowBtn}
+                        onClick={() => { setSwipeDir("right"); setCarouselIndex((i) => Math.max(0, i - 1)); }}
+                        disabled={carouselIndex === 0}
+                      >
+                        <ChevronLeft size={16} />
+                      </button>
+                      <span className={styles.mobileArrowCount}>{carouselIndex + 1} / {total}</span>
+                      <button
+                        className={styles.mobileArrowBtn}
+                        onClick={() => { setSwipeDir("left"); setCarouselIndex((i) => Math.min(total - 1, i + 1)); }}
+                        disabled={carouselIndex === total - 1}
+                      >
+                        <ChevronRight size={16} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Dots below the row — static, not animated */}
-              {total > 1 && (
-                <div className={styles.mobileDotsRow}>
-                  {selectedVenue.courts.map((_, i) => (
-                    <button
-                      key={i}
-                      className={`${styles.dot} ${styles.dotMobile} ${i === carouselIndex ? styles.dotActive : ""}`}
-                      onClick={() => {
-                        setSwipeDir(i > carouselIndex ? "left" : "right");
-                        setCarouselIndex(i);
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
 
               <button className={styles.mobileCardClose} onClick={handlePopupClose}><X size={14} /></button>
             </>

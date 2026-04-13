@@ -11,7 +11,7 @@ export default function HowItWorks() {
   const { ref, inView } = useInView(0.15, "0px 0px -180px 0px");
 
   return (
-    <section className={styles.section}>
+    <section className={`${styles.section} ${inView ? styles.sectionSweep : ""}`}>
       <div className={styles.inner} ref={ref}>
         <h2 className={`${styles.heading} ${inView ? styles.visible : ""}`}>
           {t.howItWorks.heading}
