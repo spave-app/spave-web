@@ -51,7 +51,9 @@ export default function Hero({ playerCount }: { playerCount?: number } = {}) {
         <div className={styles.bannerWrap}>
           <Image
             src={lang === "fr" ? "/banner-image-fr.svg" : "/banner-image.svg"}
-            alt="Find Your Court - Spave"
+            alt={lang === "fr"
+              ? "Trouvez votre terrain – Réservez des terrains de soccer à Montréal"
+              : "Find Your Court – Browse and book soccer courts in Montreal"}
             fill
             className={styles.banner}
             priority

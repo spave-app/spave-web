@@ -228,7 +228,7 @@
 .venueLinks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .venueLink {
@@ -336,6 +336,29 @@
   color: var(--color-text-secondary);
 }
 
+/* ── Responsive visibility helpers ── */
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none !important;
+  }
+
+  /* Restore each element type's natural display with higher specificity */
+  .venueLink.desktopOnly {
+    display: inline-flex;
+  }
+
+  .bookBtn.desktopOnly {
+    display: flex;
+  }
+
+  .secondaryLink.desktopOnly {
+    display: flex;
+  }
+}
 
 /* ── Mobile: bottom sheet ── */
 @media (max-width: 767px) {

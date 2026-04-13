@@ -42,7 +42,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
         <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
           <Image
             src={imageUrl}
-            alt={court.name}
+            alt={`${court.name} – ${isIndoor ? "Indoor" : "Outdoor"} soccer court at ${court.venue.name}`}
             fill
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 560px"
@@ -129,6 +129,15 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
                   {court.venue.email}
                 </a>
               )}
+              {court.venue.phone && (
+                <a
+                  href={`tel:${court.venue.phone}${court.venue.phoneExtension ? `;${court.venue.phoneExtension}` : ""}`}
+                  className={`${styles.venueLink} ${styles.desktopOnly}`}
+                >
+                  <Phone size={14} />
+                  {court.venue.phone}{court.venue.phoneExtension ? ` ext. ${court.venue.phoneExtension}` : ""}
+                </a>
+              )}
               {isSafeExternalUrl(court.venue.website) && (
                 <a href={court.venue.website} target="_blank" rel="noopener noreferrer" className={styles.venueLink}>
                   <Globe size={14} />
@@ -147,19 +156,43 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
           <div className={styles.footer}>
             {court.venue.phone ? (
               <>
-                <a href={`tel:${court.venue.phone}${court.venue.phoneExtension ? `;${court.venue.phoneExtension}` : ""}`} className={styles.bookBtn}>
+                {/* Mobile: phone is the primary CTA */}
+                <a
+                  href={`tel:${court.venue.phone}${court.venue.phoneExtension ? `;${court.venue.phoneExtension}` : ""}`}
+                  className={`${styles.bookBtn} ${styles.mobileOnly}`}
+                >
                   <Phone size={17} />
                   {m.callToBook}
                 </a>
+                {/* Mobile: redirect is the secondary link */}
                 {isSafeExternalUrl(court.bookingLink) && (
                   <a
                     href={court.bookingLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.secondaryLink}
+                    className={`${styles.secondaryLink} ${styles.mobileOnly}`}
                   >
                     {m.bookOnWebsite}
                     <ExternalLink size={12} />
+                  </a>
+                )}
+                {/* Desktop: redirect is the primary CTA (phone shown in venue info) */}
+                {isSafeExternalUrl(court.bookingLink) ? (
+                  <a
+                    href={court.bookingLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.bookBtn} ${styles.desktopOnly}`}
+                  >
+                    {m.bookAt(court.venue.name)}
+                  </a>
+                ) : (
+                  <a
+                    href={`tel:${court.venue.phone}${court.venue.phoneExtension ? `;${court.venue.phoneExtension}` : ""}`}
+                    className={`${styles.bookBtn} ${styles.desktopOnly}`}
+                  >
+                    <Phone size={17} />
+                    {m.callToBook}
                   </a>
                 )}
               </>
