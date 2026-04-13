@@ -251,6 +251,7 @@ export default function Browse() {
         courtLocations={courtLocations}
         filteredCourts={filtered}
         onCourtSelect={(court) => { setSelectedCourt(court); }}
+        userPosition={userPosition}
         onPinClick={(venueId) => {
           if (window.innerWidth <= 1024) return;
           const venueLocs = courtLocations.filter((l) => l.venueId === venueId);
