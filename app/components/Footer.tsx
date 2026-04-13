@@ -29,7 +29,7 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <Image src="/spave-logo.svg" alt="Spave" width={40} height={24} />
+            <Image src="/spave-logo.svg" alt="Spave logo" width={40} height={24} />
             <p className={styles.tagline}>{t.footer.tagline}</p>
           </div>
 

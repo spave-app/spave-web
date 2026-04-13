@@ -21,7 +21,7 @@ export default function FinalCTA() {
     return { noteCount: match?.[1] ?? "", noteSuffix: match?.[2] ?? t.finalCta.note };
   }, [t.finalCta.note]);
 
-  const [displayCount, setDisplayCount] = useState<string | null>(null);
+  const [displayCount, setDisplayCount] = useState<string>(() => noteCount);
 
   useEffect(() => {
     let cancelled = false;
@@ -62,12 +62,12 @@ export default function FinalCTA() {
         }, 150);
         setTimeout(() => setCounting(false), 700);
       } else if (res.status === 409) {
-        setError("You're already on the waitlist.");
+        setError(t.validation.alreadyOnWaitlist);
       } else {
-        setError("Something went wrong. Please try again.");
+        setError(t.validation.genericError);
       }
     } catch (err) {
-      setError("Network error. Please try again.");
+      setError(t.validation.networkError);
     } finally {
       setSubmitting(false);
     }
@@ -97,7 +97,7 @@ export default function FinalCTA() {
         )}
         {error && <p id="finalcta-error" className={styles.error}>{error}</p>}
         {!confirmed && <p className={styles.consent}>{t.finalCta.consent}</p>}
-        {displayCount != null && (
+        {displayCount && (
           <p className={styles.note}>
             <span className={`${styles.noteCount} ${counting ? styles.noteCountTick : ""}`}>
               {displayCount}
