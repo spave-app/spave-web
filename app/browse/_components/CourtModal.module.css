@@ -250,6 +250,28 @@
   opacity: 0.4;
 }
 
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.directionsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: var(--font-system);
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.directionsLink:hover {
+  opacity: 0.75;
+}
+
 /* ── Footer CTA ── */
 .footer {
   padding: 16px 28px 22px;
@@ -287,6 +309,23 @@
 
 .bookBtn:active {
   transform: scale(0.99);
+}
+
+.secondaryLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  font-family: var(--font-system);
+  transition: color 0.15s ease;
+}
+
+.secondaryLink:hover {
+  color: var(--color-text-secondary);
 }
 
 

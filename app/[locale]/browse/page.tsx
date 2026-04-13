@@ -222,12 +222,13 @@ export default function Browse() {
                       {t.browse.courtsFound(filtered.length)}
                     </p>
                     <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
-                      {filtered.map((court) => (
+                      {filtered.map((court, i) => (
                         <div key={court.id} id={`court-card-${court.id}`}>
                           <CourtCard
                             court={court}
                             onClick={() => setSelectedCourt(court)}
                             distance={getDistance(court)}
+                            priority={i === 0}
                           />
                         </div>
                       ))}

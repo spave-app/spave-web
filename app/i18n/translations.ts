@@ -24,7 +24,7 @@ export const translations = {
           description: "Discover real courts across the Greater Montreal Area. Filter by size, surface, and price, then get redirected straight to the venue to book.",
         },
         {
-          label: "Instant Booking",
+          label: "Direct Booking",
           description: "Reserve your slot and pay directly on Spave. We handle payment, confirmation, reminders, and cancellations.",
         },
         {
@@ -79,7 +79,7 @@ export const translations = {
       items: [
         {
           q: "Is Spave live?",
-          a: "The Spave Catalog is live now. You can browse every soccer court in the Greater Montreal Area. Instant booking is coming soon. Join the waitlist to get early access.",
+          a: "The Spave Catalog is live now. You can browse every soccer court in the Greater Montreal Area. Direct booking is coming soon. Join the waitlist to get early access.",
         },
         {
           q: "How do I find a court right now?",
@@ -98,7 +98,7 @@ export const translations = {
           a: "Soccer courts are first. Basketball, tennis, music studios, photo studios, rooftops, event spaces, classrooms, and more are on the roadmap.",
         },
         {
-          q: "When will instant booking launch?",
+          q: "When will direct booking launch?",
           a: "We are targeting late May 2026. Join the waitlist and we will email you the moment you can book.",
         },
       ],
@@ -202,6 +202,9 @@ export const translations = {
       website: "Website",
       notes: "Notes",
       bookAt: (name: string) => `Book at ${name}`,
+      callToBook: "Book",
+      bookOnWebsite: "Continue on their website",
+      directions: "Directions",
     },
     cookieBanner: {
       text: "We use analytics cookies to understand how visitors use Spave and improve the experience. Read our",
@@ -253,7 +256,7 @@ export const translations = {
           description: "Découvre de vrais terrains dans le Grand Montréal. Filtre par taille, surface et prix, puis accède directement au complexe pour réserver.",
         },
         {
-          label: "Réservation instantanée",
+          label: "Réservation directe",
           description: "Réserve ton créneau et paie directement sur Spave. On s'occupe du paiement, de la confirmation, des rappels et des annulations.",
         },
         {
@@ -308,7 +311,7 @@ export const translations = {
       items: [
         {
           q: "Est-ce que Spave est disponible ?",
-          a: "Le catalogue Spave est en ligne. Tu peux parcourir tous les terrains de soccer dans le Grand Montréal. La réservation instantanée arrive bientôt. Rejoins la liste d'attente pour un accès prioritaire.",
+          a: "Le catalogue Spave est en ligne. Tu peux parcourir tous les terrains de soccer dans le Grand Montréal. La réservation directe arrive bientôt. Rejoins la liste d'attente pour un accès prioritaire.",
         },
         {
           q: "Comment trouver un terrain maintenant ?",
@@ -327,7 +330,7 @@ export const translations = {
           a: "Les terrains de soccer sont les premiers. Basketball, tennis, studios de musique, studios photo, toits-terrasses, salles d'événements, salles de classe et bien plus sont au programme.",
         },
         {
-          q: "La réservation instantanée, c'est pour quand ?",
+          q: "La réservation directe, c'est pour quand ?",
           a: "Nous visons la fin mai 2026. Rejoins la liste d'attente et on t'enverra un courriel dès que tu pourras réserver.",
         },
       ],
@@ -431,6 +434,9 @@ export const translations = {
       website: "Site web",
       notes: "Notes",
       bookAt: (name: string) => `Réserver chez ${name}`,
+      callToBook: "Réserver",
+      bookOnWebsite: "Continuer sur leur site",
+      directions: "Itinéraire",
     },
     cookieBanner: {
       text: "Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent Spave et améliorer l'expérience. Consultez notre",

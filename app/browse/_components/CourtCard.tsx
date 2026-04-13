@@ -6,7 +6,7 @@ import type { Court } from "../../types";
 import { isValidImageUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
 import styles from "./CourtCard.module.css";
 
-export default function CourtCard({ court, onClick, distance }: { court: Court; onClick: () => void; distance?: string | null }) {
+export default function CourtCard({ court, onClick, distance, priority }: { court: Court; onClick: () => void; distance?: string | null; priority?: boolean }) {
   const { t } = useT();
   const c = t.courtCard;
   const isIndoor = court.type === "INDOOR";
@@ -29,6 +29,8 @@ export default function CourtCard({ court, onClick, distance }: { court: Court; 
           fill
           style={{ objectFit: "cover" }}
           sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+          priority={priority}
+          loading={priority ? "eager" : "lazy"}
         />
         <div className={styles.overlay} />
 
