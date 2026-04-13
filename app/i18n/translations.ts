@@ -112,6 +112,7 @@ export const translations = {
       note: "95 players are waiting.",
       consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
       confirmed: "You're on the list!",
+      scrollHint: "Learn more",
     },
     footer: {
       tagline: "Book soccer courts by the hour in Montreal.",
@@ -340,6 +341,7 @@ export const translations = {
       note: "95 joueurs attendent.",
       consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
       confirmed: "Tu es sur la liste !",
+      scrollHint: "En savoir plus",
     },
     footer: {
       tagline: "Réservez des terrains de soccer à l'heure à Montréal.",

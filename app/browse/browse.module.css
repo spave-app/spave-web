@@ -124,11 +124,11 @@
   padding-right: 50%;
 }
 
-/* On mobile the map is a bottom sheet, no side padding needed */
+/* On mobile the map is full screen, no padding adjustments needed */
 @media (max-width: 1024px) {
   .pageWithMap {
     padding-right: 0;
-    padding-bottom: 70dvh;
+    padding-bottom: 0;
   }
 }
 

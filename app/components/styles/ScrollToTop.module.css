@@ -24,3 +24,9 @@
 .btn:active {
   transform: scale(0.93);
 }
+
+@media (max-width: 1024px) {
+  .btn {
+    z-index: 39;
+  }
+}
