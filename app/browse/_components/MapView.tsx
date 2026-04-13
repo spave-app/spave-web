@@ -2,8 +2,9 @@
 
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
-import Map, { Marker, Popup, NavigationControl, useMap } from "react-map-gl/maplibre";
-import { ChevronsRight, ChevronLeft, ChevronRight, X } from "lucide-react";
+import Map, { Marker, Popup, useMap } from "react-map-gl/maplibre";
+import type { MapRef } from "react-map-gl/maplibre";
+import { ChevronsRight, ChevronLeft, ChevronRight, X, LocateFixed, Plus, Minus } from "lucide-react";
 import { useT } from "../../i18n/LanguageContext";
 import type { Court, CourtLocation } from "../../types";
 import { isValidImageUrl } from "@/app/utils/courtUtils";
@@ -15,6 +16,12 @@ const MOBILE_BREAKPOINT = 1024;
 const SWIPE_THRESHOLD_PX = 40;
 const MONTREAL_CENTER = { lng: -73.5673, lat: 45.5017 };
 const DEFAULT_ZOOM = 11;
+const LOCATE_ZOOM = 14;
+
+const MAP_STYLES = {
+  streets: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
+  satellite: `https://api.maptiler.com/maps/satellite/style.json?key=${MAPTILER_KEY}`,
+};
 
 interface VenuePin {
   venueId: string;
@@ -31,6 +38,7 @@ interface MapViewProps {
   filteredCourts: Court[];
   onCourtSelect: (court: Court) => void;
   onPinClick?: (venueId: string) => void;
+  userPosition?: { lat: number; lng: number } | null;
 }
 
 
@@ -169,13 +177,20 @@ function DesktopPopup({
 }
 
 // ── Main component ─────────────────────────────────────────────────────────
-export default function MapView({ open, onClose, courtLocations, filteredCourts, onCourtSelect, onPinClick }: MapViewProps) {
+export default function MapView({ open, onClose, courtLocations, filteredCourts, onCourtSelect, onPinClick, userPosition }: MapViewProps) {
   const { t } = useT();
   const [selectedVenueId, setSelectedVenueId] = useState<string | null>(null);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [swipeDir, setSwipeDir] = useState<"left" | "right">("left");
+  const [satellite, setSatellite] = useState(false);
   const touchStartX = useRef<number>(0);
+  const mapRef = useRef<MapRef>(null);
+
+  const handleLocate = useCallback(() => {
+    if (!userPosition || !mapRef.current) return;
+    mapRef.current.flyTo({ center: [userPosition.lng, userPosition.lat], zoom: LOCATE_ZOOM, duration: 900 });
+  }, [userPosition]);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
@@ -222,12 +237,21 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
     <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`}>
       {open && (
         <Map
+          ref={mapRef}
           initialViewState={{ longitude: MONTREAL_CENTER.lng, latitude: MONTREAL_CENTER.lat, zoom: DEFAULT_ZOOM }}
           style={{ width: "100%", height: "100%" }}
-          mapStyle={`https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`}
+          mapStyle={satellite ? MAP_STYLES.satellite : MAP_STYLES.streets}
           attributionControl={false}
         >
-          <NavigationControl position="bottom-right" showCompass={false} />
+          {/* You are here */}
+          {userPosition && (
+            <Marker longitude={userPosition.lng} latitude={userPosition.lat} anchor="center">
+              <div className={styles.youAreHere}>
+                <div className={styles.youAreHerePulse} />
+                <div className={styles.youAreHereDot} />
+              </div>
+            </Marker>
+          )}
 
           {/* Desktop: markers + floating popup */}
           {!isMobile ? (
@@ -326,6 +350,37 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
           )}
         </div>
       )}
+
+      {/* Style card — bottom-left desktop, top-left mobile */}
+      <div className={styles.mapControls}>
+        <button
+          className={styles.mapStyleCard}
+          onClick={() => setSatellite((v) => !v)}
+          title={satellite ? "Switch to map view" : "Switch to satellite view"}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={satellite ? "/terrain_preview.png" : "/sat_preview.png"}
+            alt={satellite ? "Map" : "Satellite"}
+            className={styles.mapStyleCardImg}
+          />
+        </button>
+      </div>
+
+      {/* Zoom + locate — bottom-right */}
+      <div className={styles.rightControls}>
+        <button className={styles.mapControlBtn} onClick={() => mapRef.current?.zoomIn()} title="Zoom in">
+          <Plus size={16} />
+        </button>
+        <button className={styles.mapControlBtn} onClick={() => mapRef.current?.zoomOut()} title="Zoom out">
+          <Minus size={16} />
+        </button>
+        {userPosition && (
+          <button className={styles.mapControlBtn} onClick={handleLocate} title="Center on my location">
+            <LocateFixed size={16} />
+          </button>
+        )}
+      </div>
 
       <button className={styles.closeBtn} onClick={onClose}>
         {t.map.close}
