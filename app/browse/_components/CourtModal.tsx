@@ -139,6 +139,7 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
             </div>
           </div>
 
+          <p className={styles.priceNote}>{m.priceDisclaimerModal}</p>
         </div>
 
         {/* Sticky CTA */}

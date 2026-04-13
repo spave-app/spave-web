@@ -220,6 +220,7 @@ export default function Browse() {
                     <CtaBanner />
                     <p className={styles.resultCount}>
                       {t.browse.courtsFound(filtered.length)}
+                      <span className={styles.resultDisclaimer}> · {t.browse.priceDisclaimer}</span>
                     </p>
                     <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
                       {filtered.map((court, i) => (

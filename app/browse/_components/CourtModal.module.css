@@ -280,6 +280,14 @@
   flex-shrink: 0;
 }
 
+.priceNote {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-4);
+}
+
 .bookBtn {
   display: flex;
   align-items: center;

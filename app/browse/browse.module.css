@@ -144,6 +144,10 @@
   margin-bottom: var(--space-5);
 }
 
+.resultDisclaimer {
+  font-weight: 400;
+}
+
 /* Grid — 3 col default */
 .grid {
   display: grid;

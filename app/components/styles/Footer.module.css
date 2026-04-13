@@ -158,6 +158,15 @@
   transform: scale(0.97);
 }
 
+.priceDisclaimer {
+  font-size: 11px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.25);
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: var(--space-4);
+}
+
 .bottom {
   display: flex;
   flex-wrap: wrap;
