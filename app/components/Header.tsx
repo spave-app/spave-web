@@ -32,7 +32,7 @@ export default function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
           <a href={l("/")} className={styles.brand}>
-            <Image src="/spave-logo.svg" alt="Spave" width={60} height={36} className={styles.logo} />
+            <Image src="/spave-logo.svg" alt="Spave logo" width={60} height={36} className={styles.logo} />
             <span className={styles.wordmark}>SPAVE</span>
           </a>
 

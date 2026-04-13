@@ -25,7 +25,7 @@ export default function CourtCard({ court, onClick, distance, priority }: { cour
       <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
         <Image
           src={imageUrl}
-          alt={court.name}
+          alt={`${court.name} – ${isIndoor ? "Indoor" : "Outdoor"} soccer court at ${court.venue.name}`}
           fill
           style={{ objectFit: "cover" }}
           sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"

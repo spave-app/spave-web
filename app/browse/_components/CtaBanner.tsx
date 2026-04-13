@@ -27,16 +27,12 @@ export default function CtaBanner() {
     if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
     setError("");
     setSubmitting(true);
-    const url = `${process.env.NEXT_PUBLIC_API_URL}/waitlist`;
-    console.log("[waitlist] submitting", { url, email: trimmed, apiUrl: process.env.NEXT_PUBLIC_API_URL });
     try {
-      const res = await fetch(url, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: trimmed }),
       });
-      const bodyText = await res.text().catch(() => "");
-      console.log("[waitlist] response", { status: res.status, ok: res.ok, body: bodyText });
       if (res.status === 201) {
         setConfirmed(true);
         setTimeout(() => {
@@ -45,13 +41,12 @@ export default function CtaBanner() {
           setEmail("");
         }, CONFIRM_DISPLAY_MS);
       } else if (res.status === 409) {
-        setError("You're already on the waitlist.");
+        setError(t.validation.alreadyOnWaitlist);
       } else {
-        setError("Something went wrong. Please try again.");
+        setError(t.validation.genericError);
       }
     } catch (err) {
-      console.error("[waitlist] network/error", err);
-      setError("Network error. Please try again.");
+      setError(t.validation.networkError);
     } finally {
       setSubmitting(false);
     }

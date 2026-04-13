@@ -140,6 +140,9 @@ export const translations = {
       contactConfirmed: "Message sent! We'll get back to you soon.",
       contactSending: "Sending...",
       contactError: "Couldn't send your message. Please try again.",
+      alreadyOnWaitlist: "You're already on the waitlist.",
+      genericError: "Something went wrong. Please try again.",
+      networkError: "Network error. Please try again.",
     },
     loading: {
       hint: "Searching nearby courts...",
@@ -375,6 +378,9 @@ export const translations = {
       contactConfirmed: "Message envoyé ! Nous reviendrons vers vous bientôt.",
       contactSending: "Envoi en cours...",
       contactError: "Impossible d'envoyer votre message. Veuillez réessayer.",
+      alreadyOnWaitlist: "Tu es déjà sur la liste d'attente.",
+      genericError: "Une erreur est survenue. Veuillez réessayer.",
+      networkError: "Erreur réseau. Veuillez réessayer.",
     },
     loading: {
       hint: "Recherche de terrains à proximité...",
