@@ -1,6 +1,43 @@
 .section {
+  position: relative;
+  overflow: hidden;
   padding: var(--space-24) var(--space-6);
   background: var(--color-primary);
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -40%;
+  width: 30%;
+  height: 140%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 30%,
+    rgba(255, 255, 255, 0.11) 50%,
+    rgba(255, 255, 255, 0.04) 70%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sectionSweep::after {
+  animation: lightSweep 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+@keyframes lightSweep {
+  from {
+    left: -40%;
+    opacity: 1;
+  }
+  to {
+    left: 130%;
+    opacity: 1;
+  }
 }
 
 .inner {

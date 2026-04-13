@@ -24,7 +24,7 @@ export const translations = {
           description: "Discover real courts across the Greater Montreal Area. Filter by size, surface, and price, then get redirected straight to the venue to book.",
         },
         {
-          label: "Instant Booking",
+          label: "Direct Booking",
           description: "Reserve your slot and pay directly on Spave. We handle payment, confirmation, reminders, and cancellations.",
         },
         {
@@ -79,7 +79,7 @@ export const translations = {
       items: [
         {
           q: "Is Spave live?",
-          a: "The Spave Catalog is live now. You can browse every soccer court in the Greater Montreal Area. Instant booking is coming soon. Join the waitlist to get early access.",
+          a: "The Spave Catalog is live now. You can browse every soccer court in the Greater Montreal Area. Direct booking is coming soon. Join the waitlist to get early access.",
         },
         {
           q: "How do I find a court right now?",
@@ -98,7 +98,7 @@ export const translations = {
           a: "Soccer courts are first. Basketball, tennis, music studios, photo studios, rooftops, event spaces, classrooms, and more are on the roadmap.",
         },
         {
-          q: "When will instant booking launch?",
+          q: "When will direct booking launch?",
           a: "We are targeting late May 2026. Join the waitlist and we will email you the moment you can book.",
         },
       ],
@@ -112,6 +112,7 @@ export const translations = {
       note: "95 players are waiting.",
       consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
       confirmed: "You're on the list!",
+      scrollHint: "Learn more",
     },
     footer: {
       tagline: "Book soccer courts by the hour in Montreal.",
@@ -123,6 +124,7 @@ export const translations = {
       notify: "Notify me",
       copyright: "© 2026 Spave. All rights reserved.",
       city: "Made in Montreal.",
+      priceDisclaimerFooter: "Pricing information is sourced from public data and may not reflect current venue rates. Spave is not responsible for discrepancies between listed and actual prices.",
       consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
       privacyPolicy: "Privacy Policy",
       legal: "Legal",
@@ -147,6 +149,7 @@ export const translations = {
       filter: "Filter",
       map: "Map",
       courtsFound: (n: number) => `${n} court${n !== 1 ? "s" : ""} found`,
+      priceDisclaimer: "Prices are estimates and may vary.",
       noResults: "No courts match your filters.",
       fetchError: "Could not load courts. Please try again later.",
       ctaHeadline: "Like what you see?",
@@ -201,6 +204,10 @@ export const translations = {
       website: "Website",
       notes: "Notes",
       bookAt: (name: string) => `Book at ${name}`,
+      callToBook: "Book",
+      bookOnWebsite: "Continue on their website",
+      directions: "Directions",
+      priceDisclaimerModal: "Prices shown are approximate. Always confirm rates directly with the venue.",
     },
     cookieBanner: {
       text: "We use analytics cookies to understand how visitors use Spave and improve the experience. Read our",
@@ -252,7 +259,7 @@ export const translations = {
           description: "Découvre de vrais terrains dans le Grand Montréal. Filtre par taille, surface et prix, puis accède directement au complexe pour réserver.",
         },
         {
-          label: "Réservation instantanée",
+          label: "Réservation directe",
           description: "Réserve ton créneau et paie directement sur Spave. On s'occupe du paiement, de la confirmation, des rappels et des annulations.",
         },
         {
@@ -307,7 +314,7 @@ export const translations = {
       items: [
         {
           q: "Est-ce que Spave est disponible ?",
-          a: "Le catalogue Spave est en ligne. Tu peux parcourir tous les terrains de soccer dans le Grand Montréal. La réservation instantanée arrive bientôt. Rejoins la liste d'attente pour un accès prioritaire.",
+          a: "Le catalogue Spave est en ligne. Tu peux parcourir tous les terrains de soccer dans le Grand Montréal. La réservation directe arrive bientôt. Rejoins la liste d'attente pour un accès prioritaire.",
         },
         {
           q: "Comment trouver un terrain maintenant ?",
@@ -326,7 +333,7 @@ export const translations = {
           a: "Les terrains de soccer sont les premiers. Basketball, tennis, studios de musique, studios photo, toits-terrasses, salles d'événements, salles de classe et bien plus sont au programme.",
         },
         {
-          q: "La réservation instantanée, c'est pour quand ?",
+          q: "La réservation directe, c'est pour quand ?",
           a: "Nous visons la fin mai 2026. Rejoins la liste d'attente et on t'enverra un courriel dès que tu pourras réserver.",
         },
       ],
@@ -340,6 +347,7 @@ export const translations = {
       note: "95 joueurs attendent.",
       consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
       confirmed: "Tu es sur la liste !",
+      scrollHint: "En savoir plus",
     },
     footer: {
       tagline: "Réservez des terrains de soccer à l'heure à Montréal.",
@@ -351,6 +359,7 @@ export const translations = {
       notify: "Me notifier",
       copyright: "© 2026 Spave. Tous droits réservés.",
       city: "Fait à Montréal.",
+      priceDisclaimerFooter: "Les informations tarifaires proviennent de données publiques et peuvent ne pas refléter les tarifs actuels. Spave n'est pas responsable des écarts entre les prix affichés et réels.",
       consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
       privacyPolicy: "Politique de confidentialité",
       legal: "Légal",
@@ -375,6 +384,7 @@ export const translations = {
       filter: "Filtrer",
       map: "Carte",
       courtsFound: (n: number) => `${n} terrain${n !== 1 ? "s" : ""} trouvé${n !== 1 ? "s" : ""}`,
+      priceDisclaimer: "Les prix sont estimatifs et peuvent varier.",
       noResults: "Aucun terrain ne correspond à vos filtres.",
       fetchError: "Impossible de charger les terrains. Veuillez réessayer plus tard.",
       ctaHeadline: "Quelque chose vous plaît?",
@@ -429,6 +439,10 @@ export const translations = {
       website: "Site web",
       notes: "Notes",
       bookAt: (name: string) => `Réserver chez ${name}`,
+      callToBook: "Réserver",
+      bookOnWebsite: "Continuer sur leur site",
+      directions: "Itinéraire",
+      priceDisclaimerModal: "Les prix affichés sont approximatifs. Confirmez toujours les tarifs directement avec le complexe.",
     },
     cookieBanner: {
       text: "Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent Spave et améliorer l'expérience. Consultez notre",

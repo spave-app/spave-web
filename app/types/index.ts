@@ -6,7 +6,7 @@ export type SortBy = "price_asc" | "price_desc" | "distance_asc" | "distance_des
 export interface Court {
   id: string;
   venueId: string;
-  venue: Pick<Venue, "id" | "name" | "phone" | "website" | "email">;
+  venue: Pick<Venue, "id" | "name" | "phone" | "phoneExtension" | "website" | "email" | "address">;
   name: string;
   description: string | null;
   size: CourtSize;

@@ -7,6 +7,7 @@ import SocialProof from "./components/SocialProof";
 import VisualInterlude from "./components/VisualInterlude";
 import FAQ from "./components/FAQ";
 import FinalCTA from "./components/FinalCTA";
+import ScrollHint from "./components/ScrollHint";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieBanner from "./components/CookieBanner";
@@ -17,12 +18,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <FinalCTA />
+        <ScrollHint />
         <Timeline />
         <HowItWorks />
         <SocialProof />
         <VisualInterlude />
         <FAQ />
-        <FinalCTA />
       </main>
       <Footer />
       <ScrollToTop />
