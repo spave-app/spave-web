@@ -78,9 +78,7 @@ export default function Hero({ playerCount }: { playerCount?: number } = {}) {
           </a>
         </div>
 
-        <p className={styles.socialProof}>
-          {targetCount != null ? <><span className={styles.count}>{count}</span>{socialProofSuffix}</> : <>&nbsp;</>}
-        </p>
+
       </div>
     </section>
   );
