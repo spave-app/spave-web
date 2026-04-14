@@ -14,14 +14,33 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [confirmed, setConfirmed] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
     if (!trimmed) { setError(t.validation.emailRequired); return; }
     if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
     setError("");
-    setConfirmed(true);
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: trimmed }),
+      });
+      if (res.status === 201) {
+        setConfirmed(true);
+      } else if (res.status === 409) {
+        setError(t.validation.alreadyOnWaitlist);
+      } else {
+        setError(t.validation.genericError);
+      }
+    } catch {
+      setError(t.validation.networkError);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -66,7 +85,7 @@ export default function Footer() {
                   aria-describedby="footer-error"
                   aria-invalid={!!error}
                 />
-                <button type="submit" className={styles.waitlistBtn}>{t.footer.notify}</button>
+                <button type="submit" className={styles.waitlistBtn} disabled={submitting}>{t.footer.notify}</button>
               </form>
             )}
             {error && <p id="footer-error" className={styles.error}>{error}</p>}
