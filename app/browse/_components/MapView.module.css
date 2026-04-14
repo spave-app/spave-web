@@ -104,6 +104,121 @@
   line-height: 1;
 }
 
+/* ── Map controls (locate + style toggle) ────────────── */
+.mapControls {
+  position: absolute;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.mapControlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.mapControlBtn:hover {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.mapControlBtn:active {
+  background: var(--color-surface);
+}
+
+.mapStyleCard {
+  position: relative;
+  width: 72px;
+  height: 58px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+  background: #ccc;
+}
+
+.mapStyleCard:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.38);
+  transform: scale(1.05);
+}
+
+.mapStyleCard:active {
+  transform: scale(0.97);
+}
+
+.mapStyleCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ── Right controls: zoom + locate ───────────────────── */
+.rightControls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+
+
+/* ── You are here ────────────────────────────────────── */
+.youAreHere {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.youAreHereDot {
+  width: 14px;
+  height: 14px;
+  background: #2563eb;
+  border: 2.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+.youAreHerePulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.25);
+  animation: youAreHerePulse 2s ease-out infinite;
+}
+
+@keyframes youAreHerePulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  70%  { transform: scale(2.8); opacity: 0; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
 /* ── Popup override ───────────────────────────────────── */
 :global(.maplibregl-popup-content) {
   padding: 0 !important;
@@ -357,7 +472,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 8;
+  z-index: 12;
   display: flex;
   flex-direction: column;
   background: var(--color-white);
@@ -373,7 +488,7 @@
 
 .mobileCardImage {
   position: relative;
-  width: 96px;
+  width: 130px;
   flex-shrink: 0;
   overflow: hidden;
   background: #e8e4ec;
@@ -408,8 +523,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  padding: 12px 10px 10px 12px;
+  gap: 5px;
+  padding: 14px 10px 10px 14px;
   background: transparent;
   border: none;
   text-align: left;
@@ -461,17 +576,50 @@
 .mobileCardSlide {
   display: flex;
   flex-direction: row;
-  min-height: 84px;
+  min-height: 130px;
   overflow: hidden;
 }
 
-.mobileDotsRow {
+.mobileArrows {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 2px;
-  padding: 6px 0 8px;
-  border-top: 1px solid var(--color-border);
+  gap: var(--space-3);
+  padding: 0 12px 12px;
+}
+
+.mobileArrowBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.mobileArrowBtn:hover:not(:disabled) {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  color: var(--color-white);
+}
+
+.mobileArrowBtn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.mobileArrowCount {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-system);
+  color: var(--color-text-muted);
+  min-width: 32px;
+  text-align: center;
 }
 
 .mobileCardClose {
@@ -504,15 +652,15 @@
   }
 
   .panel {
-    top: auto;
+    top: var(--header-h);
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: 70dvh;
+    height: calc(100dvh - var(--header-h));
     border-left: none;
-    border-top: 1px solid var(--color-border);
-    border-radius: 16px 16px 0 0;
+    border-top: none;
+    border-radius: 0;
     transform: translateY(100%);
   }
 

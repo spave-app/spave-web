@@ -228,7 +228,7 @@
 .venueLinks {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .venueLink {
@@ -250,12 +250,42 @@
   opacity: 0.4;
 }
 
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.directionsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: var(--font-system);
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.directionsLink:hover {
+  opacity: 0.75;
+}
+
 /* ── Footer CTA ── */
 .footer {
   padding: 16px 28px 22px;
   border-top: 1px solid #F0F0F0;
   background: #fff;
   flex-shrink: 0;
+}
+
+.priceNote {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-4);
 }
 
 .bookBtn {
@@ -289,6 +319,46 @@
   transform: scale(0.99);
 }
 
+.secondaryLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  font-family: var(--font-system);
+  transition: color 0.15s ease;
+}
+
+.secondaryLink:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ── Responsive visibility helpers ── */
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobileOnly {
+    display: none !important;
+  }
+
+  /* Restore each element type's natural display with higher specificity */
+  .venueLink.desktopOnly {
+    display: inline-flex;
+  }
+
+  .bookBtn.desktopOnly {
+    display: flex;
+  }
+
+  .secondaryLink.desktopOnly {
+    display: flex;
+  }
+}
 
 /* ── Mobile: bottom sheet ── */
 @media (max-width: 767px) {

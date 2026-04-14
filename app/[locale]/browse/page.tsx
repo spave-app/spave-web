@@ -220,14 +220,16 @@ export default function Browse() {
                     <CtaBanner />
                     <p className={styles.resultCount}>
                       {t.browse.courtsFound(filtered.length)}
+                      <span className={styles.resultDisclaimer}> · {t.browse.priceDisclaimer}</span>
                     </p>
                     <div className={`${styles.grid} ${mapOpen ? styles.gridWithMap : ""}`}>
-                      {filtered.map((court) => (
+                      {filtered.map((court, i) => (
                         <div key={court.id} id={`court-card-${court.id}`}>
                           <CourtCard
                             court={court}
                             onClick={() => setSelectedCourt(court)}
                             distance={getDistance(court)}
+                            priority={i === 0}
                           />
                         </div>
                       ))}
@@ -249,7 +251,9 @@ export default function Browse() {
         courtLocations={courtLocations}
         filteredCourts={filtered}
         onCourtSelect={(court) => { setSelectedCourt(court); }}
+        userPosition={userPosition}
         onPinClick={(venueId) => {
+          if (window.innerWidth <= 1024) return;
           const venueLocs = courtLocations.filter((l) => l.venueId === venueId);
           const court = filtered.find((c) => venueLocs.some((l) => l.courtId === c.id));
           if (!court) return;
