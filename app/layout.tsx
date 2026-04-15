@@ -43,6 +43,14 @@ export const metadata: Metadata = {
     },
   },
   themeColor: "#76043D",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-icon.png" }],
+  },
 };
 
 const jsonLd = {
