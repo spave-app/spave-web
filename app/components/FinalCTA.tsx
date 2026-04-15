@@ -21,22 +21,26 @@ export default function FinalCTA() {
     return { noteCount: match?.[1] ?? "", noteSuffix: match?.[2] ?? t.finalCta.note };
   }, [t.finalCta.note]);
 
-  const [displayCount, setDisplayCount] = useState<string>(() => noteCount);
+  const [displayCount, setDisplayCount] = useState<string>("");
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/waitlist/size`);
-        if (!res.ok) return;
+        if (!res.ok) {
+          if (!cancelled) setDisplayCount(noteCount);
+          return;
+        }
         const text = (await res.text()).trim();
-        if (!cancelled && /^\d+$/.test(text)) setDisplayCount(text);
+        if (!cancelled) setDisplayCount(/^\d+$/.test(text) ? text : noteCount);
       } catch (err) {
         console.error("[waitlist/size] failed", err);
+        if (!cancelled) setDisplayCount(noteCount);
       }
     })();
     return () => { cancelled = true; };
-  }, []);
+  }, [noteCount]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
