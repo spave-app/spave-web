@@ -42,6 +42,8 @@ export default function CtaBanner() {
         }, CONFIRM_DISPLAY_MS);
       } else if (res.status === 409) {
         setError(t.validation.alreadyOnWaitlist);
+      } else if (res.status === 429) {
+        setError(t.validation.rateLimited);
       } else {
         setError(t.validation.genericError);
       }
