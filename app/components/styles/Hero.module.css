@@ -74,7 +74,10 @@
   padding: 13px var(--space-8);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
 }
 
 .btnPrimary:hover {
@@ -98,14 +101,20 @@
   border-radius: var(--radius-full);
   border: 1.5px solid var(--color-border);
   box-shadow: var(--shadow-card);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
 }
 
 .btnSecondary svg {
   opacity: 0;
   width: 0;
   transform: translateX(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, width 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    width 0.2s ease;
 }
 
 .btnSecondary:hover {

@@ -37,14 +37,19 @@ export default function NotFound() {
         <rect x="518" y="130" width="80" height="140" stroke="currentColor" strokeWidth="1.5" />
       </svg>
 
-      <div className={styles.backdrop} aria-hidden="true">404</div>
+      <div className={styles.backdrop} aria-hidden="true">
+        404
+      </div>
 
       <div className={styles.content}>
         <h1 className={styles.heading}>{c.heading}</h1>
         <p className={styles.sub}>
-          {c.sub[0]}<span className={styles.subBreak}> {c.sub[1]}</span>
+          {c.sub[0]}
+          <span className={styles.subBreak}> {c.sub[1]}</span>
         </p>
-        <Link href={c.href} className={styles.cta}>{c.cta}</Link>
+        <Link href={c.href} className={styles.cta}>
+          {c.cta}
+        </Link>
       </div>
     </div>
   );

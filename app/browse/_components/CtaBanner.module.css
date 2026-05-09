@@ -47,7 +47,9 @@
   font-family: var(--font-system);
   white-space: nowrap;
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
 }
 
 .notifyBtn:hover {
@@ -112,7 +114,9 @@
   justify-content: center;
   flex-shrink: 0;
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
 }
 
 .submitBtn:hover {
@@ -132,7 +136,9 @@
   color: var(--color-text-muted);
   border-radius: 50%;
   flex-shrink: 0;
-  transition: color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
 }
 
 .dismiss:hover {

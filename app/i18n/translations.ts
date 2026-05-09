@@ -7,7 +7,8 @@ export const translations = {
       tryPrototype: "Catalog",
     },
     hero: {
-      description: "Introducing Spave. Book soccer courts across the Greater Montreal Area in a few clicks.",
+      description:
+        "Introducing Spave. Book soccer courts across the Greater Montreal Area in a few clicks.",
       incentive: "Coming soon, be the first to book.",
       joinWaitlist: "Join the Waitlist",
       tryPrototype: "Browse Catalog",
@@ -21,19 +22,23 @@ export const translations = {
       milestones: [
         {
           label: "Prototype",
-          description: "Discover real courts across the Greater Montreal Area. Filter by size, surface, and price, then get redirected straight to the venue to book.",
+          description:
+            "Discover real courts across the Greater Montreal Area. Filter by size, surface, and price, then get redirected straight to the venue to book.",
         },
         {
           label: "Direct Booking",
-          description: "Reserve your slot and pay directly on Spave. We handle payment, confirmation, reminders, and cancellations.",
+          description:
+            "Reserve your slot and pay directly on Spave. We handle payment, confirmation, reminders, and cancellations.",
         },
         {
           label: "Every Sport",
-          description: "Basketball courts, tennis courts, hockey rinks, badminton courts. One platform, any game.",
+          description:
+            "Basketball courts, tennis courts, hockey rinks, badminton courts. One platform, any game.",
         },
         {
           label: "Spave Mobile App",
-          description: "Full native experience on iOS and Android. Every court in your pocket, always.",
+          description:
+            "Full native experience on iOS and Android. Every court in your pocket, always.",
         },
       ],
     },
@@ -42,7 +47,8 @@ export const translations = {
       steps: [
         {
           title: "Browse",
-          description: "Find courts near you. Search by size, surface, and price. See real availability at a glance.",
+          description:
+            "Find courts near you. Search by size, surface, and price. See real availability at a glance.",
         },
         {
           title: "Book",
@@ -58,12 +64,14 @@ export const translations = {
       heading: "What players are saying",
       testimonials: [
         {
-          quote: "Every time I want to book a court I end up calling three different places just to find out they're all full. There has to be a better way.",
+          quote:
+            "Every time I want to book a court I end up calling three different places just to find out they're all full. There has to be a better way.",
           author: "Nicolas Landry",
           location: "Saint-Bruno",
         },
         {
-          quote: "Half the time there's no price anywhere online. I only find out what it costs once I'm already on the phone with someone.",
+          quote:
+            "Half the time there's no price anywhere online. I only find out what it costs once I'm already on the phone with someone.",
           author: "Yahya Bejja",
           location: "Laval",
         },
@@ -110,7 +118,8 @@ export const translations = {
       placeholder: "your@email.com",
       notify: "Notify me",
       note: "95 players are waiting.",
-      consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
+      consent:
+        "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
       confirmed: "You're on the list!",
       scrollHint: "Learn more",
     },
@@ -124,8 +133,10 @@ export const translations = {
       notify: "Notify me",
       copyright: "© 2026 Spave. All rights reserved.",
       city: "Made in Montreal.",
-      priceDisclaimerFooter: "Pricing information is sourced from public data and may not reflect current venue rates. Spave is not responsible for discrepancies between listed and actual prices.",
-      consent: "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
+      priceDisclaimerFooter:
+        "Pricing information is sourced from public data and may not reflect current venue rates. Spave is not responsible for discrepancies between listed and actual prices.",
+      consent:
+        "By joining, you agree to receive occasional updates about Spave. Unsubscribe anytime.",
       privacyPolicy: "Privacy Policy",
       legal: "Legal",
       cookiePreferences: "Cookie Preferences",
@@ -210,7 +221,8 @@ export const translations = {
       callToBook: "Book",
       bookOnWebsite: "Continue on their website",
       directions: "Directions",
-      priceDisclaimerModal: "Prices shown are approximate. Always confirm rates directly with the venue.",
+      priceDisclaimerModal:
+        "Prices shown are approximate. Always confirm rates directly with the venue.",
     },
     cookieBanner: {
       text: "We use analytics cookies to understand how visitors use Spave and improve the experience. Read our",
@@ -245,7 +257,8 @@ export const translations = {
       tryPrototype: "Catalogue",
     },
     hero: {
-      description: "Découvre Spave. Réserve des terrains de soccer dans le Grand Montréal en quelques clics.",
+      description:
+        "Découvre Spave. Réserve des terrains de soccer dans le Grand Montréal en quelques clics.",
       incentive: "Bientôt disponible, sois parmi les premiers à réserver.",
       joinWaitlist: "Liste d'attente",
       tryPrototype: "Voir le catalogue",
@@ -259,19 +272,23 @@ export const translations = {
       milestones: [
         {
           label: "Prototype",
-          description: "Découvre de vrais terrains dans le Grand Montréal. Filtre par taille, surface et prix, puis accède directement au complexe pour réserver.",
+          description:
+            "Découvre de vrais terrains dans le Grand Montréal. Filtre par taille, surface et prix, puis accède directement au complexe pour réserver.",
         },
         {
           label: "Réservation directe",
-          description: "Réserve ton créneau et paie directement sur Spave. On s'occupe du paiement, de la confirmation, des rappels et des annulations.",
+          description:
+            "Réserve ton créneau et paie directement sur Spave. On s'occupe du paiement, de la confirmation, des rappels et des annulations.",
         },
         {
           label: "Tous les sports",
-          description: "Terrains de basketball, tennis, patinoires de hockey, terrains de badminton. Une plateforme, tous les sports.",
+          description:
+            "Terrains de basketball, tennis, patinoires de hockey, terrains de badminton. Une plateforme, tous les sports.",
         },
         {
           label: "Application mobile Spave",
-          description: "Expérience native complète sur iOS et Android. Tous tes terrains dans ta poche, où que tu sois.",
+          description:
+            "Expérience native complète sur iOS et Android. Tous tes terrains dans ta poche, où que tu sois.",
         },
       ],
     },
@@ -280,7 +297,8 @@ export const translations = {
       steps: [
         {
           title: "Parcourir",
-          description: "Trouve des terrains près de toi. Cherche par taille, surface et prix. Consulte les disponibilités en un coup d'œil.",
+          description:
+            "Trouve des terrains près de toi. Cherche par taille, surface et prix. Consulte les disponibilités en un coup d'œil.",
         },
         {
           title: "Réserver",
@@ -296,12 +314,14 @@ export const translations = {
       heading: "Ce que disent les joueurs",
       testimonials: [
         {
-          quote: "Chaque fois que je veux réserver un terrain, j'appelle trois endroits pour finalement apprendre qu'ils sont tous complets. Il doit y avoir une meilleure façon.",
+          quote:
+            "Chaque fois que je veux réserver un terrain, j'appelle trois endroits pour finalement apprendre qu'ils sont tous complets. Il doit y avoir une meilleure façon.",
           author: "Nicolas Landry",
           location: "Saint-Bruno",
         },
         {
-          quote: "La moitié du temps il n'y a aucun prix en ligne. Je le découvre seulement une fois que j'ai quelqu'un au téléphone.",
+          quote:
+            "La moitié du temps il n'y a aucun prix en ligne. Je le découvre seulement une fois que j'ai quelqu'un au téléphone.",
           author: "Yahya Bejja",
           location: "Laval",
         },
@@ -348,7 +368,8 @@ export const translations = {
       placeholder: "votre@email.com",
       notify: "Me notifier",
       note: "95 joueurs attendent.",
-      consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
+      consent:
+        "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
       confirmed: "Tu es sur la liste !",
       scrollHint: "En savoir plus",
     },
@@ -362,8 +383,10 @@ export const translations = {
       notify: "Me notifier",
       copyright: "© 2026 Spave. Tous droits réservés.",
       city: "Fait à Montréal.",
-      priceDisclaimerFooter: "Les informations tarifaires proviennent de données publiques et peuvent ne pas refléter les tarifs actuels. Spave n'est pas responsable des écarts entre les prix affichés et réels.",
-      consent: "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
+      priceDisclaimerFooter:
+        "Les informations tarifaires proviennent de données publiques et peuvent ne pas refléter les tarifs actuels. Spave n'est pas responsable des écarts entre les prix affichés et réels.",
+      consent:
+        "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles sur Spave. Désabonnement possible à tout moment.",
       privacyPolicy: "Politique de confidentialité",
       legal: "Légal",
       cookiePreferences: "Préférences de cookies",
@@ -394,10 +417,14 @@ export const translations = {
       noResults: "Aucun terrain ne correspond à vos filtres.",
       fetchError: "Impossible de charger les terrains. Veuillez réessayer plus tard.",
       ctaHeadline: "Quelque chose vous plaît?",
-      ctaSub: "La réservation directe de ces terrains sur Spave arrive bientôt. Sois parmi les premiers.",
+      ctaSub:
+        "La réservation directe de ces terrains sur Spave arrive bientôt. Sois parmi les premiers.",
       ctaBtn: "Me notifier",
       ctaConfirmed: "Vous êtes sur la liste!",
-      ctaConsent: ["En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles.", "Désabonnement possible à tout moment."],
+      ctaConsent: [
+        "En vous inscrivant, vous acceptez de recevoir des mises à jour occasionnelles.",
+        "Désabonnement possible à tout moment.",
+      ],
     },
     filter: {
       title: "Filtrer",
@@ -448,7 +475,8 @@ export const translations = {
       callToBook: "Réserver",
       bookOnWebsite: "Continuer sur leur site",
       directions: "Itinéraire",
-      priceDisclaimerModal: "Les prix affichés sont approximatifs. Confirmez toujours les tarifs directement avec le complexe.",
+      priceDisclaimerModal:
+        "Les prix affichés sont approximatifs. Confirmez toujours les tarifs directement avec le complexe.",
     },
     cookieBanner: {
       text: "Nous utilisons des cookies analytiques pour comprendre comment les visiteurs utilisent Spave et améliorer l'expérience. Consultez notre",

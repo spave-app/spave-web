@@ -39,14 +39,22 @@ export default function FinalCTA() {
         if (!cancelled) setDisplayCount(noteCount);
       }
     })();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [noteCount]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
-    if (!trimmed) { setError(t.validation.emailRequired); return; }
-    if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
+    if (!trimmed) {
+      setError(t.validation.emailRequired);
+      return;
+    }
+    if (!isValidEmail(trimmed)) {
+      setError(t.validation.emailInvalid);
+      return;
+    }
     setError("");
     setSubmitting(true);
     try {
@@ -84,22 +92,33 @@ export default function FinalCTA() {
         <h2 className={styles.heading}>{t.finalCta.heading}</h2>
         <p className={styles.sub}>{t.finalCta.sub}</p>
         {confirmed ? (
-          <p role="status" className={styles.confirmed}>{t.finalCta.confirmed}</p>
+          <p role="status" className={styles.confirmed}>
+            {t.finalCta.confirmed}
+          </p>
         ) : (
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             <input
               type="email"
               placeholder={t.finalCta.placeholder}
               value={email}
-              onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError("");
+              }}
               className={`${styles.input} ${error ? styles.inputError : ""}`}
               aria-describedby="finalcta-error"
               aria-invalid={!!error}
             />
-            <button type="submit" className={styles.btn} disabled={submitting}>{t.finalCta.notify}</button>
+            <button type="submit" className={styles.btn} disabled={submitting}>
+              {t.finalCta.notify}
+            </button>
           </form>
         )}
-        {error && <p id="finalcta-error" className={styles.error}>{error}</p>}
+        {error && (
+          <p id="finalcta-error" className={styles.error}>
+            {error}
+          </p>
+        )}
         {!confirmed && <p className={styles.consent}>{t.finalCta.consent}</p>}
         {displayCount && (
           <p className={styles.note}>
@@ -110,7 +129,6 @@ export default function FinalCTA() {
           </p>
         )}
       </div>
-
     </section>
   );
 }

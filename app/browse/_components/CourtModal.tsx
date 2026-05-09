@@ -5,7 +5,13 @@ import { X, Phone, Mail, Globe, ExternalLink, MapPin, Navigation } from "lucide-
 import { useEffect } from "react";
 import { useT } from "../../i18n/LanguageContext";
 import type { Court } from "../../types";
-import { isValidImageUrl, isSafeExternalUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
+import {
+  isValidImageUrl,
+  isSafeExternalUrl,
+  formatSize,
+  formatSurface,
+  formatPrice,
+} from "@/app/utils/courtUtils";
 import styles from "./CourtModal.module.css";
 
 export default function CourtModal({ court, onClose }: { court: Court; onClose: () => void }) {
@@ -15,11 +21,15 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, []);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
@@ -31,15 +41,25 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
 
   const surfaceLabels = { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood };
   const sizeLabels = { full: c.full };
-  const priceLabels = { fromPrice: c.fromPrice, upToPrice: c.upToPrice, contactVenue: c.contactVenue };
+  const priceLabels = {
+    fromPrice: c.fromPrice,
+    upToPrice: c.upToPrice,
+    contactVenue: c.contactVenue,
+  };
 
   return (
     <>
       <div className={styles.overlay} onClick={onClose} />
-      <div className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="modal-court-name">
-
+      <div
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-court-name"
+      >
         {/* Image */}
-        <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
+        <div
+          className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}
+        >
           <Image
             src={imageUrl}
             alt={`${court.name} – ${isIndoor ? "Indoor" : "Outdoor"} soccer court at ${court.venue.name}`}
@@ -51,21 +71,26 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
           <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
             <X size={18} />
           </button>
-          <span className={`${styles.typeBadge} ${isIndoor ? styles.typeBadgeIndoor : styles.typeBadgeOutdoor}`}>
+          <span
+            className={`${styles.typeBadge} ${isIndoor ? styles.typeBadgeIndoor : styles.typeBadgeOutdoor}`}
+          >
             {isIndoor ? c.indoor : c.outdoor}
           </span>
         </div>
 
         {/* Scrollable body */}
         <div className={styles.body}>
-
           <div className={styles.header}>
-            <h2 id="modal-court-name" className={styles.courtName}>{court.name}</h2>
+            <h2 id="modal-court-name" className={styles.courtName}>
+              {court.name}
+            </h2>
             <p className={styles.venueName}>{court.venue.name}</p>
           </div>
 
           <div className={styles.priceRow}>
-            <span className={styles.priceValue}>{formatPrice(court.priceMin, court.priceMax, priceLabels)}</span>
+            <span className={styles.priceValue}>
+              {formatPrice(court.priceMin, court.priceMax, priceLabels)}
+            </span>
             {hasPrice && <span className={styles.priceUnit}>{c.perHour}</span>}
           </div>
 
@@ -88,7 +113,9 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
               <p className={styles.sectionLabel}>{m.availability}</p>
               <div className={styles.pills}>
                 {court.availabilityHint.map((hint, i) => (
-                  <span key={i} className={styles.pill}>{hint}</span>
+                  <span key={i} className={styles.pill}>
+                    {hint}
+                  </span>
                 ))}
               </div>
             </div>
@@ -110,7 +137,9 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
                 <div className={styles.addressRow}>
                   <span className={styles.venueLink}>
                     <MapPin size={14} />
-                    {[court.venue.address.addressLine1, court.venue.address.city].filter(Boolean).join(", ")}
+                    {[court.venue.address.addressLine1, court.venue.address.city]
+                      .filter(Boolean)
+                      .join(", ")}
                   </span>
                   <a
                     href={`https://www.google.com/maps/dir/?api=1&destination=${court.venue.address.lat},${court.venue.address.lng}`}
@@ -135,11 +164,17 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
                   className={`${styles.venueLink} ${styles.desktopOnly}`}
                 >
                   <Phone size={14} />
-                  {court.venue.phone}{court.venue.phoneExtension ? ` ext. ${court.venue.phoneExtension}` : ""}
+                  {court.venue.phone}
+                  {court.venue.phoneExtension ? ` ext. ${court.venue.phoneExtension}` : ""}
                 </a>
               )}
               {isSafeExternalUrl(court.venue.website) && (
-                <a href={court.venue.website} target="_blank" rel="noopener noreferrer" className={styles.venueLink}>
+                <a
+                  href={court.venue.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.venueLink}
+                >
                   <Globe size={14} />
                   {m.website}
                   <ExternalLink size={11} className={styles.externalIcon} />
@@ -208,7 +243,6 @@ export default function CourtModal({ court, onClose }: { court: Court; onClose: 
             )}
           </div>
         )}
-
       </div>
     </>
   );

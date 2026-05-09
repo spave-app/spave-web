@@ -24,7 +24,14 @@ export const metadata: Metadata = {
       "Find and book soccer courts by the hour across Montreal's metropolitan area. Direct booking coming soon!",
     url: "https://spaveapp.com",
     siteName: "Spave",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Spave – Book Soccer Courts in Montreal" }],
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Spave – Book Soccer Courts in Montreal",
+      },
+    ],
     locale: "en_CA",
     type: "website",
   },
@@ -58,8 +65,7 @@ const jsonLd = {
   "@type": "WebSite",
   name: "Spave",
   url: "https://spaveapp.com",
-  description:
-    "Find and book soccer courts by the hour across Montreal's metropolitan area.",
+  description: "Find and book soccer courts by the hour across Montreal's metropolitan area.",
   inLanguage: ["en-CA", "fr-CA"],
   potentialAction: {
     "@type": "SearchAction",
@@ -72,8 +78,7 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsActivityLocation",
   name: "Spave",
-  description:
-    "Marketplace for booking soccer courts by the hour in the Greater Montreal Area.",
+  description: "Marketplace for booking soccer courts by the hour in the Greater Montreal Area.",
   url: "https://spaveapp.com",
   logo: "https://spaveapp.com/spave-logo.svg",
   image: "https://spaveapp.com/og-image.png",

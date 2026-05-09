@@ -6,7 +6,17 @@ import type { Court } from "../../types";
 import { isValidImageUrl, formatSize, formatSurface, formatPrice } from "@/app/utils/courtUtils";
 import styles from "./CourtCard.module.css";
 
-export default function CourtCard({ court, onClick, distance, priority }: { court: Court; onClick: () => void; distance?: string | null; priority?: boolean }) {
+export default function CourtCard({
+  court,
+  onClick,
+  distance,
+  priority,
+}: {
+  court: Court;
+  onClick: () => void;
+  distance?: string | null;
+  priority?: boolean;
+}) {
   const { t } = useT();
   const c = t.courtCard;
   const isIndoor = court.type === "INDOOR";
@@ -19,10 +29,17 @@ export default function CourtCard({ court, onClick, distance, priority }: { cour
       onClick={onClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick(); } }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
       aria-label={court.name}
     >
-      <div className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}>
+      <div
+        className={`${styles.imageWrap} ${!validImage ? (isIndoor ? styles.indoor : styles.outdoor) : ""}`}
+      >
         <Image
           src={imageUrl}
           alt={`${court.name} – ${isIndoor ? "Indoor" : "Outdoor"} soccer court at ${court.venue.name}`}
@@ -35,7 +52,9 @@ export default function CourtCard({ court, onClick, distance, priority }: { cour
         <div className={styles.overlay} />
 
         <div className={styles.imageMeta}>
-          <span className={`${styles.typeBadge} ${isIndoor ? styles.typeBadgeIndoor : styles.typeBadgeOutdoor}`}>
+          <span
+            className={`${styles.typeBadge} ${isIndoor ? styles.typeBadgeIndoor : styles.typeBadgeOutdoor}`}
+          >
             {isIndoor ? c.indoor : c.outdoor}
           </span>
         </div>
@@ -43,7 +62,9 @@ export default function CourtCard({ court, onClick, distance, priority }: { cour
         {court.availabilityHint.length > 0 && (
           <div className={styles.hints}>
             {court.availabilityHint.slice(0, 3).map((hint, i) => (
-              <span key={i} className={styles.hint}>{hint}</span>
+              <span key={i} className={styles.hint}>
+                {hint}
+              </span>
             ))}
           </div>
         )}
@@ -55,18 +76,25 @@ export default function CourtCard({ court, onClick, distance, priority }: { cour
             <h3 className={styles.name}>{court.name}</h3>
             <span className={styles.venueName}>{court.venue.name}</span>
           </div>
-          <span className={styles.available}>
-            {c.available(court.numberAvailable)}
-          </span>
+          <span className={styles.available}>{c.available(court.numberAvailable)}</span>
         </div>
 
         <p className={styles.meta}>
-          {formatSize(court.size, { full: c.full })} · {formatSurface(court.surface, { synthetic: c.synthetic, grass: c.grass, hardwood: c.hardwood })}
+          {formatSize(court.size, { full: c.full })} ·{" "}
+          {formatSurface(court.surface, {
+            synthetic: c.synthetic,
+            grass: c.grass,
+            hardwood: c.hardwood,
+          })}
           {distance && <span className={styles.distance}> · {distance}</span>}
         </p>
 
         <p className={styles.price}>
-          {formatPrice(court.priceMin, court.priceMax, { fromPrice: c.fromPrice, upToPrice: c.upToPrice, contactVenue: c.contactVenue })}
+          {formatPrice(court.priceMin, court.priceMax, {
+            fromPrice: c.fromPrice,
+            upToPrice: c.upToPrice,
+            contactVenue: c.contactVenue,
+          })}
           {(court.priceMin !== null || court.priceMax !== null) && (
             <span className={styles.priceUnit}> {c.perHour}</span>
           )}

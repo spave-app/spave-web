@@ -67,7 +67,10 @@
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-full);
   font-family: var(--font-system);
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
   white-space: nowrap;
 }
 
@@ -91,7 +94,6 @@
   border-color: var(--color-text-primary);
   color: var(--color-white);
 }
-
 
 .priceRow {
   display: flex;

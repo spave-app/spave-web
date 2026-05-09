@@ -18,8 +18,14 @@ export default function Footer() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
-    if (!trimmed) { setError(t.validation.emailRequired); return; }
-    if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
+    if (!trimmed) {
+      setError(t.validation.emailRequired);
+      return;
+    }
+    if (!isValidEmail(trimmed)) {
+      setError(t.validation.emailInvalid);
+      return;
+    }
     setError("");
     setConfirmed(true);
   }
@@ -36,12 +42,18 @@ export default function Footer() {
           <div className={styles.links}>
             <div className={styles.linkGroup}>
               <span className={styles.linkGroupLabel}>{t.footer.quickLinks}</span>
-              <a href={l("/browse")} className={styles.link}>{t.footer.tryPrototype}</a>
-              <a href={l("/contact")} className={styles.link}>{t.footer.contact}</a>
+              <a href={l("/browse")} className={styles.link}>
+                {t.footer.tryPrototype}
+              </a>
+              <a href={l("/contact")} className={styles.link}>
+                {t.footer.contact}
+              </a>
             </div>
             <div className={styles.linkGroup}>
               <span className={styles.linkGroupLabel}>{t.footer.legal}</span>
-              <a href={l("/privacy")} className={styles.link}>{t.footer.privacyPolicy}</a>
+              <a href={l("/privacy")} className={styles.link}>
+                {t.footer.privacyPolicy}
+              </a>
               <button
                 className={styles.linkBtn}
                 onClick={() => window.dispatchEvent(new CustomEvent("spave:reset-cookie-consent"))}
@@ -54,22 +66,33 @@ export default function Footer() {
           <div className={styles.waitlistBlock}>
             <p className={styles.waitlistLabel}>{t.footer.stayInLoop}</p>
             {confirmed ? (
-              <p role="status" className={styles.confirmed}>{t.footer.confirmed}</p>
+              <p role="status" className={styles.confirmed}>
+                {t.footer.confirmed}
+              </p>
             ) : (
               <form className={styles.waitlistForm} onSubmit={handleSubmit} noValidate>
                 <input
                   type="email"
                   placeholder={t.footer.placeholder}
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError("");
+                  }}
                   className={`${styles.input} ${error ? styles.inputError : ""}`}
                   aria-describedby="footer-error"
                   aria-invalid={!!error}
                 />
-                <button type="submit" className={styles.waitlistBtn}>{t.footer.notify}</button>
+                <button type="submit" className={styles.waitlistBtn}>
+                  {t.footer.notify}
+                </button>
               </form>
             )}
-            {error && <p id="footer-error" className={styles.error}>{error}</p>}
+            {error && (
+              <p id="footer-error" className={styles.error}>
+                {error}
+              </p>
+            )}
             <p className={styles.consent}>{t.footer.consent}</p>
           </div>
         </div>

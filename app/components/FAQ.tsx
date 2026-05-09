@@ -52,12 +52,24 @@ export default function FAQ() {
         <div className={styles.faqGrid}>
           <div className={styles.col}>
             {items.slice(0, 3).map((f, i) => (
-              <FAQRow key={f.q} item={f} open={openIndex === i} onToggle={() => toggle(i)} id={`faq-${i}`} />
+              <FAQRow
+                key={f.q}
+                item={f}
+                open={openIndex === i}
+                onToggle={() => toggle(i)}
+                id={`faq-${i}`}
+              />
             ))}
           </div>
           <div className={styles.col}>
             {items.slice(3).map((f, i) => (
-              <FAQRow key={f.q} item={f} open={openIndex === i + 3} onToggle={() => toggle(i + 3)} id={`faq-${i + 3}`} />
+              <FAQRow
+                key={f.q}
+                item={f}
+                open={openIndex === i + 3}
+                onToggle={() => toggle(i + 3)}
+                id={`faq-${i + 3}`}
+              />
             ))}
           </div>
         </div>

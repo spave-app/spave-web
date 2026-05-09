@@ -13,7 +13,9 @@ export default function ScrollHint() {
     const target = document.getElementById("timeline");
     if (!target) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setHidden(true); },
+      ([entry]) => {
+        if (entry.isIntersecting) setHidden(true);
+      },
       { threshold: 0.4 }
     );
     observer.observe(target);

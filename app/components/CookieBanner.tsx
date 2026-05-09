@@ -55,11 +55,19 @@ export default function CookieBanner() {
     <>
       {consent === "all" && <Analytics />}
       {visible && (
-        <div ref={bannerRef} className={styles.banner} role="dialog" aria-label="Cookie preferences">
+        <div
+          ref={bannerRef}
+          className={styles.banner}
+          role="dialog"
+          aria-label="Cookie preferences"
+        >
           <div className={styles.inner}>
             <p className={styles.text}>
               {t.cookieBanner.text}{" "}
-              <a href={l("/privacy")} className={styles.policyLink}>{t.cookieBanner.privacyLink}</a>.
+              <a href={l("/privacy")} className={styles.policyLink}>
+                {t.cookieBanner.privacyLink}
+              </a>
+              .
             </p>
             <div className={styles.actions}>
               <button className={styles.refuse} onClick={() => choose("refused")}>

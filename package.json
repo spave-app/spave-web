@@ -13,7 +13,8 @@
     "format:fix": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "test:ci": "jest --ci --forceExit"
+    "test:ci": "jest --ci --forceExit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -25,6 +26,9 @@
     "react-dom": "19.2.3",
     "react-map-gl": "^8.1.0"
   },
+  "lint-staged": {
+    "*.{ts,tsx,css,md,json,mjs}": "prettier --write"
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6",
@@ -35,8 +39,10 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "husky": "^9.1.7",
     "jest": "^29",
     "jest-environment-jsdom": "^29",
+    "lint-staged": "^17.0.4",
     "prettier": "^3",
     "tailwindcss": "^4",
     "typescript": "^5"

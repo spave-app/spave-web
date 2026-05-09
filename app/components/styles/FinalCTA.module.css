@@ -71,7 +71,9 @@
   padding: 13px var(--space-6);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
   white-space: nowrap;
 }
 
@@ -125,12 +127,25 @@
 }
 
 @keyframes countTick {
-  0%   { transform: translateY(0);     opacity: 1; color: var(--color-text-primary); }
-  30%  { transform: translateY(-8px);  opacity: 0; }
-  31%  { transform: translateY(8px);   opacity: 0; }
-  100% { transform: translateY(0);     opacity: 1; color: var(--color-primary); }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+    color: var(--color-text-primary);
+  }
+  30% {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  31% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+    color: var(--color-primary);
+  }
 }
-
 
 @media (max-width: 560px) {
   .heading {

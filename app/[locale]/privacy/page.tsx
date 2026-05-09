@@ -24,7 +24,11 @@ This Privacy Policy describes what information we collect, how we use it, and wh
         details: [
           { label: "Name", value: "Hendrik Tebeng" },
           { label: "Title", value: "Privacy Officer and Founder, Spave" },
-          { label: "Email", value: "hendriktebeng@gmail.com", href: "mailto:hendriktebeng@gmail.com" },
+          {
+            label: "Email",
+            value: "hendriktebeng@gmail.com",
+            href: "mailto:hendriktebeng@gmail.com",
+          },
         ],
         bodyAfter: `For any questions, requests, or complaints regarding your personal information, please contact the privacy officer directly.`,
       },
@@ -111,7 +115,8 @@ This Privacy Policy describes what information we collect, how we use it, and wh
             link: { label: "Privacy Policy", href: "https://supabase.com/privacy" },
           },
         ],
-        bodyAfter: "We have ensured that each of these providers maintains adequate data protection practices consistent with applicable law.",
+        bodyAfter:
+          "We have ensured that each of these providers maintains adequate data protection practices consistent with applicable law.",
       },
       {
         number: "8",
@@ -163,9 +168,17 @@ In the event of a confidentiality incident (data breach) involving your personal
         heading: "Contact",
         body: "For any questions about this Privacy Policy or our data practices:",
         details: [
-          { label: "General inquiries", value: "contact@spaveapp.com", href: "mailto:contact@spaveapp.com" },
+          {
+            label: "General inquiries",
+            value: "contact@spaveapp.com",
+            href: "mailto:contact@spaveapp.com",
+          },
           { label: "Privacy Officer", value: "Hendrik Tebeng" },
-          { label: "Privacy Officer email", value: "hendriktebeng@gmail.com", href: "mailto:hendriktebeng@gmail.com" },
+          {
+            label: "Privacy Officer email",
+            value: "hendriktebeng@gmail.com",
+            href: "mailto:hendriktebeng@gmail.com",
+          },
           { label: "Address", value: "Montreal, Quebec, Canada" },
         ],
       },
@@ -189,10 +202,18 @@ Cette politique de confidentialite decrit les renseignements que nous collectons
         body: "Conformement a la Loi 25, un responsable de la protection des renseignements personnels a ete designe chez Spave.",
         details: [
           { label: "Nom", value: "Hendrik Tebeng" },
-          { label: "Titre", value: "Responsable de la protection des renseignements personnels et fondateur, Spave" },
-          { label: "Courriel", value: "hendriktebeng@gmail.com", href: "mailto:hendriktebeng@gmail.com" },
+          {
+            label: "Titre",
+            value: "Responsable de la protection des renseignements personnels et fondateur, Spave",
+          },
+          {
+            label: "Courriel",
+            value: "hendriktebeng@gmail.com",
+            href: "mailto:hendriktebeng@gmail.com",
+          },
         ],
-        bodyAfter: "Pour toute question, demande ou plainte concernant vos renseignements personnels, veuillez contacter directement le responsable.",
+        bodyAfter:
+          "Pour toute question, demande ou plainte concernant vos renseignements personnels, veuillez contacter directement le responsable.",
       },
       {
         number: "3",
@@ -262,13 +283,19 @@ Cette politique de confidentialite decrit les renseignements que nous collectons
             number: "7.1",
             heading: "Vercel Inc. (Etats-Unis)",
             body: "Vercel heberge le Site et, avec votre consentement, traite des donnees analytiques anonymisees. Vercel se conforme aux lois applicables en matiere de protection des donnees.",
-            link: { label: "Politique de confidentialite", href: "https://vercel.com/legal/privacy-policy" },
+            link: {
+              label: "Politique de confidentialite",
+              href: "https://vercel.com/legal/privacy-policy",
+            },
           },
           {
             number: "7.2",
             heading: "MapTiler AG (Suisse)",
             body: "MapTiler fournit les tuiles cartographiques affichees sur le Site. Les requetes de tuiles peuvent inclure des donnees de connexion techniques (telles que l'adresse IP) traitees par les serveurs de MapTiler.",
-            link: { label: "Politique de confidentialite", href: "https://www.maptiler.com/privacy-policy/" },
+            link: {
+              label: "Politique de confidentialite",
+              href: "https://www.maptiler.com/privacy-policy/",
+            },
           },
           {
             number: "7.3",
@@ -277,7 +304,8 @@ Cette politique de confidentialite decrit les renseignements que nous collectons
             link: { label: "Politique de confidentialite", href: "https://supabase.com/privacy" },
           },
         ],
-        bodyAfter: "Nous avons veille a ce que chacun de ces prestataires maintienne des pratiques de protection des donnees adequates, conformement au droit applicable.",
+        bodyAfter:
+          "Nous avons veille a ce que chacun de ces prestataires maintienne des pratiques de protection des donnees adequates, conformement au droit applicable.",
       },
       {
         number: "8",
@@ -329,9 +357,17 @@ En cas d'incident de confidentialite (violation de donnees) impliquant vos rense
         heading: "Nous contacter",
         body: "Pour toute question concernant la presente politique de confidentialite ou nos pratiques en matiere de donnees :",
         details: [
-          { label: "Questions generales", value: "contact@spaveapp.com", href: "mailto:contact@spaveapp.com" },
+          {
+            label: "Questions generales",
+            value: "contact@spaveapp.com",
+            href: "mailto:contact@spaveapp.com",
+          },
           { label: "Responsable de la protection", value: "Hendrik Tebeng" },
-          { label: "Courriel du responsable", value: "hendriktebeng@gmail.com", href: "mailto:hendriktebeng@gmail.com" },
+          {
+            label: "Courriel du responsable",
+            value: "hendriktebeng@gmail.com",
+            href: "mailto:hendriktebeng@gmail.com",
+          },
           { label: "Adresse", value: "Montreal, Quebec, Canada" },
         ],
       },
@@ -340,7 +376,12 @@ En cas d'incident de confidentialite (violation de donnees) impliquant vos rense
 };
 
 type Detail = { label: string; value: string; href?: string };
-type Subsection = { number: string; heading: string; body: string; link?: { label: string; href: string } };
+type Subsection = {
+  number: string;
+  heading: string;
+  body: string;
+  link?: { label: string; href: string };
+};
 type Section = {
   number: string;
   heading: string;
@@ -353,7 +394,9 @@ type Section = {
 
 function renderBody(text: string) {
   return text.split("\n\n").map((para, i) => (
-    <p key={i} className={styles.body}>{para}</p>
+    <p key={i} className={styles.body}>
+      {para}
+    </p>
   ));
 }
 
@@ -389,7 +432,13 @@ export default function PrivacyPolicy() {
                         <div key={d.label} className={styles.detailRow}>
                           <dt className={styles.detailLabel}>{d.label}</dt>
                           <dd className={styles.detailValue}>
-                            {d.href ? <a href={d.href} className={styles.inlineLink}>{d.value}</a> : d.value}
+                            {d.href ? (
+                              <a href={d.href} className={styles.inlineLink}>
+                                {d.value}
+                              </a>
+                            ) : (
+                              d.value
+                            )}
                           </dd>
                         </div>
                       ))}
@@ -399,7 +448,9 @@ export default function PrivacyPolicy() {
                   {section.list && (
                     <ul className={styles.list}>
                       {section.list.map((item: string, i: number) => (
-                        <li key={i} className={styles.listItem}>{item}</li>
+                        <li key={i} className={styles.listItem}>
+                          {item}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -414,7 +465,12 @@ export default function PrivacyPolicy() {
                           </h3>
                           <p className={styles.body}>{sub.body}</p>
                           {sub.link && (
-                            <a href={sub.link.href} target="_blank" rel="noopener noreferrer" className={styles.externalLink}>
+                            <a
+                              href={sub.link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.externalLink}
+                            >
                               {sub.link.label} &rarr;
                             </a>
                           )}

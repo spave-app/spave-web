@@ -23,8 +23,14 @@ export default function CtaBanner() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = email.trim();
-    if (!trimmed) { setError(t.validation.emailRequired); return; }
-    if (!isValidEmail(trimmed)) { setError(t.validation.emailInvalid); return; }
+    if (!trimmed) {
+      setError(t.validation.emailRequired);
+      return;
+    }
+    if (!isValidEmail(trimmed)) {
+      setError(t.validation.emailInvalid);
+      return;
+    }
     setError("");
     setSubmitting(true);
     try {
@@ -57,17 +63,19 @@ export default function CtaBanner() {
   return (
     <div className={styles.banner}>
       {confirmed ? (
-        <span role="status" className={styles.confirmed}>{t.browse.ctaConfirmed}</span>
+        <span role="status" className={styles.confirmed}>
+          {t.browse.ctaConfirmed}
+        </span>
       ) : (
         <>
           <div className={styles.left}>
             <span className={styles.headline}>{t.browse.ctaHeadline}</span>
             <span className={styles.sub}>
-              {t.browse.ctaSub.split(". ").map((s, i, arr) =>
-                i === arr.length - 1
-                  ? <strong key={i}>{s}</strong>
-                  : <span key={i}>{s}. </span>
-              )}
+              {t.browse.ctaSub
+                .split(". ")
+                .map((s, i, arr) =>
+                  i === arr.length - 1 ? <strong key={i}>{s}</strong> : <span key={i}>{s}. </span>
+                )}
             </span>
           </div>
           <div className={styles.right}>
@@ -79,18 +87,32 @@ export default function CtaBanner() {
                     autoFocus
                     placeholder="your@email.com"
                     value={email}
-                    onChange={(e) => { setEmail(e.target.value); if (error) setError(""); }}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (error) setError("");
+                    }}
                     className={`${styles.input} ${error ? styles.inputError : ""}`}
                     aria-describedby="ctabanner-error"
                     aria-invalid={!!error}
                   />
-                  <button type="submit" className={styles.submitBtn} aria-label="Submit email" disabled={submitting}>
+                  <button
+                    type="submit"
+                    className={styles.submitBtn}
+                    aria-label="Submit email"
+                    disabled={submitting}
+                  >
                     <ArrowRight size={14} aria-hidden="true" />
                   </button>
                 </form>
-                {error && <p id="ctabanner-error" className={styles.error}>{error}</p>}
+                {error && (
+                  <p id="ctabanner-error" className={styles.error}>
+                    {error}
+                  </p>
+                )}
                 <p className={styles.consent}>
-                  {t.browse.ctaConsent[0]}<br />{t.browse.ctaConsent[1]}
+                  {t.browse.ctaConsent[0]}
+                  <br />
+                  {t.browse.ctaConsent[1]}
                 </p>
               </div>
             ) : (
@@ -101,7 +123,11 @@ export default function CtaBanner() {
           </div>
         </>
       )}
-      <button className={styles.dismiss} onClick={() => setDismissed(true)} aria-label="Dismiss banner">
+      <button
+        className={styles.dismiss}
+        onClick={() => setDismissed(true)}
+        aria-label="Dismiss banner"
+      >
         <X size={13} />
       </button>
     </div>

@@ -92,16 +92,23 @@ export default function Browse() {
 
   const venueCoords = useMemo(() => {
     const map: Record<string, { lat: number; lng: number }> = {};
-    courtLocations.forEach((l) => { map[l.venueId] = { lat: l.lat, lng: l.lng }; });
+    courtLocations.forEach((l) => {
+      map[l.venueId] = { lat: l.lat, lng: l.lng };
+    });
     return map;
   }, [courtLocations]);
 
-  const getDistance = useCallback((court: Court): string | null => {
-    if (!userPosition) return null;
-    const coords = venueCoords[court.venue.id];
-    if (!coords) return null;
-    return formatDistance(haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng));
-  }, [userPosition, venueCoords]);
+  const getDistance = useCallback(
+    (court: Court): string | null => {
+      if (!userPosition) return null;
+      const coords = venueCoords[court.venue.id];
+      if (!coords) return null;
+      return formatDistance(
+        haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng)
+      );
+    },
+    [userPosition, venueCoords]
+  );
 
   const filtered = useMemo(() => {
     let result = [...courts];
@@ -139,14 +146,19 @@ export default function Browse() {
       result.sort((a, b) => (a.priceMin ?? 0) - (b.priceMin ?? 0));
     } else if (filters.sortBy === "price_desc") {
       result.sort((a, b) => (b.priceMin ?? 0) - (a.priceMin ?? 0));
-    } else if (userPosition && (filters.sortBy === "distance_asc" || filters.sortBy === "distance_desc")) {
+    } else if (
+      userPosition &&
+      (filters.sortBy === "distance_asc" || filters.sortBy === "distance_desc")
+    ) {
       const getDist = (c: Court) => {
         const coords = venueCoords[c.venue.id];
-        return coords ? haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng) : Infinity;
+        return coords
+          ? haversineKm(userPosition.lat, userPosition.lng, coords.lat, coords.lng)
+          : Infinity;
       };
-      result.sort((a, b) => filters.sortBy === "distance_asc"
-        ? getDist(a) - getDist(b)
-        : getDist(b) - getDist(a));
+      result.sort((a, b) =>
+        filters.sortBy === "distance_asc" ? getDist(a) - getDist(b) : getDist(b) - getDist(a)
+      );
     }
 
     return result;
@@ -184,7 +196,8 @@ export default function Browse() {
                 onClick={() => setFilterOpen((v) => !v)}
               >
                 <SlidersHorizontal size={15} />
-                {t.browse.filter}{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
+                {t.browse.filter}
+                {activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}
               </button>
               <button
                 className={`${styles.topBtn} ${styles.mapBtn} ${mapOpen ? styles.topBtnActive : ""}`}
@@ -234,9 +247,7 @@ export default function Browse() {
                         </div>
                       ))}
                     </div>
-                    {filtered.length === 0 && (
-                      <p className={styles.empty}>{t.browse.noResults}</p>
-                    )}
+                    {filtered.length === 0 && <p className={styles.empty}>{t.browse.noResults}</p>}
                   </>
                 )}
               </>
@@ -250,19 +261,21 @@ export default function Browse() {
         onClose={() => setMapOpen(false)}
         courtLocations={courtLocations}
         filteredCourts={filtered}
-        onCourtSelect={(court) => { setSelectedCourt(court); }}
+        onCourtSelect={(court) => {
+          setSelectedCourt(court);
+        }}
         userPosition={userPosition}
         onPinClick={(venueId) => {
           if (window.innerWidth <= 1024) return;
           const venueLocs = courtLocations.filter((l) => l.venueId === venueId);
           const court = filtered.find((c) => venueLocs.some((l) => l.courtId === c.id));
           if (!court) return;
-          document.getElementById(`court-card-${court.id}`)?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          document
+            .getElementById(`court-card-${court.id}`)
+            ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }}
       />
-      {selectedCourt && (
-        <CourtModal court={selectedCourt} onClose={() => setSelectedCourt(null)} />
-      )}
+      {selectedCourt && <CourtModal court={selectedCourt} onClose={() => setSelectedCourt(null)} />}
       <Footer />
     </>
   );

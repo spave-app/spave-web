@@ -44,7 +44,10 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
     setSubmitError("");
     setSubmitting(true);
     try {
@@ -77,7 +80,6 @@ export default function Contact() {
       <main className={styles.page}>
         <section className={styles.hero}>
           <div className={styles.heroInner}>
-
             {/* ── Left: identity ── */}
             <div className={styles.identity}>
               <span className={styles.tagline}>
@@ -94,9 +96,7 @@ export default function Contact() {
                 <a href="mailto:contact@spaveapp.com" className={styles.emailLink}>
                   contact@spaveapp.com
                 </a>
-                <span className={styles.responseTime}>
-                  {c.responseTime}
-                </span>
+                <span className={styles.responseTime}>{c.responseTime}</span>
               </div>
 
               <a href={l("/#faq")} className={styles.faqLink}>
@@ -109,12 +109,16 @@ export default function Contact() {
             <div className={styles.formWrap}>
               <p className={styles.formTitle}>{c.formTitle}</p>
               {confirmed ? (
-                <p role="status" className={styles.confirmed}>{v.contactConfirmed}</p>
+                <p role="status" className={styles.confirmed}>
+                  {v.contactConfirmed}
+                </p>
               ) : (
                 <form className={styles.form} onSubmit={handleSubmit} noValidate>
                   <div className={styles.row}>
                     <div className={styles.fieldGroup}>
-                      <label className={styles.label} htmlFor="name">{c.name}</label>
+                      <label className={styles.label} htmlFor="name">
+                        {c.name}
+                      </label>
                       <input
                         id="name"
                         type="text"
@@ -125,10 +129,16 @@ export default function Contact() {
                         aria-describedby="contact-name-error"
                         aria-invalid={!!errors.name}
                       />
-                      {errors.name && <p id="contact-name-error" className={styles.fieldError}>{errors.name}</p>}
+                      {errors.name && (
+                        <p id="contact-name-error" className={styles.fieldError}>
+                          {errors.name}
+                        </p>
+                      )}
                     </div>
                     <div className={styles.fieldGroup}>
-                      <label className={styles.label} htmlFor="email">{c.email}</label>
+                      <label className={styles.label} htmlFor="email">
+                        {c.email}
+                      </label>
                       <input
                         id="email"
                         type="email"
@@ -139,11 +149,17 @@ export default function Contact() {
                         aria-describedby="contact-email-error"
                         aria-invalid={!!errors.email}
                       />
-                      {errors.email && <p id="contact-email-error" className={styles.fieldError}>{errors.email}</p>}
+                      {errors.email && (
+                        <p id="contact-email-error" className={styles.fieldError}>
+                          {errors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className={styles.fieldGroup}>
-                    <label className={styles.label} htmlFor="subject">{c.subject}</label>
+                    <label className={styles.label} htmlFor="subject">
+                      {c.subject}
+                    </label>
                     <input
                       id="subject"
                       type="text"
@@ -154,10 +170,16 @@ export default function Contact() {
                       aria-describedby="contact-subject-error"
                       aria-invalid={!!errors.subject}
                     />
-                    {errors.subject && <p id="contact-subject-error" className={styles.fieldError}>{errors.subject}</p>}
+                    {errors.subject && (
+                      <p id="contact-subject-error" className={styles.fieldError}>
+                        {errors.subject}
+                      </p>
+                    )}
                   </div>
                   <div className={styles.fieldGroup}>
-                    <label className={styles.label} htmlFor="message">{c.message}</label>
+                    <label className={styles.label} htmlFor="message">
+                      {c.message}
+                    </label>
                     <textarea
                       id="message"
                       placeholder={c.messagePlaceholder}
@@ -167,10 +189,16 @@ export default function Contact() {
                       aria-describedby="contact-message-error"
                       aria-invalid={!!errors.message}
                     />
-                    {errors.message && <p id="contact-message-error" className={styles.fieldError}>{errors.message}</p>}
+                    {errors.message && (
+                      <p id="contact-message-error" className={styles.fieldError}>
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
                   {submitError && (
-                    <p role="alert" className={styles.submitError}>{submitError}</p>
+                    <p role="alert" className={styles.submitError}>
+                      {submitError}
+                    </p>
                   )}
                   <button type="submit" className={styles.submit} disabled={submitting}>
                     {submitting ? v.contactSending : c.submit}
@@ -179,7 +207,6 @@ export default function Contact() {
                 </form>
               )}
             </div>
-
           </div>
         </section>
       </main>
