@@ -13,7 +13,6 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY;
 const MOBILE_BREAKPOINT = 1024;
-const SWIPE_THRESHOLD_PX = 40;
 const MONTREAL_CENTER = { lng: -73.5673, lat: 45.5017 };
 const DEFAULT_ZOOM = 11;
 const LOCATE_ZOOM = 14;
@@ -184,7 +183,6 @@ export default function MapView({ open, onClose, courtLocations, filteredCourts,
   const [isMobile, setIsMobile] = useState(false);
   const [swipeDir, setSwipeDir] = useState<"left" | "right">("left");
   const [satellite, setSatellite] = useState(false);
-  const touchStartX = useRef<number>(0);
   const mapRef = useRef<MapRef>(null);
 
   const handleLocate = useCallback(() => {

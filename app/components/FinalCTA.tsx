@@ -70,7 +70,7 @@ export default function FinalCTA() {
       } else {
         setError(t.validation.genericError);
       }
-    } catch (err) {
+    } catch {
       setError(t.validation.networkError);
     } finally {
       setSubmitting(false);

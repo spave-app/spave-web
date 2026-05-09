@@ -11,8 +11,12 @@ const CSS_VAR = "--cookie-banner-height";
 
 export default function CookieBanner() {
   const { t, l } = useT();
-  const [consent, setConsent] = useState<Consent | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [consent, setConsent] = useState<Consent | null>(() =>
+    typeof window !== "undefined" ? (localStorage.getItem(STORAGE_KEY) as Consent | null) : null
+  );
+  const [visible, setVisible] = useState(() =>
+    typeof window !== "undefined" ? !localStorage.getItem(STORAGE_KEY) : false
+  );
   const bannerRef = useRef<HTMLDivElement>(null);
 
   // Keep --cookie-banner-height in sync with the actual rendered banner height
@@ -27,13 +31,6 @@ export default function CookieBanner() {
   }, [visible]);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Consent | null;
-    if (stored) {
-      setConsent(stored);
-    } else {
-      setVisible(true);
-    }
-
     function handleReset() {
       localStorage.removeItem(STORAGE_KEY);
       setConsent(null);

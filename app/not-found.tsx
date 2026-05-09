@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import styles from "./not-found.module.css";
 
@@ -20,11 +20,9 @@ const content = {
 };
 
 export default function NotFound() {
-  const [lang, setLang] = useState<"en" | "fr">("en");
-
-  useEffect(() => {
-    if (window.location.pathname.startsWith("/fr")) setLang("fr");
-  }, []);
+  const [lang] = useState<"en" | "fr">(() =>
+    typeof window !== "undefined" && window.location.pathname.startsWith("/fr") ? "fr" : "en"
+  );
 
   const c = content[lang];
 

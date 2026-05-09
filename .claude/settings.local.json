@@ -3,7 +3,11 @@
     "allow": [
       "Bash(xargs ls:*)",
       "Bash(npx next:*)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(npm install *)",
+      "Bash(npx jest *)",
+      "Bash(npx prettier *)",
+      "Bash(npm run *)"
     ]
   }
 }
