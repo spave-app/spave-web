@@ -35,7 +35,10 @@ export function formatSize(size: CourtSize, labels: { full: string }): string {
   return map[size] ?? size;
 }
 
-export function formatSurface(surface: CourtSurface, labels: { synthetic: string; grass: string; hardwood: string }): string {
+export function formatSurface(
+  surface: CourtSurface,
+  labels: { synthetic: string; grass: string; hardwood: string }
+): string {
   const map: Record<CourtSurface, string> = {
     SYNTHETIC: labels.synthetic,
     GRASS: labels.grass,

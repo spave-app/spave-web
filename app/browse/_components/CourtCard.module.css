@@ -26,14 +26,18 @@
   background:
     radial-gradient(circle, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
     linear-gradient(145deg, #1c0a14 0%, #2d1020 60%, #1a0810 100%);
-  background-size: 28px 28px, 100% 100%;
+  background-size:
+    28px 28px,
+    100% 100%;
 }
 
 .outdoor {
   background:
     radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(145deg, #0a1a0c 0%, #102a14 60%, #0a180c 100%);
-  background-size: 28px 28px, 100% 100%;
+  background-size:
+    28px 28px,
+    100% 100%;
 }
 
 /* Subtle vignette overlay */

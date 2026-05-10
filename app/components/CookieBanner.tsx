@@ -11,8 +11,12 @@ const CSS_VAR = "--cookie-banner-height";
 
 export default function CookieBanner() {
   const { t, l } = useT();
-  const [consent, setConsent] = useState<Consent | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [consent, setConsent] = useState<Consent | null>(() =>
+    typeof window !== "undefined" ? (localStorage.getItem(STORAGE_KEY) as Consent | null) : null
+  );
+  const [visible, setVisible] = useState(() =>
+    typeof window !== "undefined" ? !localStorage.getItem(STORAGE_KEY) : false
+  );
   const bannerRef = useRef<HTMLDivElement>(null);
 
   // Keep --cookie-banner-height in sync with the actual rendered banner height
@@ -27,13 +31,6 @@ export default function CookieBanner() {
   }, [visible]);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Consent | null;
-    if (stored) {
-      setConsent(stored);
-    } else {
-      setVisible(true);
-    }
-
     function handleReset() {
       localStorage.removeItem(STORAGE_KEY);
       setConsent(null);
@@ -58,11 +55,19 @@ export default function CookieBanner() {
     <>
       {consent === "all" && <Analytics />}
       {visible && (
-        <div ref={bannerRef} className={styles.banner} role="dialog" aria-label="Cookie preferences">
+        <div
+          ref={bannerRef}
+          className={styles.banner}
+          role="dialog"
+          aria-label="Cookie preferences"
+        >
           <div className={styles.inner}>
             <p className={styles.text}>
               {t.cookieBanner.text}{" "}
-              <a href={l("/privacy")} className={styles.policyLink}>{t.cookieBanner.privacyLink}</a>.
+              <a href={l("/privacy")} className={styles.policyLink}>
+                {t.cookieBanner.privacyLink}
+              </a>
+              .
             </p>
             <div className={styles.actions}>
               <button className={styles.refuse} onClick={() => choose("refused")}>

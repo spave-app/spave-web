@@ -22,7 +22,13 @@ const PAGE_TITLES: Record<Language, string> = {
   fr: "Spave - Réservez des terrains de soccer dans le Grand Montréal",
 };
 
-export function LanguageProvider({ lang: initialLang, children }: { lang: Language; children: ReactNode }) {
+export function LanguageProvider({
+  lang: initialLang,
+  children,
+}: {
+  lang: Language;
+  children: ReactNode;
+}) {
   const [lang, setLangState] = useState<Language>(initialLang);
 
   const setLang = useCallback((newLang: Language) => {
@@ -39,11 +45,7 @@ export function LanguageProvider({ lang: initialLang, children }: { lang: Langua
     [lang, setLang, l]
   );
 
-  return (
-    <LanguageContext.Provider value={value}>
-      {children}
-    </LanguageContext.Provider>
-  );
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useT() {

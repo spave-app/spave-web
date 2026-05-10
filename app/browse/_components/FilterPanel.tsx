@@ -31,42 +31,57 @@ export default function FilterPanel({
   const { t } = useT();
   const f = t.filter;
 
-  const sizes = useMemo<{ value: CourtSize; label: string }[]>(() => [
-    { value: "THREE_V_THREE", label: "3v3" },
-    { value: "FIVE_V_FIVE", label: "5v5" },
-    { value: "SEVEN_V_SEVEN", label: "7v7" },
-    { value: "NINE_V_NINE", label: "9v9" },
-    { value: "FULL", label: f.full },
-  ], [f.full]);
+  const sizes = useMemo<{ value: CourtSize; label: string }[]>(
+    () => [
+      { value: "THREE_V_THREE", label: "3v3" },
+      { value: "FIVE_V_FIVE", label: "5v5" },
+      { value: "SEVEN_V_SEVEN", label: "7v7" },
+      { value: "NINE_V_NINE", label: "9v9" },
+      { value: "FULL", label: f.full },
+    ],
+    [f.full]
+  );
 
-  const types = useMemo<{ value: CourtType; label: string }[]>(() => [
-    { value: "INDOOR", label: f.indoor },
-    { value: "OUTDOOR", label: f.outdoor },
-  ], [f.indoor, f.outdoor]);
+  const types = useMemo<{ value: CourtType; label: string }[]>(
+    () => [
+      { value: "INDOOR", label: f.indoor },
+      { value: "OUTDOOR", label: f.outdoor },
+    ],
+    [f.indoor, f.outdoor]
+  );
 
-  const surfaces = useMemo<{ value: CourtSurface; label: string }[]>(() => [
-    { value: "SYNTHETIC", label: f.synthetic },
-    { value: "GRASS", label: f.grass },
-    { value: "HARDWOOD", label: f.hardwood },
-  ], [f.synthetic, f.grass, f.hardwood]);
+  const surfaces = useMemo<{ value: CourtSurface; label: string }[]>(
+    () => [
+      { value: "SYNTHETIC", label: f.synthetic },
+      { value: "GRASS", label: f.grass },
+      { value: "HARDWOOD", label: f.hardwood },
+    ],
+    [f.synthetic, f.grass, f.hardwood]
+  );
 
-  const sortOptions = useMemo<{ value: SortBy; label: string }[]>(() => [
-    { value: "price_asc", label: f.priceLowHigh },
-    { value: "price_desc", label: f.priceHighLow },
-    ...(hasLocation ? [
-      { value: "distance_asc" as SortBy, label: f.distanceNearFar },
-      { value: "distance_desc" as SortBy, label: f.distanceFarNear },
-    ] : []),
-  ], [f.priceLowHigh, f.priceHighLow, f.distanceNearFar, f.distanceFarNear, hasLocation]);
+  const sortOptions = useMemo<{ value: SortBy; label: string }[]>(
+    () => [
+      { value: "price_asc", label: f.priceLowHigh },
+      { value: "price_desc", label: f.priceHighLow },
+      ...(hasLocation
+        ? [
+            { value: "distance_asc" as SortBy, label: f.distanceNearFar },
+            { value: "distance_desc" as SortBy, label: f.distanceFarNear },
+          ]
+        : []),
+    ],
+    [f.priceLowHigh, f.priceHighLow, f.distanceNearFar, f.distanceFarNear, hasLocation]
+  );
 
-  const update = (partial: Partial<Filters>) =>
-    onFiltersChange({ ...filters, ...partial });
+  const update = (partial: Partial<Filters>) => onFiltersChange({ ...filters, ...partial });
 
   return (
     <div className={`${styles.panel} ${open ? styles.panelOpen : ""}`}>
       <div className={styles.mobileHeader}>
         <span className={styles.mobileTitle}>{f.title}</span>
-        <button className={styles.resetBtn} onClick={onReset}>{f.reset}</button>
+        <button className={styles.resetBtn} onClick={onReset}>
+          {f.reset}
+        </button>
       </div>
 
       <div className={styles.body}>
@@ -167,7 +182,9 @@ export default function FilterPanel({
           </div>
         </div>
 
-        <button className={`${styles.resetBtn} ${styles.desktopReset}`} onClick={onReset}>{f.resetShort}</button>
+        <button className={`${styles.resetBtn} ${styles.desktopReset}`} onClick={onReset}>
+          {f.resetShort}
+        </button>
       </div>
 
       <div className={styles.mobileFooter}>

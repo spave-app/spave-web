@@ -32,8 +32,12 @@ export default function Timeline() {
                 <div className={`${styles.dot} ${styles[status]}`} />
                 <div className={`${styles.card} ${styles[`card_${status}`]}`}>
                   {status === "done" && <span className={styles.badge}>{live}</span>}
-                  {status === "active" && <span className={`${styles.badge} ${styles.badgeActive}`}>{inProgress}</span>}
-                  {status === "upcoming" && <span className={`${styles.badge} ${styles.badgeUpcoming}`}>{comingSoon}</span>}
+                  {status === "active" && (
+                    <span className={`${styles.badge} ${styles.badgeActive}`}>{inProgress}</span>
+                  )}
+                  {status === "upcoming" && (
+                    <span className={`${styles.badge} ${styles.badgeUpcoming}`}>{comingSoon}</span>
+                  )}
                   <h3 className={styles.milestoneTitle}>{m.label}</h3>
                   <p className={styles.milestoneDesc}>{m.description}</p>
                 </div>

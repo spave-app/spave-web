@@ -19,7 +19,9 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -32,14 +34,24 @@ export default function Header() {
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
         <div className={styles.inner}>
           <a href={l("/")} className={styles.brand}>
-            <Image src="/spave-logo.svg" alt="Spave logo" width={60} height={36} className={styles.logo} />
+            <Image
+              src="/spave-logo.svg"
+              alt="Spave logo"
+              width={60}
+              height={36}
+              className={styles.logo}
+            />
             <span className={styles.wordmark}>SPAVE</span>
           </a>
 
           <nav id="main-nav" className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`}>
-            <a href={l("/contact")} className={styles.navLink}>{t.header.contact}</a>
+            <a href={l("/contact")} className={styles.navLink}>
+              {t.header.contact}
+            </a>
             <div className={styles.ctaGroup}>
-              <a href={l("/browse")} className={styles.navCta}>{t.header.tryPrototype}</a>
+              <a href={l("/browse")} className={styles.navCta}>
+                {t.header.tryPrototype}
+              </a>
               <button
                 className={styles.langToggle}
                 onClick={() => setLang(lang === "en" ? "fr" : "en")}

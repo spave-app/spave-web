@@ -10,7 +10,8 @@ export function generateStaticParams() {
 const meta: Record<Language, Metadata> = {
   en: {
     title: "Spave – Book Soccer Courts in the Greater Montreal Area",
-    description: "Find and book soccer courts across the Greater Montreal Area in a few clicks. No calls, no guesswork.",
+    description:
+      "Find and book soccer courts across the Greater Montreal Area in a few clicks. No calls, no guesswork.",
     alternates: {
       canonical: "https://spaveapp.com",
       languages: {
@@ -21,7 +22,8 @@ const meta: Record<Language, Metadata> = {
   },
   fr: {
     title: "Spave – Réservez des terrains de soccer dans le Grand Montréal",
-    description: "Trouvez et réservez des terrains de soccer dans le Grand Montréal en quelques clics. Sans appels, sans tracas.",
+    description:
+      "Trouvez et réservez des terrains de soccer dans le Grand Montréal en quelques clics. Sans appels, sans tracas.",
     alternates: {
       canonical: "https://spaveapp.com/fr",
       languages: {

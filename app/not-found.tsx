@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import styles from "./not-found.module.css";
 
@@ -20,11 +20,9 @@ const content = {
 };
 
 export default function NotFound() {
-  const [lang, setLang] = useState<"en" | "fr">("en");
-
-  useEffect(() => {
-    if (window.location.pathname.startsWith("/fr")) setLang("fr");
-  }, []);
+  const [lang] = useState<"en" | "fr">(() =>
+    typeof window !== "undefined" && window.location.pathname.startsWith("/fr") ? "fr" : "en"
+  );
 
   const c = content[lang];
 
@@ -39,14 +37,19 @@ export default function NotFound() {
         <rect x="518" y="130" width="80" height="140" stroke="currentColor" strokeWidth="1.5" />
       </svg>
 
-      <div className={styles.backdrop} aria-hidden="true">404</div>
+      <div className={styles.backdrop} aria-hidden="true">
+        404
+      </div>
 
       <div className={styles.content}>
         <h1 className={styles.heading}>{c.heading}</h1>
         <p className={styles.sub}>
-          {c.sub[0]}<span className={styles.subBreak}> {c.sub[1]}</span>
+          {c.sub[0]}
+          <span className={styles.subBreak}> {c.sub[1]}</span>
         </p>
-        <Link href={c.href} className={styles.cta}>{c.cta}</Link>
+        <Link href={c.href} className={styles.cta}>
+          {c.cta}
+        </Link>
       </div>
     </div>
   );

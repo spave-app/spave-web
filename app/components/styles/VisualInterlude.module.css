@@ -49,14 +49,20 @@
   padding: 14px var(--space-8);
   border-radius: var(--radius-full);
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
 }
 
 .cta svg {
   opacity: 0;
   width: 0;
   transform: translateX(-4px);
-  transition: opacity 0.2s ease, transform 0.2s ease, width 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    width 0.2s ease;
 }
 
 .cta:hover {

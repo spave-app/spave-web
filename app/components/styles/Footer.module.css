@@ -125,7 +125,9 @@
   border-radius: var(--radius-sm);
   padding: 10px var(--space-4);
   outline: none;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .input::placeholder {
@@ -146,7 +148,9 @@
   padding: 10px var(--space-6);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-btn);
-  transition: background 0.15s ease, transform 0.1s ease;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
   white-space: nowrap;
 }
 

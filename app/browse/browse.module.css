@@ -57,7 +57,10 @@
   font-family: var(--font-system);
   color: var(--color-text-primary);
   background: var(--color-surface);
-  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .searchInput::placeholder {
@@ -86,7 +89,10 @@
   border-radius: var(--radius-full);
   white-space: nowrap;
   font-family: var(--font-system);
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .topBtn:hover {
